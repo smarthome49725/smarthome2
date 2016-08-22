@@ -16,7 +16,7 @@ $('document').ready(function () {
         //Pega a key do servidor local
         if (flag) {
             var peer = new Peer('49725', {
-                host: '192.168.10.100',
+                host: '192.168.1.123',
                 //host: '192.168.1.2',
                 port: 9000,
                 path: '/peerjs',
@@ -26,14 +26,14 @@ $('document').ready(function () {
                             { url: 'stun:stun1.l.google.com:19302' },
                             {
                                 url: 'turn:numb.viagenie.ca',
-                                credential: 'muazkh', username: 'webrtc@live.com'
+                                credential: 'smarthome2', username: 'webrtc@live.com'
                             }
                     ]
                 }
             });
         } else {
             var peer = new Peer({
-                host: '192.168.10.100',
+                host: '192.168.1.123',
                //host: '192.168.1.2',
                 port: 9000,
                 path: '/peerjs',
@@ -43,7 +43,7 @@ $('document').ready(function () {
                             { url: 'stun:stun1.l.google.com:19302' },
                             {
                                 url: 'turn:numb.viagenie.ca',
-                                credential: 'muazkh', username: 'webrtc@live.com'
+                                credential: 'smarthome2', username: 'webrtc@live.com'
                             }
                     ]
                 }

@@ -6,6 +6,9 @@ var express = require('express.io'),
     ar = require('./models/airconditioning.js'),
     control_light = require('./models/lamps.js');
 
+var PeerServer = require('peer').PeerServer;
+var server = PeerServer({port: 9000, path: '/peerjs'});
+
 app = express();
 socket = require('socket.io').listen(app.listen(49725));
 
