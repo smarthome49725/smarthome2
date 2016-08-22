@@ -7,7 +7,7 @@ var express = require('express.io'),
     control_light = require('./models/lamps.js');
 
 var PeerServer = require('peer').PeerServer;
-var server = PeerServer({port: 9000, path: '/peerjs'});
+var server = PeerServer({port: 9000, path: '/smarthome2'});
 
 app = express();
 socket = require('socket.io').listen(app.listen(49725));

@@ -19,7 +19,7 @@ $('document').ready(function () {
                 host: '192.168.1.123',
                 //host: '192.168.1.2',
                 port: 9000,
-                path: '/peerjs',
+                path: '/smarthome2',
                 debug: 3,
                 config: {
                     'iceServers': [
@@ -36,7 +36,7 @@ $('document').ready(function () {
                 host: '192.168.1.123',
                //host: '192.168.1.2',
                 port: 9000,
-                path: '/peerjs',
+                path: '/smarthome2',
                 debug: 3,
                 config: {
                     'iceServers': [
