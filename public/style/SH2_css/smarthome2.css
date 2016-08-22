@@ -1,0 +1,51 @@
+#my-video {
+    position: absolute;
+    width: 800px;
+    height: 600px;       
+    border: 4px solid #000000;
+    
+}
+
+#remote-video {    
+    width: 800px;
+    height: 600px;    
+    border: 4px solid #000000;
+}
+
+#myCanvas {
+    position: absolute;
+    border: 2px solid yellow;    
+    z-index: 10;
+}
+
+#make-call {
+    margin-top: 10px;
+}
+
+#lblMonito {
+    color: yellow;
+}
+
+#iniciar {
+    background: yellow;   
+    font-size: 16pt;
+}
+
+#make-call {
+    background: green;
+    color: white;
+    font-size: 16pt;
+}
+
+#end-call{
+    background: red;
+    color: white;
+    font-size: 16pt;
+}
+
+#end-monitoring{
+    background: red;
+    color: white;
+    font-size: 16pt;
+
+}
