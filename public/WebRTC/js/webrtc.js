@@ -8,15 +8,15 @@ $('document').ready(function () {
         // Matem compatibilidade com outros navegadores
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-        /* O objeto pares é onde criamos e receber ligações.
-         * PeerJS usa PeerServer para metadados sessão e sinalização candidato
+        /* O objeto pares ï¿½ onde criamos e receber ligaï¿½ï¿½es.
+         * PeerJS usa PeerServer para metadados sessï¿½o e sinalizaï¿½ï¿½o candidato
          * debug: 3 (imprime todos os logs)
          */
 
         //Pega a key do servidor local
         if (flag) {
             var peer = new Peer('49725', {
-                host: '192.168.1.123',
+                host: '192.168.1.122',
                 //host: '192.168.1.2',
                 port: 9000,
                 path: '/smarthome2',
@@ -33,7 +33,7 @@ $('document').ready(function () {
             });
         } else {
             var peer = new Peer({
-                host: '192.168.1.123',
+                host: '192.168.1.122',
                //host: '192.168.1.2',
                 port: 9000,
                 path: '/smarthome2',
@@ -51,8 +51,8 @@ $('document').ready(function () {
         }
 
 
-        /* Cada objeto de pares é atribuído um aleatório, exclusivo ID quando ele é criado.
-         * Exibe o id do peer qundo a conexão 
+        /* Cada objeto de pares ï¿½ atribuï¿½do um aleatï¿½rio, exclusivo ID quando ele ï¿½ criado.
+         * Exibe o id do peer qundo a conexï¿½o 
          */
         peer.on('open', function () {
 
@@ -63,10 +63,10 @@ $('document').ready(function () {
         });
 
         /* Recebe chamada de video e audio
-         * Evento 'call' é emitido quando outro par faz a chamada
+         * Evento 'call' ï¿½ emitido quando outro par faz a chamada
          */
         peer.on('call', function (call) {
-            // Atender a chamada automaticamente (em vez de solicitar usuário) para fins de demonstração
+            // Atender a chamada automaticamente (em vez de solicitar usuï¿½rio) para fins de demonstraï¿½ï¿½o
             call.answer(window.localStream);
             step3(call);
         });
@@ -76,21 +76,21 @@ $('document').ready(function () {
         });
 
 
-        $('#iniciar').click(function () {
+        $('#modalFace').click(function () {
             // Get things started 
-            // inicia stream de video e audio      
+            // inicia stream de video e audio     
             step1();
         });
 
         // Click handlers setup
-        //$(function(){ //função autoexecutável    
+        //$(function(){ //funï¿½ï¿½o autoexecutï¿½vel    
         $('#make-call').click(function () {
 
             /* Inicia uma chamada
              * passa para peer.call o id do host hemoto 
              * O retorno do call evento fornecer um objeto MediaConnection. 
-             * O próprio objeto MediaConnection emite um stream evento cujo retorno inclui o 
-             * fluxo de vídeo / áudio do outro par.
+             * O prï¿½prio objeto MediaConnection emite um stream evento cujo retorno inclui o 
+             * fluxo de vï¿½deo / ï¿½udio do outro par.
              */
             var socket = io();
             socket.emit('requestPeerId', 'getPeerId');
@@ -109,12 +109,18 @@ $('document').ready(function () {
         function step1() {            
             // Get audio/video stream
             navigator.getUserMedia({ audio: true, video: true }, function (stream) {
-                // Set your video displays
+                // Set your video displays            	
+            	//Mirror video
+            	$('#my-video').css("-moz-transform", "scale(-1, 1)")
+            	.css("-webkit-transform", "scale(-1, 1)")
+            	.css("-o-transform", "scale(-1, 1)")
+            	.css("transform", "filter: FlipH");         	
+            	            	
                 $('#my-video').prop('src', URL.createObjectURL(stream));
 
                 window.localStream = stream;
-            }, function () {
-                $('#step1-error').show();
+            }, function () {            	
+                alert('ERRO STEP 1');
             });
         }
 
@@ -128,6 +134,16 @@ $('document').ready(function () {
              * Exibe video para host remoto
              */
             call.on('stream', function (stream) {
+            	//Mirror video
+            	$('#remote-video').css("-moz-transform", "scale(-1, 1)")
+            	.css("-webkit-transform", "scale(-1, 1)")
+            	.css("-o-transform", "scale(-1, 1)")
+            	.css("transform", "filter: FlipH");        
+            	
+            	document.getElementById('remote-video').style.cssText = "-moz-transform: scale(-1, 1); \
+            		-webkit-transform: scale(-1, 1); -o-transform: scale(-1, 1); \
+            		transform: scale(-1, 1); filter: FlipH;";
+            	
                 $('#remote-video').prop('src', URL.createObjectURL(stream));
             });
 
