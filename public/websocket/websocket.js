@@ -1,5 +1,5 @@
 ﻿$('document').ready(function () {
-    var socket = new WebSocket('ws://192.168.1.117:8080/websession');    
+    var socket = new WebSocket('ws://192.168.10.106:8080/websession');    
     socket.onopen = function () {
         console.log('CONNECTION ESTABLISHED!');
     };
@@ -110,22 +110,35 @@
         }
     });
 
+    /***************************************************************
+     *                                                             *
+     *               CONTROLE DA API REALSENSE                     *
+     *              											   *
+     ***************************************************************/
+    
     $('#btCadastro').click(function () {
-
         var nome = $('#name').val();
         var tel = $('#tel').val();
         var age = $('#age').val();
-
-        var strJson = '{' + '"nome":"' + nome + '",' + '"tel":"' + tel + '",' + '"age":"' + age + '"}';
-
+        var email = $('#email').val();
+        var strJson = 'save{' + '"nome":"' + nome + '",' + '"tel":"' + tel + '",' + '"age":"' + age + '"}';
         console.log(strJson);
-
         var json = JSON.parse(strJson);
-
         console.log(json);
         socket.send(strJson);
 
     });
+    
+    $('#btUnregister').click(function () {        
+        var strJson = 'unregister{' + '"nome":"' + nome + '",' + '"tel":"' + tel + '",' + '"age":"' + age + '"}';
+        console.log(strJson);
+        var json = JSON.parse(strJson);
+        console.log(json);
+        socket.send(strJson);
+
+    });
+    
+    
 
 
 });
