@@ -16,7 +16,7 @@ $('document').ready(function () {
         //Pega a key do servidor local
         if (flag) {
             var peer = new Peer('49725', {
-                host: '192.168.10.101',
+                host: '192.168.10.103',
                 //host: '192.168.1.2',
                 port: 9000,
                 path: '/smarthome2',
@@ -33,7 +33,7 @@ $('document').ready(function () {
             });
         } else {
             var peer = new Peer({
-                host: '192.168.10.101',
+                host: '192.168.10.103',
                //host: '192.168.1.2',
                 port: 9000,
                 path: '/smarthome2',

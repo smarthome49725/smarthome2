@@ -320,14 +320,34 @@
 
 										<!-- Make calls to others -->
 										<div id="step2">
+										<br/>
+											<!-- STATUS -->
+												<label id="lbStatus"></label>
+												<div id="StatusConnection"></div>
+											<!-- /STATUS -->
+										
 											<p>
 												Your id: <span id="my-id">...</span>
 											</p>
 
 											<!--Id do host remoto-->
-											<input type="text" placeholder="Call user id..."
-												id="id-guest">
-											<button id="make-call">make-call</button>
+											<input type="text" placeholder="Call user id..."id="id-guest">
+											
+											
+											
+											
+											<br/>
+											<button id="btShowConfig">Configure IP</button>
+											
+											<div id="divConfigIP">
+												<input type="text" placeholder="IP:PORTA" id="ipAPI_RS" value="192.168.10.102:8080">
+												<button id="btSaveConnectAPI_RS">Save</button>
+											</div>
+											
+											<br/>
+											<br/>
+											
+											<button id="make-call">make-call</button>																				
 											<button id="end-call">End call</button>
 											<button id="hideCanvas">hideCanvas</button>
 											<button id="end-monitoring">End-Monitoring</button>

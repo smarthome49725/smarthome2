@@ -115,6 +115,19 @@ border: 0.1em solid #F1F1F1;
 	margin-left: 25%;	
 }
 
+#StatusConnection{
+	width: 20px;
+    height: 20px;
+	background:green;
+	border-radius: 50%;
+	float: left;
+	
+
+}
+#lbStatus{
+	margin-left: 5px;
+}
+
 
 
 
