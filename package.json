@@ -1,5 +1,5 @@
 {
-  "name": "smartHome2",
+  "name": "AnalogRead",
   "description": "",
   "version": "0.0.0",
   "main": "main.js",
@@ -7,15 +7,5 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
-    "cylon-intel-iot": "^0.4.0",
-    "express": "^4.10.4",
-    "express.io": "^1.1.13",
-    "jade": "^1.8.0",
-    "method-override": "^2.3.0",
-    "mongoose": "3.8",
-    "morgan": "^1.5.0",
-    "peer": "^0.2.8",
-    "socket.io": "1.4.6",
-    "websocket": "1.0.23"
   }
 }

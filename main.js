@@ -1,174 +1,88 @@
-var express = require('express.io'),
-    //Cylon         = require('cylon'),
-    temper = require('./models/temperature.js'),
-    ExeStepper = require('./models/stepper.js'),
-    televisor = require('./models/tv_smart.js'),
-    ar = require('./models/airconditioning.js'),
-    control_light = require('./models/lamps.js');
+/*jslint node:true, vars:true, bitwise:true, unparam:true */
+/*jshint unused:true */
+/*global */
+/*
+A simple node.js application intended to read data from Analog pins on the Intel based development boards 
+such as the Intel(R) Galileo and Edison with Arduino breakout board, and display it in a browser running on the client.
 
-var PeerServer = require('peer').PeerServer;
-var server = PeerServer({port: 9000, path: '/smarthome2'});
+This demonstrates use of http.createServer, and fs.
 
-app = express();
-socket = require('socket.io').listen(app.listen(49725));
+MRAA - Low Level Skeleton Library for Communication on GNU/Linux platforms
+Library in C/C++ to interface with Galileo & other Intel platforms, in a structured and sane API with port nanmes/numbering that match boards & with bindings to javascript & python.
+  
+Steps for installing MRAA & UPM Library on Intel IoT Platform with IoTDevKit Linux* image
+Using a ssh client: 
+1. echo "src maa-upm http://iotdk.intel.com/repos/1.1/intelgalactic" > /etc/opkg/intel-iotdk.conf
+2. opkg update
+3. opkg upgrade
 
-app.sensorsReady = false;
-app.sensors = {};
-
-app.use(express.static(__dirname + '/public'));
-app.http().io();
-
-//SMARTHOME2 WebRTC
-socket.on('connection', function (socket) {
-    socket.on('requestPeerId', function (peer_id) {
-        var PEERID;
-        if (peer_id === 'getPeerId') {
-            console.log('requestPeerId: false');
-            PEERID = peerId.getPeerId();
-            socket.emit('requestPeerId', PEERID);
-        } else {
-            peerId.setPeerId(peer_id);
-            console.log('requestPeerId: ' + peer_id);
-
-        }
-    });
-});
-
-var peerId = {
-    peer_id: "",
-    setPeerId: function (peer_id) {
-        this.peer_id = peer_id;
-    },
-    getPeerId: function () {
-        return this.peer_id;
-    }
-};
-
-var flagM = true;
-socket.on('connection', function (socket) {
-    socket.on('flag', function (flag) {
-        socket.emit('flag', flagM);
-        flagM = false;
-
-        console.log('setando false para flag!');
-
-    });
-});
-
-//</SMARTHOME2-WebRtc>
-
-
-
-/*Cylon.robot({
-  connections: {
-    galileo: {
-      adaptor: 'intel-iot'
-    }
-  },
-
-  devices: {
-    temp_bathroom: {driver: 'analogSensor',pin: 0},
-    temp_kitchen: {driver: 'analogSensor', pin: 1},
-    temp_bedroom: {driver: 'analogSensor', pin: 2},
-    temp_room: {driver: 'analogSensor', pin: 3},
-    relay_bathroom: {driver: 'direct-pin',pin: 6},
-    relay_kitchen: {driver: 'direct-pin',pin: 7},
-    relay_room: {driver: 'direct-pin',pin: 8},
-    relay_roomTwo: {driver: 'direct-pin',pin: 9},
-    relay_bedroom: {driver: 'direct-pin',pin: 10},
-    active_ar: {driver: 'direct-pin',pin: 5},
-    ar_Volume: {driver: 'direct-pin', pin: 13},
-    tv_Increase: {driver: 'direct-pin', pin: 4},
-    tv_Decrease: {driver: 'direct-pin', pin: 11},
-    tv_On_Off: {driver: 'direct-pin', pin: 12}
-  },
-
-  work: function (my) {
-   app.sensorsReady = true;
-   app.sensors = {
-   temp_bathroom: my.temp_bathroom,
-   temp_kitchen: my.temp_kitchen,
-   temp_bedroom: my.temp_bedroom,
-   temp_room: my.temp_room,
-   relay_bathroom: my.relay_bathroom,
-   relay_kitchen: my.relay_kitchen,
-   relay_room: my.relay_room,
-   relay_roomTwo: my.relay_roomTwo,
-   relay_bedroom: my.relay_bedroom,
-   active_ar: my.active_ar,
-   tv_Increase: my.tv_Increase,
-   tv_Decrease: my.tv_Decrease,
-   ar_Volume: my.ar_Volume,
-   tv_On_Off: my.tv_On_Off
-  };
-    every((4).second(), function () {
-    app.tempBroadcast();
-    });
-  }
-}).start();
+Article: https://software.intel.com/en-us/xdk-sample-creating-a-web-server
 */
-app.tempBroadcast = function () {
-    temper.temperature();
-},
 
-app.relay_connect_allController = function () {
-    control_light.control_lampAll();
-},
+// Set this to the ip address of your board (not 127.0.0.1)
+var ipAddress = '192.168.2.15'; 
 
-app.relay_bathroomController = function () {
-    control_light.bathroom();
-},
+var mraa = require('mraa'); //require mraa
+console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the console
 
-app.relay_kitchenController = function () {
-    control_light.kitchen();
-},
+// Start by loading in some data
+var fs = require('fs');
 
-app.relay_bedroomController = function () {
-    control_light.bedroom();
-},
+var lightSensorPage = fs.readFileSync('/node_app_slot/lightsensor.html');
 
-app.relay_roomController = function () {
-    control_light.roomOne();
-},
+// Insert the ip address in the code in the page
 
-app.relay_roomTwoController = function () {
-    control_light.roomTwo();
-},
+lightSensorPage = String(lightSensorPage).replace(/<<ipAddress>>/, ipAddress);
 
-app.control_curtain = function () {
-    ExeStepper.controlMotor();
-};
+var analogPin0 = new mraa.Aio(0);
 
-app.televisor_on_off = function () {
-    televisor.control_tv();
-};
+/**
+ * Given a value, convert it to Lux
+ *
+ * This uses the table given in the documentation for the 
+ * Grove Starter Kit Plus. We have not sought to verify these
+ * values with our device. That would be worth doing if you
+ * intend to rely on these values. In that case, it could also
+ * be worthwhile to improve the interpolation formula
+ * @param {Number} - the raw reading from the device
+ */
+function getLux(analogValue) {
+  // Values taken from Grove Starter Kit for Arduino table
+  var lux;
+  var calib = [{reading:0, lux:0},
+               {reading:100, lux:0.2},  // guess - not from published table
+               {reading:200, lux:1},
+               {reading:300, lux:3},
+               {reading:400, lux:6},
+               {reading:500, lux:10},
+               {reading:600, lux:15},
+               {reading:700, lux:35},
+               {reading:800, lux:80},
+               {reading:900, lux:100}];
+  var i = 0;
+  while (i < calib.length && calib[i].reading < analogValue) {
+    i ++;
+  }
+  if (i > 0) {
+    i = i - 1;
+  }
+  // simple linear interpolation 
+  lux =  (calib[i].lux *(calib[i + 1].reading - analogValue) + calib[i + 1].lux * (analogValue - calib[i].reading))/(calib[i + 1].reading - calib[i].reading);
+  return lux;
+}
 
-app.televisor_increase = function () {
-    televisor.increase();
-};
-
-app.televisor_decrease = function () {
-    televisor.decrease();
-};
-
-app.ar_on_off = function () {
-    ar.control_ar();
-};
-
-app.ar_increase = function () {
-    ar.increase();
-};
-
-app.ar_decrease = function () {
-    ar.decrease();
-};
-
-control_light.socket_Lamps();
-
-ExeStepper.socket_curtain();
-
-televisor.socket_Televisor();
-
-ar.socket_AR();
-
-console.log('Smart Home-2 - C.I.A - 49725');
+var http = require('http');
+http.createServer(function (req, res) {
+    var value;
+    // This is a very quick and dirty way of detecting a request for the page
+    // versus a request for light values
+    if (req.url.indexOf('lightsensor') != -1) {
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end(lightSensorPage);
+    }
+    else {
+        value = analogPin0.read();
+        res.writeHead(200, {'Content-Type': 'text/json'});
+        res.end(JSON.stringify({lightLevel:getLux(value), rawValue:value}));
+    }
+}).listen(1337, ipAddress);
