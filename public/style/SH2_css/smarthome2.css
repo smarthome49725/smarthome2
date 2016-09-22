@@ -118,7 +118,7 @@ border: 0.1em solid #F1F1F1;
 #StatusConnection{
 	width: 20px;
     height: 20px;
-	background:green;
+	background:red;
 	border-radius: 50%;
 	float: left;
 	

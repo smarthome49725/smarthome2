@@ -1,9 +1,16 @@
 $('document').ready(function () {
     var socket = io();
     var flag;
+
+    var ipAPI_RS;
+
     socket.emit('flag', 'flag');
     socket.on('flag', function (flag) {
 
+    
+           
+            
+      
 
         // Matem compatibilidade com outros navegadores
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -14,37 +21,39 @@ $('document').ready(function () {
          */
 
         //Pega a key do servidor local
+        //$('#btSaveIPplaca').click(function () {
+        //ipPlaca = $('#ipPlaca').val();   
+
+        var ipPlaca = $('#ipPlaca').val();
         if (flag) {
             var peer = new Peer('49725', {
-                host: '192.168.10.103',
-                //host: '192.168.1.2',
+                host: '127.0.0.1',
                 port: 9000,
                 path: '/smarthome2',
                 debug: 3,
                 config: {
                     'iceServers': [
-                            { url: 'stun:stun1.l.google.com:19302' },
-                            {
-                                url: 'turn:numb.viagenie.ca',
-                                credential: 'smarthome2', username: 'webrtc@live.com'
-                            }
+                        { url: 'stun:stun1.l.google.com:19302' },
+                        {
+                            url: 'turn:numb.viagenie.ca',
+                            credential: 'smarthome2', username: 'webrtc@live.com'
+                        }
                     ]
                 }
             });
         } else {
             var peer = new Peer({
-                host: '192.168.10.103',
-               //host: '192.168.1.2',
+                host: '127.0.0.1',
                 port: 9000,
                 path: '/smarthome2',
                 debug: 3,
                 config: {
                     'iceServers': [
-                            { url: 'stun:stun1.l.google.com:19302' },
-                            {
-                                url: 'turn:numb.viagenie.ca',
-                                credential: 'smarthome2', username: 'webrtc@live.com'
-                            }
+                        { url: 'stun:stun1.l.google.com:19302' },
+                        {
+                            url: 'turn:numb.viagenie.ca',
+                            credential: 'smarthome2', username: 'webrtc@live.com'
+                        }
                     ]
                 }
             });
@@ -76,7 +85,7 @@ $('document').ready(function () {
         });
 
 
-        $('#modalFace').click(function () {
+        $('#startStream').click(function () {
             // Get things started 
             // inicia stream de video e audio     
             step1();
@@ -97,7 +106,7 @@ $('document').ready(function () {
             socket.on('requestPeerId', function (peer_id) {
                 //var call = peer.call('49725', window.localStream);
 
-                var call = peer.call($('#id-guest').val(), window.localStream);            
+                var call = peer.call($('#id-guest').val(), window.localStream);
                 step3(call);
             });
         });
@@ -106,20 +115,20 @@ $('document').ready(function () {
             window.existingCall.close();
         });
 
-        function step1() {            
+        function step1() {
             // Get audio/video stream
             navigator.getUserMedia({ audio: true, video: true }, function (stream) {
                 // Set your video displays            	
-            	//Mirror video
-            	$('#my-video').css("-moz-transform", "scale(-1, 1)")
-            	.css("-webkit-transform", "scale(-1, 1)")
-            	.css("-o-transform", "scale(-1, 1)")
-            	.css("transform", "filter: FlipH");         	
-            	            	
+                //Mirror video
+                $('#my-video').css("-moz-transform", "scale(-1, 1)")
+                    .css("-webkit-transform", "scale(-1, 1)")
+                    .css("-o-transform", "scale(-1, 1)")
+                    .css("transform", "filter: FlipH");
+
                 $('#my-video').prop('src', URL.createObjectURL(stream));
 
                 window.localStream = stream;
-            }, function () {            	
+            }, function () {
                 alert('ERRO STEP 1');
             });
         }
@@ -134,16 +143,16 @@ $('document').ready(function () {
              * Exibe video para host remoto
              */
             call.on('stream', function (stream) {
-            	//Mirror video
-            	$('#remote-video').css("-moz-transform", "scale(-1, 1)")
-            	.css("-webkit-transform", "scale(-1, 1)")
-            	.css("-o-transform", "scale(-1, 1)")
-            	.css("transform", "filter: FlipH");        
-            	
-            	document.getElementById('remote-video').style.cssText = "-moz-transform: scale(-1, 1); \
+                //Mirror video
+                $('#remote-video').css("-moz-transform", "scale(-1, 1)")
+                    .css("-webkit-transform", "scale(-1, 1)")
+                    .css("-o-transform", "scale(-1, 1)")
+                    .css("transform", "filter: FlipH");
+
+                document.getElementById('remote-video').style.cssText = "-moz-transform: scale(-1, 1); \
             		-webkit-transform: scale(-1, 1); -o-transform: scale(-1, 1); \
             		transform: scale(-1, 1); filter: FlipH;";
-            	
+
                 $('#remote-video').prop('src', URL.createObjectURL(stream));
             });
 
@@ -153,7 +162,7 @@ $('document').ready(function () {
             call.on('close');
 
         }
-     
+
     });
 
 
