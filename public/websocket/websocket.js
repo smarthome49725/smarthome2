@@ -5,9 +5,11 @@
 
     var ipPlaca;
     var configIP;
+    var ipClientRTC;
+    var ipServerRTC;
 
     var ipAPI_RS = '0.0.0.0';// CAPTURAR IP GUARDADO NO BD DA PLACA (MONGO DB)   
-   
+
     /***************************************************************
      *                 NAV SHOW AND HIDE                           *  
      ***************************************************************/
@@ -29,7 +31,7 @@
             flag2 = true;
             flag3 = true;
         } else {
-            $('#step2').hide();            
+            $('#step2').hide();
             flag = true;
         }
     });
@@ -38,16 +40,16 @@
         if (flag2 === true) {
             $('#divForm').show();
             $('#step2').hide();
-            $('#divConfigIP').hide();            
+            $('#divConfigIP').hide();
             flag2 = false;
             flag = true;
             flag3 = true;
         } else {
-            $('#divForm').hide();            
+            $('#divForm').hide();
             flag2 = true;
         }
     });
-    
+
     $('#btShowConfig').click(function () {
         if (flag3 === true) {
             $('#divConfigIP').show();
@@ -57,11 +59,11 @@
             flag = true;
             flag2 = true;
         } else {
-            $('#divConfigIP').hide();            
+            $('#divConfigIP').hide();
             flag3 = true;
         }
-    });    
-   
+    });
+
 
     /***************************************************************
      *         CONFIG IP-API AND CONNECTION WEBSOCKET              *  
@@ -70,7 +72,7 @@
     socketIO.emit('readIP', 'readIP'); //emite sinal para receber o IP guardado na placa    
     socketIO.on('getIP_API', function (configIP) {
 
-        configIP = JSON.parse(configIP);       
+        configIP = JSON.parse(configIP);
 
         socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/websession');
         eventsWS();
@@ -80,15 +82,20 @@
     $('#btSaveConnectAPI_RS').click(function () {
         ipAPI_RS = $('#ipAPI_RS').val();
         ipPlaca = $('#ipPlaca').val();
-        //var configIP = '{jsonConfig:[{' + '"ipPlaca"' + ':"' + ipPlaca + '"}]}';
+        ipClientRTC = $('#ipClientRTC').val();
+        ipServerRTC = $('#ipServerRTC').val();       
 
         configIP = '{ "configIP" : [' +
    '{' + '"ipAPI_RS"' + ':"' + ipAPI_RS + '"},' +
-   '{' + '"ipPlaca"' + ':"' + ipPlaca + '"}]}';
+   '{' + '"ipPlaca"' + ':"' + ipPlaca + '"},' +
+   '{' + '"ipClientRTC"' + ':"' + ipClientRTC + '"},' +
+   '{' + '"ipServerRTC"' + ':"' + ipServerRTC + '"}]}';
+
 
         socketIO.emit('saveIP', configIP);
 
         configIP = JSON.parse(configIP);
+        console.log(configIP);
 
         socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/websession');
         eventsWS();
@@ -97,7 +104,7 @@
 
     /***************************************************************
      *                     REGISTER USER                           *  
-     ***************************************************************/ 
+     ***************************************************************/
 
     $('#btCadastro').click(function () {
         var nome = $('#name').val();
@@ -125,7 +132,7 @@
         var strJson = '{' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
         console.log(strJson);
         var json = JSON.parse(strJson);
-        console.log(json);            
+        console.log(json);
         socket.send('unregisterUser' + strJson);
     });
 
@@ -233,8 +240,6 @@
             alert("Canvas is not supported in your browser");
         }
     };
-
-
 
     //DAR UTILIDADE A ESTE BUTTON
     $('#btSettings').click(function () {

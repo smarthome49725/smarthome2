@@ -5,29 +5,54 @@ $('document').ready(function () {
     var ipAPI_RS;
     var configIP;
 
+    //<pegar ip do computador>
+    var ipClientRTC;
+    var ipServerRTC;
+
+    var myIP;
+    //http://stackoverflow.com/questions/20194722/can-you-get-a-users-local-lan-ip-address-via-javascript
+    var pc = new RTCPeerConnection({ iceServers: [] }), noop = function () { };
+    pc.createDataChannel("");   //create a bogus data channel
+    pc.createOffer(pc.setLocalDescription.bind(pc), noop);    // create offer and set local description
+    pc.onicecandidate = function (ice) {  //listen for candidate events
+        if (!ice || !ice.candidate || !ice.candidate.candidate) return;
+        myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
+        console.log('my IP: ', myIP);
+
+        pc.onicecandidate = noop;
+    };
+
+   
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+  
+    //</pegar ip do computador>
+
+    
+
     socket.emit('flag', 'flag');
     socket.on('flag', function (flag) {
-
-
-
-
-
 
         // Matem compatibilidade com outros navegadores
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-        /* O objeto pares � onde criamos e receber liga��es.
-         * PeerJS usa PeerServer para metadados sess�o e sinaliza��o candidato
-         * debug: 3 (imprime todos os logs)
-         */
-
-
         socket.emit('readIP', 'readIP'); //emite sinal para receber o IP guardado na placa
+
 
         $('#btSaveConnectAPI_RS').click(function () {
             socket.emit('readIP', 'readIP');
-
-            
         });
 
         socket.on('getIP_API', function (configIP) {
@@ -35,10 +60,16 @@ $('document').ready(function () {
 
             ipAPI_RS = $('#ipAPI_RS').val(configIP.configIP[0].ipAPI_RS);
             ipPlaca = $('#ipPlaca').val(configIP.configIP[1].ipPlaca);
+            ipClientRTC = $('#ipClientRTC').val(configIP.configIP[2].ipClientRTC);
+            ipServerRTC = $('#ipServerRTC').val(configIP.configIP[3].ipServerRTC);
 
+            /* O objeto pares � onde criamos e receber liga��es.
+            * PeerJS usa PeerServer para metadados sess�o e sinaliza��o candidato
+            * debug: 3 (imprime todos os logs)
+            */
             var ipPlaca = $('#ipPlaca').val();
             if (flag) {
-                var peer = new Peer('49725', {
+                var peer = new Peer(configIP.configIP[2].ipClientRTC, {
                     host: configIP.configIP[1].ipPlaca,
                     port: 9000,
                     path: '/smarthome2',
@@ -54,7 +85,7 @@ $('document').ready(function () {
                     }
                 });
             } else {
-                var peer = new Peer({
+                var peer = new Peer(configIP.configIP[3].ipServerRTC, {
                     host: configIP.configIP[1].ipPlaca,
                     port: 9000,
                     path: '/smarthome2',
@@ -71,14 +102,13 @@ $('document').ready(function () {
                 });
             }
 
-
             /* Cada objeto de pares � atribu�do um aleat�rio, exclusivo ID quando ele � criado.
              * Exibe o id do peer qundo a conex�o 
              */
             peer.on('open', function () {
 
-                socket = io();
-                socket.emit('requestPeerId', peer.id);
+                /*socket = io();
+                socket.emit('requestPeerId', peer.id);*/
 
                 $('#my-id').text(peer.id);
             });
@@ -113,14 +143,15 @@ $('document').ready(function () {
                  * O pr�prio objeto MediaConnection emite um stream evento cujo retorno inclui o 
                  * fluxo de v�deo / �udio do outro par.
                  */
-                var socket = io();
+                /*var socket = io();
                 socket.emit('requestPeerId', 'getPeerId');
-                socket.on('requestPeerId', function (peer_id) {
-                    //var call = peer.call('49725', window.localStream);
+                socket.on('requestPeerId', function (peer_id) {*/
+                //var call = peer.call('49725', window.localStream);
 
-                    var call = peer.call($('#id-guest').val(), window.localStream);
-                    step3(call);
-                });
+                var call = peer.call($('#id-guest').val(), window.localStream);
+
+                step3(call);
+                // });
             });
 
             $('#end-call').click(function () {
