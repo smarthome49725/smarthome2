@@ -31,7 +31,10 @@ $('document').ready(function () {
         });
 
         socket.on('getIP_API', function (configIP) {
-            configIP = JSON.parse(configIP);          
+            configIP = JSON.parse(configIP);
+
+            ipAPI_RS = $('#ipAPI_RS').val(configIP.configIP[0].ipAPI_RS);
+            ipPlaca = $('#ipPlaca').val(configIP.configIP[1].ipPlaca);
 
             var ipPlaca = $('#ipPlaca').val();
             if (flag) {

@@ -6,8 +6,7 @@
     var ipPlaca;
     var configIP;
 
-    var ipAPI_RS = '0.0.0.0';// CAPTURAR IP GUARDADO NO BD DA PLACA (MONGO DB)
-   
+    var ipAPI_RS = '0.0.0.0';// CAPTURAR IP GUARDADO NO BD DA PLACA (MONGO DB)   
    
     /***************************************************************
      *                 NAV SHOW AND HIDE                           *  
@@ -16,7 +15,6 @@
     $('#divForm').hide();
     $('#divConfigIP').hide();
     $('#step2').hide();
-
 
     var flag = true;
     var flag2 = true;
@@ -31,8 +29,7 @@
             flag2 = true;
             flag3 = true;
         } else {
-            $('#step2').hide();
-            //$('#divConfigIP').show();
+            $('#step2').hide();            
             flag = true;
         }
     });
@@ -46,8 +43,7 @@
             flag = true;
             flag3 = true;
         } else {
-            $('#divForm').hide();
-            //$('#divConfigIP').show();
+            $('#divForm').hide();            
             flag2 = true;
         }
     });
@@ -61,24 +57,20 @@
             flag = true;
             flag2 = true;
         } else {
-            $('#divConfigIP').hide();
-            //$('#divForm').show();
+            $('#divConfigIP').hide();            
             flag3 = true;
         }
-    });
-
-    btMonitoring
+    });    
    
 
     /***************************************************************
      *         CONFIG IP-API AND CONNECTION WEBSOCKET              *  
      ***************************************************************/
 
-    socketIO.emit('readIP', 'readIP'); //emite sinal para receber o IP guardado na placa
-    //inicial connection with API
+    socketIO.emit('readIP', 'readIP'); //emite sinal para receber o IP guardado na placa    
     socketIO.on('getIP_API', function (configIP) {
 
-        configIP = JSON.parse(configIP);
+        configIP = JSON.parse(configIP);       
 
         socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/websession');
         eventsWS();
