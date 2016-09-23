@@ -71,16 +71,16 @@ socket.on('connection', function (socket) {
 /***************************************************************
  *                     CONFIG IP-API                           *  
  ***************************************************************/
-var ipAPI = '';
+var configIP = '';
 
 socket.on('connection', function (socket) {
-    socket.on('readIP', function (ipAPI) {
-        fs.readFile("public/config", 'utf8', function (err, ipAPI) {
+    socket.on('readIP', function (configIP) {
+        fs.readFile("public/config", 'utf8', function (err, configIP) {
             if (err) {
                 return console.log(err);
             }
-            console.log('READ: ' + ipAPI);
-            socket.emit('getIP_API', ipAPI);
+            console.log('READ: ' + configIP);
+            socket.emit('getIP_API', configIP);
 
         });
     });
@@ -88,19 +88,20 @@ socket.on('connection', function (socket) {
 
 
 socket.on('connection', function (socket) {
-    socket.on('saveIP', function (ipAPI) {
+    socket.on('saveIP', function (configIP) {
+        var jsonConfig = JSON.parse(configIP);
 
-        fs.writeFile("public/config", ipAPI, function (err) {
+        fs.writeFile("public/config", configIP, function (err) {
             if (err) {
                 console.log(err);
             } else {
-                console.log("The config was saved!: " + ipAPI);
-
-                socket.emit('getIP_API', ipAPI);
-
-
+                console.log("The config was saved!: " + configIP);
+                console.log(configIP);
+                socket.emit('getIP_API', configIP);
             }
         });
+
+
     });
 });
 

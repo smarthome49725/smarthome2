@@ -128,7 +128,23 @@ border: 0.1em solid #F1F1F1;
 	margin-left: 5px;
 }
 
+#ipAPI_RS{
+    margin-left: 21px;
+}
 
+
+#btSaveConnectAPI_RS{
+    margin-left: 162px;
+}
+
+#divConfigIP{
+    background: #337ab7;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+    
 
 
 

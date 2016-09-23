@@ -3,6 +3,8 @@
     var socketIO = io();
 
 
+    var ipPlaca;
+    var configIP;
 
     var ipAPI_RS = '0.0.0.0';// CAPTURAR IP GUARDADO NO BD DA PLACA (MONGO DB)
     $('#cadastro').hide();
@@ -22,20 +24,33 @@
 
     /***************************************************************
      *         CONFIG IP-API AND CONNECTION WEBSOCKET              *  
-     ***************************************************************/    
+     ***************************************************************/
 
-    socketIO.emit('readIP', ipAPI_RS); //emite sinal para receber o IP guardado na placa
+    socketIO.emit('readIP', 'readIP'); //emite sinal para receber o IP guardado na placa
     //inicial connection with API
-    socketIO.on('getIP_API', function (ipAPI_RS) {
-        socket = new WebSocket('ws://' + ipAPI_RS + '/websession');
+    socketIO.on('getIP_API', function (configIP) {
+
+        configIP = JSON.parse(configIP);
+
+        socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/websession');
         eventsWS();
     });
 
     //Config and connection with API
     $('#btSaveConnectAPI_RS').click(function () {
         ipAPI_RS = $('#ipAPI_RS').val();
-        socketIO.emit('saveIP', ipAPI_RS);
-        socket = new WebSocket('ws://' + ipAPI_RS + '/websession');
+        ipPlaca = $('#ipPlaca').val();
+        //var configIP = '{jsonConfig:[{' + '"ipPlaca"' + ':"' + ipPlaca + '"}]}';
+
+        configIP = '{ "configIP" : [' +
+   '{' + '"ipAPI_RS"' + ':"' + ipAPI_RS + '"},' +
+   '{' + '"ipPlaca"' + ':"' + ipPlaca + '"}]}';
+
+        socketIO.emit('saveIP', configIP);
+
+        configIP = JSON.parse(configIP);
+
+        socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/websession');
         eventsWS();
 
     });//Connection API 
@@ -63,11 +78,11 @@
         var email = $('#email').val();
         //ORIGINALvar strJson = 'registerUser' + '{' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
         //Teste banco melgaço
-        var strJson = 'registerUser' + '{' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age /*+ '",' + '"email"' + ':"' + email*/ + '"}';
+        var strJson = '{' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age /*+ '",' + '"email"' + ':"' + email*/ + '"}';
         console.log(strJson);
-        //var json = JSON.parse(strJson);
-        //console.log(json);            
-        socket.send(strJson);
+        var json = JSON.parse(strJson);
+        console.log(json);
+        socket.send('registerUser' + strJson);
     });
 
 
@@ -87,7 +102,7 @@
         socket.send(strJson);
     });
 
-	/***************************************************************
+    /***************************************************************
 	 *                     EVENTS WEBSOCKET                        *  
 	 ***************************************************************/
 
