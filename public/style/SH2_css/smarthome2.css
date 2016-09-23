@@ -17,10 +17,6 @@
     z-index: 10;
 }
 
-#make-call {
-    margin-top: 10px;
-}
-
 #lblMonito {
     
 }
@@ -32,20 +28,17 @@
 
 #make-call {
     background: green;
-    color: white;
-    font-size: 16pt;
+    color: white; 
 }
 
 #end-call{
     background: red;
-    color: white;
-    font-size: 16pt;
+    color: white;    
 }
 
 #end-monitoring{
     background: red;
-    color: white;
-    font-size: 16pt;
+    color: white;    
 
 }
 
@@ -102,18 +95,35 @@ border: 0.1em solid #F1F1F1;
 		background: #0165F3;
 }
 
+#name{
+    margin-left: 4px;
+}
+
 #tel{
-	margin-left: 18px;	
+	margin-left: 23px;	
 	margin-top: 5px;
 }
 #age{
-	margin-left: 17px;
+	margin-left: 18px;
 	margin-top: 5px;
 }
 
-#btCadastro{
-	margin-left: 25%;	
+#email{
+    margin-left: 2px;
+    margin-top: 5px;
+    
 }
+
+#btCadastro{
+    padding-left: 5px;
+	margin-left: 47px;	
+    width: 72px;
+}
+
+#btUnregiste{
+    width: 72px;
+}
+
 
 #StatusConnection{
 	width: 20px;
@@ -137,7 +147,7 @@ border: 0.1em solid #F1F1F1;
     margin-left: 162px;
 }
 
-#divConfigIP{
+#divConfigIP, #divForm, #step2{
     background: #337ab7;
     border-radius: 5px;
     font-weight: bold;

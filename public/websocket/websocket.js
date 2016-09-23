@@ -7,20 +7,68 @@
     var configIP;
 
     var ipAPI_RS = '0.0.0.0';// CAPTURAR IP GUARDADO NO BD DA PLACA (MONGO DB)
-    $('#cadastro').hide();
+   
+   
+    /***************************************************************
+     *                 NAV SHOW AND HIDE                           *  
+     ***************************************************************/
+
     $('#divForm').hide();
     $('#divConfigIP').hide();
+    $('#step2').hide();
 
+
+    var flag = true;
     var flag2 = true;
-    $('#btShowConfig').click(function () {
-        if (flag2 === true) {
-            $('#divConfigIP').show();
-            flag2 = false;
-        } else {
+    var flag3 = true;
+
+    $('#btMonitoring').click(function () {
+        if (flag === true) {
+            $('#step2').show();
+            $('#divForm').hide();
             $('#divConfigIP').hide();
+            flag = false;
+            flag2 = true;
+            flag3 = true;
+        } else {
+            $('#step2').hide();
+            //$('#divConfigIP').show();
+            flag = true;
+        }
+    });
+
+    $('#cadastro').click(function () {
+        if (flag2 === true) {
+            $('#divForm').show();
+            $('#step2').hide();
+            $('#divConfigIP').hide();            
+            flag2 = false;
+            flag = true;
+            flag3 = true;
+        } else {
+            $('#divForm').hide();
+            //$('#divConfigIP').show();
             flag2 = true;
         }
     });
+    
+    $('#btShowConfig').click(function () {
+        if (flag3 === true) {
+            $('#divConfigIP').show();
+            $('#step2').hide();
+            $('#divForm').hide();
+            flag3 = false;
+            flag = true;
+            flag2 = true;
+        } else {
+            $('#divConfigIP').hide();
+            //$('#divForm').show();
+            flag3 = true;
+        }
+    });
+
+    btMonitoring
+   
 
     /***************************************************************
      *         CONFIG IP-API AND CONNECTION WEBSOCKET              *  
@@ -57,19 +105,7 @@
 
     /***************************************************************
      *                     REGISTER USER                           *  
-     ***************************************************************/
-
-    $('#cadastro').show();
-    var flag = true;
-    $('#cadastro').click(function () {
-        if (flag === true) {
-            $('#divForm').show();
-            flag = false;
-        } else {
-            $('#divForm').hide();
-            flag = true;
-        }
-    });
+     ***************************************************************/ 
 
     $('#btCadastro').click(function () {
         var nome = $('#name').val();
@@ -85,7 +121,6 @@
         socket.send('registerUser' + strJson);
     });
 
-
     /***************************************************************
      *                       UNREGISTER USER                       *  
      ***************************************************************/
@@ -95,11 +130,11 @@
         var tel = $('#tel').val();
         var age = $('#age').val();
         var email = $('#email').val();
-        var strJson = 'unregisterUser' + '{' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
+        var strJson = '{' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
         console.log(strJson);
-        //var json = JSON.parse(strJson);
-        //console.log(json);            
-        socket.send(strJson);
+        var json = JSON.parse(strJson);
+        console.log(json);            
+        socket.send('unregisterUser' + strJson);
     });
 
     /***************************************************************
