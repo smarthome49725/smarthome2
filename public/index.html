@@ -283,7 +283,7 @@
                                             </div>
                                             <div class="btn-group" role="group">
                                                 <button id="btShowConfig" type="button" class="btn btn-default">Configurações</button>
-                                            </div>
+                                            </div>                                           
                                         </div>
                                         <!--</TESTE NAV>-->
                                         <!--CONFIG RS-->
@@ -322,6 +322,19 @@
                                         <div id="step2">                                            
                                             <fieldset>
                                                 <legend>Monitoramento</legend>
+                                                <!-- STATUS -->
+                                                <div id="status">
+                                                    <label id="lbStatus">NOT CONNECTED</label>
+                                                    <span id="StatusConnection"></span>
+                                                    <p>Your id: <span id="my-id">...</span></p>
+                                                    <!-- /STATUS -->
+                                                    <div id="step3">
+                                                        <p>
+                                                            Currently in call with <span id="their-id">...</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
                                                 <input id="id-guest" type="text" placeholder="Call user id...">
                                                 <button id="startStream" class="btn btn-success">Start Stream</button>
                                                 <button id="make-call" class="btn btn-success">make-call</button>
@@ -331,20 +344,15 @@
                                                 <button id="onrect" class="btn btn-success">Rect</button>
                                             </fieldset>
                                         </div>
+
+
                                         <!-- Call in progress -->
 
-                                        <!-- STATUS -->
-                                        <label id="lbStatus">NOT CONNECTED</label>
-                                        <span id="StatusConnection"></span>
-                                        <p>Your id: <span id="my-id">...</span></p>
-                                        <!-- /STATUS -->
-                                        <!-- Steps -->
+                                      
+                                        
+                                            <!-- Steps -->
 
-                                        <div id="step3">
-                                            <p>
-                                                Currently in call with <span id="their-id">...</span>
-                                            </p>
-                                        </div>
+                                        
                                     </div>
 
 
