@@ -1,5 +1,7 @@
 A Web Server App
 ============================
+Chrome --unsafely-treat-insecure-origin-as-secure=http://192.168.10.106:49725 --user-data-dir=/test/only/profile/dir
+
 A simple node.js application to demonstrate some of the possibilities of using the board to serve data to a web page.
 
 The sample app reads the value of the light sensor and serves it as JSON to a web page, that is also served by the app.
