@@ -75,11 +75,11 @@ var configIP = '';
 
 socket.on('connection', function (socket) {
     socket.on('readIP', function (configIP) {
-        fs.readFile("public/config", 'utf8', function (err, configIP) {
+        fs.readFile("public/config/config.json", 'utf8', function (err, configIP) {
             if (err) {
                 return console.log(err);
             }
-            console.log('READ: ' + configIP);
+            console.log('READ CONFIG 200 OK');
             socket.emit('getIP_API', configIP);
 
         });
@@ -87,16 +87,19 @@ socket.on('connection', function (socket) {
 });
 
 
+/***************************************************************
+ *                     CONFIG IP-API READ                      *  
+ ***************************************************************/
+
 socket.on('connection', function (socket) {
     socket.on('saveIP', function (configIP) {
         var jsonConfig = JSON.parse(configIP);
 
-        fs.writeFile("public/config", configIP, function (err) {
+        fs.writeFile("public/config/config.json", configIP, function (err) {
             if (err) {
                 console.log(err);
             } else {
-                console.log("The config was saved!: " + configIP);
-                console.log(configIP);
+                console.log("SAVE CONFIG 200 OK");                
                 socket.emit('getIP_API', configIP);
             }
         });
