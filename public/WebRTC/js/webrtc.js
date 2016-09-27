@@ -69,7 +69,7 @@ $('document').ready(function () {
             */
             var ipPlaca = $('#ipPlaca').val();
             if (flag) {
-                var peer = new Peer(configIP.configIP[2].ipClientRTC, {
+                var peer = new Peer(/*configIP.configIP[2].ipClientRTC, */{
                     host: configIP.configIP[1].ipPlaca,
                     port: 9000,
                     path: '/smarthome2',
@@ -85,7 +85,7 @@ $('document').ready(function () {
                     }
                 });
             } else {
-                var peer = new Peer(configIP.configIP[3].ipServerRTC, {
+                var peer = new Peer(/*configIP.configIP[3].ipServerRTC, */{
                     host: configIP.configIP[1].ipPlaca,
                     port: 9000,
                     path: '/smarthome2',
