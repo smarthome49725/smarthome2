@@ -1,0 +1,167 @@
+#my-video {
+    position: absolute;
+    width: 568px;
+    height: 428px;        
+    border: 4px solid #000000;    
+}
+
+#remote-video {    
+    width: 568px;
+    height: 428px;   
+    border: 4px solid #000000;
+}
+
+#myCanvas {
+    position: absolute;
+    border: 2px solid yellow;    
+    z-index: 10;
+}
+
+#lblMonito {
+    
+}
+
+#start {
+    background: yellow;   
+    font-size: 16pt;
+}
+
+#make-call {
+    background: green;
+    color: white; 
+}
+
+#end-call{
+    background: red;
+    color: white;    
+}
+
+#end-monitoring{
+    background: red;
+    color: white;    
+
+}
+
+#imgModalFace {
+    top: 14%;
+    height: 65%;
+    width: 65%;
+    position:relative;
+}
+
+#lblModalFace {
+    top: 16.5%;
+    left: -15px;
+}
+
+.modalFace{
+height: 100%;
+width: 100%;
+padding: 0;
+margin: 0;
+}
+
+.modalFace{
+height: 100%;
+width: 100%;
+padding: 0;
+margin: 0;
+}
+
+.modalFace:hover{
+transition: 0.9s;
+transform: scale(1.1,1.1);
+}
+
+.face_cl{
+height: 100%;
+background: #0165F3;
+border: 0.1em solid #F1F1F1;
+}
+
+.ar_condicionado{
+	background: #0165F3;
+}
+
+.tv{
+	background: #0165F3;	
+}
+
+.temp{
+	background: #0165F3;
+}
+
+.curtain{
+		background: #0165F3;
+}
+
+#name{
+    margin-left: 4px;
+}
+
+#tel{
+	margin-left: 23px;	
+	margin-top: 5px;
+}
+#age{
+	margin-left: 18px;
+	margin-top: 5px;
+}
+
+#email{
+    margin-left: 2px;
+    margin-top: 5px;
+    
+}
+
+#btCadastro{
+    padding-left: 5px;
+	margin-left: 47px;	
+    width: 72px;
+}
+
+#btUnregiste{
+    width: 72px;
+}
+
+
+#StatusConnection{
+	width: 20px;
+    height: 20px;
+	background:red;
+	border-radius: 50%;
+	float: left;
+	
+
+}
+#lbStatus{
+	margin-left: 5px;
+}
+
+#status{
+    margin-top: 10px;
+    background: #50a396;
+    border-radius: 5px;
+}
+
+#ipAPI_RS{
+    margin-left: 21px;
+}
+
+
+#btSaveConnectAPI_RS{
+    margin-left: 150px;
+}
+
+#divConfigIP, #divForm, #step2{
+    background: #337ab7;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+    
+
+
+
+
