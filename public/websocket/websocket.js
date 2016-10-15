@@ -74,7 +74,7 @@
 
         configIP = JSON.parse(configIP);
 
-        socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/websession');
+        socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/level1');
         eventsWS();
     });
 
@@ -97,7 +97,7 @@
         configIP = JSON.parse(configIP);
         console.log(configIP);
 
-        socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/websession');
+        socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/level1');
         eventsWS();
 
     });//Connection API 
