@@ -160,7 +160,19 @@ border: 0.1em solid #F1F1F1;
     padding: 10px;
 }
 
-    
+.toggleRect{
+width: 14%;
+margin: 0 0 0 20px;
+padding: 0;
+text-align: center;
+position: relative;
+/*left: -5%;
+float: right;*/
+}    
+
+.toggleRectTxt{
+    margin-right: 20px;
+}
 
 
 

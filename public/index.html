@@ -27,10 +27,13 @@
 
     <!--Adicionar a biblioteca cliente PeerJS para sua página web.-->
     <script type="text/javascript" src="SH2/WebRTC/dist/peer.js"></script>
-    <script src="/socket.io/socket.io.js"></script>    
+    <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="SH2/WebRTC/js/webrtc.js"></script>
+
     <script type="text/javascript" src="SH2/websocket/websocket.js"></script>
-        
+    <script type="text/javascript" src="SH2/config/config.js"></script>
+
+
 
 
     <!--</SH2>-->
@@ -273,6 +276,16 @@
                                             <canvas id="myCanvas"></canvas>
                                             <video id="my-video"></video>
                                             <video id="remote-video" autoplay></video>
+
+                                            <article class="toggleRect">
+                                                <div class="row">
+                                                    <div class="switch">
+                                                        <input id="rect" class="cmn-toggle cmn-toggle-round" type="checkbox">
+                                                        <label for="rect"></label> <span class="toggleRectTxt">Rect</span>
+                                                    </div>
+                                                </div>
+                                            </article>
+
                                         </div>
 
                                         <!--<TESTE NAV>-->
@@ -285,7 +298,7 @@
                                             </div>
                                             <div class="btn-group" role="group">
                                                 <button id="btShowConfig" type="button" class="btn btn-default">Configurações</button>
-                                            </div>                                           
+                                            </div>
                                         </div>
                                         <!--</TESTE NAV>-->
                                         <!--CONFIG RS-->
@@ -305,8 +318,8 @@
                                                 IP-SERVE_RTC: <input type="text" placeholder="IP" id="ipServerRTC">
                                                 <br />
                                                 <br />
-                                                <button id="btSaveConnectAPI_RS" class="btn btn-success">Salvar</button>                                               
-                                                
+                                                <button id="btSaveConnectAPI_RS" class="btn btn-success">Salvar</button>
+                                                                                                
                                             </fieldset>
                                         </div>
                                         <!--/CONFIG RS-->
@@ -326,15 +339,15 @@
                                             <button class="btn btn-success" id="btUnregiste">Excluir</button>
                                         </div>
                                         <!--/FORM CADASTRO-->
-
                                         <!-- Make calls to others -->
-                                        <div id="step2">                                            
+                                        <div id="step2">
                                             <fieldset>
                                                 <legend>Monitoramento</legend>
                                                 <!-- STATUS -->
                                                 <div id="status">
                                                     <label id="lbStatus">NOT CONNECTED</label>
                                                     <span id="StatusConnection"></span>
+
                                                     <p>Your id: <span id="my-id">...</span></p>
                                                     <!-- /STATUS -->
                                                     <div id="step3">
@@ -349,19 +362,17 @@
                                                 <button id="make-call" class="btn btn-success">make-call</button>
                                                 <button id="end-call" class="btn btn-success">End call</button>
                                                 <button id="hideCanvas" class="btn btn-success">hideCanvas</button>
-                                                <button id="end-monitoring" class="btn btn-success">End-Monitoring</button>
-                                                <button id="onrect" class="btn btn-success">Rect</button>
+                                                <button id="end-monitoring" class="btn btn-success">End-Monitoring</button>                                                  
+                                                       
+                                              
                                             </fieldset>
                                         </div>
 
 
                                         <!-- Call in progress -->
+                                        <!-- Steps -->
 
-                                      
-                                        
-                                            <!-- Steps -->
 
-                                        
                                     </div>
 
 

@@ -1,91 +1,19 @@
 ﻿$('document').ready(function () {
+
     var socket;
     var socketIO = io();
-
-
-    var ipPlaca;
     var configIP;
-    var ipClientRTC;
-    var ipServerRTC;
 
-    var ipAPI_RS = '0.0.0.0';// CAPTURAR IP GUARDADO NO BD DA PLACA (MONGO DB)   
-      
-
-    /***************************************************************
-     *         CONFIG IP-API AND CONNECTION WEBSOCKET              *  
-     ***************************************************************/
-
-    socketIO.emit('readIP', 'readIP'); //emite sinal para receber o IP guardado na placa    
-    socketIO.on('getIP_API', function (configIP) {
-
-        configIP = JSON.parse(configIP);
-
-        socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/level1');
-        eventsWS();
-    });
-
-    //Config and connection with API
-    $('#btSaveConnectAPI_RS').click(function () {
-        ipAPI_RS = $('#ipAPI_RS').val();
-        ipPlaca = $('#ipPlaca').val();
-        ipClientRTC = $('#ipClientRTC').val();
-        ipServerRTC = $('#ipServerRTC').val();       
-
-        configIP = '{ "configIP" : [' +
-   '{' + '"ipAPI_RS"' + ':"' + ipAPI_RS + '"},' +
-   '{' + '"ipPlaca"' + ':"' + ipPlaca + '"},' +
-   '{' + '"ipClientRTC"' + ':"' + ipClientRTC + '"},' +
-   '{' + '"ipServerRTC"' + ':"' + ipServerRTC + '"}]}';
-
-
-        socketIO.emit('saveIP', configIP);
-
-        configIP = JSON.parse(configIP);
-        console.log(configIP);
-
-        socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/level1');
-        eventsWS();
-
-    });//Connection API 
-
-    /***************************************************************
-     *                     REGISTER USER                           *  
-     ***************************************************************/
-
-    $('#btCadastro').click(function () {
-        var nome = $('#name').val();
-        var tel = $('#tel').val();
-        var age = $('#age').val();
-        var email = $('#email').val();
-        var strJson = '{' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';               
-        console.log(strJson);
-        var json = JSON.parse(strJson);
-        console.log(json);
-        socket.send('registerUser' + strJson);
-    });
-
-    /***************************************************************
-     *                       UNREGISTER USER                       *  
-     ***************************************************************/
-
-    $('#btUnregiste').click(function () {
-        var nome = $('#name').val();
-        var tel = $('#tel').val();
-        var age = $('#age').val();
-        var email = $('#email').val();
-        var strJson = '{' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
-        console.log(strJson);
-        var json = JSON.parse(strJson);
-        console.log(json);
-        socket.send('unregisterUser' + strJson);
-    });
+    /* $(window).bind("beforeunload", function () {        
+         return confirm("Do you really want to close?");
+ 
+     });*/
 
     /***************************************************************
 	 *                     EVENTS WEBSOCKET                        *  
 	 ***************************************************************/
 
-    function eventsWS() {
-
+    window.eventsWS = function () {
         socket.onopen = function () {
             console.log('CONNECTION ESTABLISHED!');
             $('#StatusConnection').css("background", "green");
@@ -124,19 +52,79 @@
 
     }//eventsWS
 
-    $('#onrect').click(function () {
-        socket.send("onrect");
+    /***************************************************************
+     *                    CONNECT WEBSOCKET                        *  
+     ***************************************************************/
+
+    window.connectWebSocket = function () {
+        socketIO.emit('readIP', 'readIP'); //emite sinal para receber o IP guardado na placa    
+        socketIO.on('getIP_API', function (configIP) {
+
+            configIP = JSON.parse(configIP);
+            socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/level' + window.level);
+            eventsWS();
+        });
+    }
+    window.connectWebSocket();
+
+
+    /***************************************************************
+     *                     REGISTER USER                           *  
+     ***************************************************************/
+
+    $('#btCadastro').click(function () {
+        var nome = $('#name').val();
+        var tel = $('#tel').val();
+        var age = $('#age').val();
+        var email = $('#email').val();
+        var strJson = '{' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
+        console.log(strJson);
+        var json = JSON.parse(strJson);
+        console.log(json);
+        socket.send('registerUser' + strJson);
     });
 
-    $('#end-monitoring').click(function () {
-        socket.send("offrect");
+    /***************************************************************
+     *                       UNREGISTER USER                       *  
+     ***************************************************************/
+
+    $('#btUnregiste').click(function () {
+        var nome = $('#name').val();
+        var tel = $('#tel').val();
+        var age = $('#age').val();
+        var email = $('#email').val();
+        var strJson = '{' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
+        console.log(strJson);
+        var json = JSON.parse(strJson);
+        console.log(json);
+        socket.send('unregisterUser' + strJson);
     });
 
+
+    /***************************************************************
+     *                      SEND MSG APIREALSNSE                   *  
+     ***************************************************************/
+    function sendMsgAPI(msg) {
+        socket.send("LEVEL" + window.level + ":" + msg);
+    }
 
 
     /***************************************************************
      *                     CANVAS FACE RECTANGLE                   *  
-     ***************************************************************/
+     ***************************************************************/    
+    $('#rect').click(function () {
+        if ($('#rect').is(':checked')) {
+            sendMsgAPI("rectON");
+            $('#myCanvas').show();
+        } else {
+            sendMsgAPI("rectOFF");
+            $('#myCanvas').hide();
+
+           
+        }
+
+    });  
+
 
     $("#hideCanvas").click(function () {
         var canvas = document.getElementById('myCanvas');
