@@ -27,44 +27,42 @@ app.http().io();
 /***************************************************************
  *                     CONFIG IP-API                           *  
  ***************************************************************/
-
+var configIPBuffer;
 //READ FILE
 socket.on('connection', function (socket) {
     socket.on('readIP', function (configIP) {
-        fs.readFile("public/config/config.json", 'utf8', function(err, configIP) {
+        fs.readFile("public/config/config.json", 'utf8', function (err, configIP) {
             if (err) {
                 return console.log(err);
             }
-            console.log('READ CONFIG 200 OK');
-            global.configIP = JSON.parse(configIP); // FOR CONFIG IP AND PORT NET.SOCKET
-            socket.emit('getIP_API', configIP);           
+            console.log('READ CONFIG 200 OK');            
+            socket.emit('getIP_API', configIP);
+
         });
     });
 });
 
-
+//WRITE FILE
 socket.on('connection', function (socket) {
-    socket.on('saveIP', function (configIP) {       
-
+    socket.on('saveIP', function (configIP) {
+        var jsonConfig = JSON.parse(configIP);
         fs.writeFile("public/config/config.json", configIP, function (err) {
             if (err) {
                 console.log(err);
             } else {
                 console.log("SAVE CONFIG 200 OK");
-                // FOR CONFIG IP AND PORT NET.SOCKET
-                configIPBuffer = JSON.parse(configIP); 
+                configIPBuffer = JSON.parse(configIP);
                 if (global.configIP.configIP[1].ipPlaca != configIPBuffer.configIP[1].ipPlaca) {
                     global.configIP.configIP[1].ipPlaca = configIPBuffer.configIP[1].ipPlaca;
-                    console.log("DIFERENTE" + global.configIP.configIP[1].ipPlaca);
-                    global.loadConfig
-                }                
-                socket.emit('getIP_API', configIP);                
+                    global.loadConfig();
+                }
+                socket.emit('getIP_API', configIP);
             }
         });
 
+
     });
 });
-
 
 //</SMARTHOME2 SAVE-IP>
 

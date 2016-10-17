@@ -6,23 +6,23 @@ var client = new net.Socket();
 global.configIP;
 
 global.connect = function () {
-    
+
     client.connect(8080, global.configIP.configIP[1].ipPlaca, function () {
         console.log('Connected');
-        client.write('HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB.');    
+        client.write('HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB.');
     })
 }
 
 client.on('data', function (data) {
-    console.log('Received: ' + data);    
+    console.log('Received: ' + data);
 });
 
-client.on('close', function () {    
-    console.log('Connection closed');    
-    setTimeout(connect, 1000);  
+client.on('close', function () {
+    console.log('Connection closed');
+    setTimeout(connect, 1000);
 });
 
-client.on('error', (err) => {      
+client.on('error', (err) => {
     console.error(err);
 });
 
