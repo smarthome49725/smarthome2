@@ -28,10 +28,6 @@ app.http().io();
  *                     CONFIG IP-API                           *  
  ***************************************************************/
 
-
-
-
-
 //READ FILE
 socket.on('connection', function (socket) {
     socket.on('readIP', function (configIP) {
@@ -40,7 +36,7 @@ socket.on('connection', function (socket) {
                 return console.log(err);
             }
             console.log('READ CONFIG 200 OK');
-            //global.configIP = JSON.parse(configIP); // Para configurar o IP do websocketclient.js
+            global.configIP = JSON.parse(configIP); // FOR CONFIG IP AND PORT NET.SOCKET
             socket.emit('getIP_API', configIP);           
         });
     });
@@ -55,17 +51,16 @@ socket.on('connection', function (socket) {
                 console.log(err);
             } else {
                 console.log("SAVE CONFIG 200 OK");
-                configIPBuffer = JSON.parse(configIP); // Para configurar o IP do websocketclient.js
+                // FOR CONFIG IP AND PORT NET.SOCKET
+                configIPBuffer = JSON.parse(configIP); 
                 if (global.configIP.configIP[1].ipPlaca != configIPBuffer.configIP[1].ipPlaca) {
                     global.configIP.configIP[1].ipPlaca = configIPBuffer.configIP[1].ipPlaca;
                     console.log("DIFERENTE" + global.configIP.configIP[1].ipPlaca);
-                    
-                }
-                global.connect();
+                    global.loadConfig
+                }                
                 socket.emit('getIP_API', configIP);                
             }
         });
-
 
     });
 });
@@ -75,10 +70,8 @@ socket.on('connection', function (socket) {
 
 
 //webSocketClient +++
-require('./models/SH2/websocketclient.js');
+require('./models/SH2/clientAPI.js');
 //webSocketClient ---
-
-
 
 
 //SMARTHOME2 WebRTC
