@@ -1,5 +1,5 @@
 ﻿$('document').ready(function () {
-
+    window.configIP;
     window.level = window.prompt("Level", "1"); 
 
     /***************************************************************
@@ -20,9 +20,20 @@
    '{' + '"ipServerRTC"' + ':"' + ipServerRTC + '"}]}';
 
         socketIO.emit('saveIP', configIP);
-               
-        window.connectWebSocket();
 
     });//Connection API 
 
+    socketIO.emit('readIP', 'readIP'); //emite sinal para receber o IP guardado na placa    
+    socketIO.on('getIP_API', function (configIP) {
+        window.configIP = JSON.parse(configIP);
+        ipAPI_RS = $('#ipAPI_RS').val(window.configIP.configIP[0].ipAPI_RS);
+        ipPlaca = $('#ipPlaca').val(window.configIP.configIP[1].ipPlaca);
+        ipClientRTC = $('#ipClientRTC').val(window.configIP.configIP[2].ipClientRTC);
+        ipServerRTC = $('#ipServerRTC').val(window.configIP.configIP[3].ipServerRTC);
+
+        window.connectWRTC();
+        window.connectWebSocket();        
+    });
+
+    
 });

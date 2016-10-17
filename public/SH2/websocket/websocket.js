@@ -2,12 +2,7 @@
 
     var socket;
     var socketIO = io();
-    var configIP;
-
-    /* $(window).bind("beforeunload", function () {        
-         return confirm("Do you really want to close?");
- 
-     });*/
+    //var configIP;
 
     /***************************************************************
 	 *                     EVENTS WEBSOCKET                        *  
@@ -56,16 +51,10 @@
      *                    CONNECT WEBSOCKET                        *  
      ***************************************************************/
 
-    window.connectWebSocket = function () {
-        socketIO.emit('readIP', 'readIP'); //emite sinal para receber o IP guardado na placa    
-        socketIO.on('getIP_API', function (configIP) {
-
-            configIP = JSON.parse(configIP);
+    window.connectWebSocket = function () {      
             socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/level' + window.level);
-            eventsWS();
-        });
-    }
-    window.connectWebSocket();
+            eventsWS();     
+    }  
 
 
     /***************************************************************
