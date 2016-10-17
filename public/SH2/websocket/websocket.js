@@ -81,7 +81,8 @@
         console.log(strJson);
         var json = JSON.parse(strJson);
         console.log(json);
-        socket.send('registerUser' + strJson);
+        //socket.send('registerUser' + strJson);
+        sendCodAPI('registerUser', false);
     });
 
     /***************************************************************
@@ -104,26 +105,40 @@
     /***************************************************************
      *                      SEND MSG APIREALSNSE                   *  
      ***************************************************************/
-    function sendMsgAPI(msg) {
-        socket.send("LEVEL" + window.level + ":" + msg);
+    function sendCodAPI(cod, rect) {
+        switch (cod) {
+            case "rect":
+                cod = '{' + '"level"' + ':"' + window.level + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
+                break;
+            case "registerUser":
+                var nome = $('#name').val();
+                var tel = $('#tel').val();
+                var age = $('#age').val();
+                var email = $('#email').val();
+                var cod = '{' + '"level"' + ':"' + window.level + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
+
+        }
+
+        socket.send(cod);
+        console.log(JSON.parse(cod));
     }
 
 
     /***************************************************************
      *                     CANVAS FACE RECTANGLE                   *  
-     ***************************************************************/    
+     ***************************************************************/
     $('#rect').click(function () {
         if ($('#rect').is(':checked')) {
-            sendMsgAPI("rectON");
+            sendCodAPI("rect", true);
             $('#myCanvas').show();
         } else {
-            sendMsgAPI("rectOFF");
+            sendCodAPI("rect", false);
             $('#myCanvas').hide();
 
-           
+
         }
 
-    });  
+    });
 
 
     $("#hideCanvas").click(function () {

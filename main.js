@@ -21,55 +21,63 @@ app.use(express.static(__dirname + '/public'));
 app.http().io();
 
 
-//********************WEBSOCKET CLIENTE NODE******************************************************************
+
+//<SMARTHOME2 SAVE-IP>
+
+/***************************************************************
+ *                     CONFIG IP-API                           *  
+ ***************************************************************/
 
 
-var WebSocketClient = require('websocket').client;
 
-var client = new WebSocketClient();
 
-client.on('connectFailed', function (error) {
-    console.log('Connect Error: ' + error.toString());
+
+//READ FILE
+socket.on('connection', function (socket) {
+    socket.on('readIP', function (configIP) {
+        fs.readFile("public/config/config.json", 'utf8', function(err, configIP) {
+            if (err) {
+                return console.log(err);
+            }
+            console.log('READ CONFIG 200 OK');
+            //global.configIP = JSON.parse(configIP); // Para configurar o IP do websocketclient.js
+            socket.emit('getIP_API', configIP);           
+        });
+    });
 });
 
-client.on('connect', function (connection) {
-    console.log('WebSocket Client Connected');
-    connection.on('error', function (error) {
-        console.log("Connection Error: " + error.toString());
-    });
-    connection.on('close', function () {
-        console.log('echo-protocol Connection Closed');
-    });
-    connection.on('message', function (message) {
-        if (message.type === 'utf8') {
-            console.log("Received: '" + message.utf8Data + "'");
-        }
-    });
-
-    function sendNumber() {
-        if (connection.connected) {
-            var number = Math.round(Math.random() * 0xFFF);
-            connection.sendUTF(number.toString());
-            setTimeout(sendNumber, 1000);
-        }
-    }
-    sendNumber();
-});
-
-client.connect('ws://192.168.42.132:8080');
 
 socket.on('connection', function (socket) {
-    socket.on('send', function (abc) {
+    socket.on('saveIP', function (configIP) {       
 
-        connection.sendUTF(number.toString());
-        console.log('SEND: Number');
+        fs.writeFile("public/config/config.json", configIP, function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("SAVE CONFIG 200 OK");
+                configIPBuffer = JSON.parse(configIP); // Para configurar o IP do websocketclient.js
+                if (global.configIP.configIP[1].ipPlaca != configIPBuffer.configIP[1].ipPlaca) {
+                    global.configIP.configIP[1].ipPlaca = configIPBuffer.configIP[1].ipPlaca;
+                    console.log("DIFERENTE" + global.configIP.configIP[1].ipPlaca);
+                    
+                }
+                global.connect();
+                socket.emit('getIP_API', configIP);                
+            }
+        });
+
+
     });
 });
 
 
+//</SMARTHOME2 SAVE-IP>
 
 
-//***********************************************************************************************
+//webSocketClient +++
+require('./models/SH2/websocketclient.js');
+//webSocketClient ---
+
 
 
 
@@ -114,55 +122,7 @@ socket.on('connection', function (socket) {
 });
 //</SMARTHOME2-WebRtc>
 
-//<SMARTHOME2 SAVE-IP>
 
-/***************************************************************
- *                     CONFIG IP-API                           *  
- ***************************************************************/
-var configIP = '';
-
-socket.on('connection', function (socket) {
-    socket.on('readIP', function (configIP) {
-        fs.readFile("public/config/config.json", 'utf8', function (err, configIP) {
-            if (err) {
-                return console.log(err);
-            }
-            console.log('READ CONFIG 200 OK');
-            socket.emit('getIP_API', configIP);
-
-        });
-    });
-});
-
-
-/***************************************************************
- *                     CONFIG IP-API READ                      *  
- ***************************************************************/
-
-socket.on('connection', function (socket) {
-    socket.on('saveIP', function (configIP) {
-        var jsonConfig = JSON.parse(configIP);
-
-        fs.writeFile("public/config/config.json", configIP, function (err) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log("SAVE CONFIG 200 OK");                
-                socket.emit('getIP_API', configIP);
-            }
-        });
-
-
-    });
-});
-
-
-
-
-
-
-
-//</SMARTHOME2 SAVE-IP>
 
 
 /*Cylon.robot({
