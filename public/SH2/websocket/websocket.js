@@ -61,16 +61,7 @@
      *                     REGISTER USER                           *  
      ***************************************************************/
 
-    $('#btCadastro').click(function () {
-        var nome = $('#name').val();
-        var tel = $('#tel').val();
-        var age = $('#age').val();
-        var email = $('#email').val();
-        var strJson = '{' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
-        console.log(strJson);
-        var json = JSON.parse(strJson);
-        console.log(json);
-        //socket.send('registerUser' + strJson);
+    $('#btCadastro').click(function () {      
         sendCodAPI('registerUser', false);
     });
 
@@ -79,15 +70,7 @@
      ***************************************************************/
 
     $('#btUnregiste').click(function () {
-        var nome = $('#name').val();
-        var tel = $('#tel').val();
-        var age = $('#age').val();
-        var email = $('#email').val();
-        var strJson = '{' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
-        console.log(strJson);
-        var json = JSON.parse(strJson);
-        console.log(json);
-        socket.send('unregisterUser' + strJson);
+       sendCodAPI('unregisterUser', false);
     });
 
 
@@ -105,7 +88,14 @@
                 var age = $('#age').val();
                 var email = $('#email').val();
                 var cod = '{' + '"level"' + ':"' + window.level + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
-
+                break;
+            case "unregisterUser":
+                var nome = $('#name').val();
+                var tel = $('#tel').val();
+                var age = $('#age').val();
+                var email = $('#email').val();
+                var cod = '{' + '"level"' + ':"' + window.level + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
+                break;
         }
 
         socket.send(cod);

@@ -10,7 +10,7 @@ window.connectWRTC = function () {
     * debug: 3 (imprime todos os logs)
     */    
     var peer = new Peer(window.level, {
-        host: "10.101.33.125",//window.configIP.configIP[1].ipPlaca,
+        host: window.configIP.configIP[1].ipPlaca,
         port: 9000,
         path: '/smarthome2',
         debug: 3,
