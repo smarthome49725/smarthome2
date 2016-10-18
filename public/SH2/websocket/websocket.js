@@ -2,7 +2,7 @@
 
     var socket;
     var socketIO = io();
-    //var configIP;
+    var receivedAPI;
 
     /***************************************************************
 	 *                     EVENTS WEBSOCKET                        *  
@@ -29,10 +29,17 @@
 
         socket.onmessage = function (messageEvent) {
             console.log(messageEvent.data);
-            var msgFormated = messageEvent.data;
-            var msgFormated = msgFormated.split(" ");
-            console.log("msgFormated: " + msgFormated);
-            faceRectangle(msgFormated);
+            receivedAPI = JSON.parse(messageEvent.data);
+            console.log(receivedAPI);
+
+            switch (receivedAPI.code) {
+                case "rect":
+                    faceRectangle(receivedAPI.mess, receivedAPI.userId);
+                    break;
+                case "userData":
+                    alert(receivedAPI.mess);
+            }         
+
             /*if (messageEvent.data === 'detected') {
              console.log(messageEvent.data);
              $(".lbFace").text("Detected");
@@ -99,7 +106,7 @@
         }
 
         socket.send(cod);
-        console.log(JSON.parse(cod));
+        //console.log(JSON.parse(cod));
     }
 
 
@@ -131,24 +138,22 @@
 
     });
 
-    function faceRectangle(msgFormated) {
+    function faceRectangle(coords, userId) {
+        var coordsFormated = coords.split(" "); //Separate coordinates
+
         var canvas = document.getElementById('myCanvas');
         //canvas.width = imageSize.width;
         //canvas.height = imageSize.height;
 
         canvas.width = 568;
-        canvas.height = 428;
-
-        var x = Math.floor((Math.random() * 200));
-        var y = Math.floor((Math.random() * 200));
-        userId = x;
+        canvas.height = 428;     
 
         if (canvas.getContext) {
             var context = canvas.getContext('2d');
-            var faceRectangleX = msgFormated[0];
-            var faceRectangleY = msgFormated[1];
-            var faceRectangleW = msgFormated[2];
-            var faceRectangleH = msgFormated[3];
+            var faceRectangleX = coordsFormated[0];
+            var faceRectangleY = coordsFormated[1];
+            var faceRectangleW = coordsFormated[2];
+            var faceRectangleH = coordsFormated[3];
 
             context.beginPath();
             context.lineWidth = 3;
