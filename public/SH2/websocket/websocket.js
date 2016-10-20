@@ -34,7 +34,7 @@
 
             switch (receivedAPI.code) {
                 case "rect":
-                    faceRectangle(receivedAPI.mess, receivedAPI.userId);
+                    faceRectangle(receivedAPI.msg, receivedAPI.userId);
                     break;
                 case "userData":
                     alert(receivedAPI.msg);
@@ -80,6 +80,22 @@
        sendCodAPI('unregisterUser', false);
     });
 
+    /***************************************************************
+     *                       GENERATE ID USER                      *  
+     ***************************************************************/
+    $('#btGenIdUser').click(function () {
+        sendCodAPI('geniduser', false);
+    });
+
+    /***************************************************************
+   *                       GENERATE ID USER                      *  
+   ***************************************************************/
+    $('#btRmIdUser').click(function () {
+        sendCodAPI('rmiduser', false);
+    });
+
+    
+    
 
     /***************************************************************
      *                      SEND MSG APIREALSNSE                   *  
@@ -103,8 +119,14 @@
                 var email = $('#email').val();
                 var cod = '{' + '"level"' + ':"' + window.level + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
                 break;
+            case "geniduser":
+                cod = '{' + '"level"' + ':"' + window.level + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
+                break;
+            case "rmiduser":
+                cod = '{' + '"level"' + ':"' + window.level + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
+                break;
         }
-
+        
         socket.send(cod);
         //console.log(JSON.parse(cod));
     }
@@ -162,10 +184,8 @@
             context.stroke();
 
             //User ID
-            context.fillStyle = "yellow";
-
-
-            context.font = "7pt Helvetica";
+            context.fillStyle = "green";
+            context.font = "12pt Helvetica";
             context.fillText("User ID: " + userId, faceRectangleX, faceRectangleY - 4);
         } else {
             alert("Canvas is not supported in your browser");
