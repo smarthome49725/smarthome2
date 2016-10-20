@@ -37,7 +37,7 @@
                     faceRectangle(receivedAPI.mess, receivedAPI.userId);
                     break;
                 case "userData":
-                    alert(receivedAPI.mess);
+                    alert(receivedAPI.msg);
             }         
 
             /*if (messageEvent.data === 'detected') {

@@ -2,6 +2,7 @@
 var fs = require('fs');
 
 var client = new net.Socket();
+var receivedAPI;
 
 global.configIP;
 
@@ -9,12 +10,26 @@ global.connect = function () {
 
     client.connect(8080, global.configIP.configIP[1].ipPlaca, function () {
         console.log('Connected');
-        client.write('HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB. HELLO SOFTWARE, MY NAME IS AJB.');
+        client.write('HELLO SOFTWARE, HELLO SOFTWARE, HELLO SOFTWARE, HELLO SOFTWARE, HELLO SOFTWARE, HELLO SOFTWARE, HELLO SOFTWARE, HELLO SOFTWARE');
+        console.log(client);
     })
 }
 
 client.on('data', function (data) {
     console.log('Received: ' + data);
+    receivedAPI = JSON.parse(data);    
+    switch (receivedAPI.code) {
+        case "PORT":
+            console.log(receivedAPI.msg);
+            client.write(receivedAPI.code + " 200");                        
+            break;
+        case "LAMP":
+            console.log(receivedAPI.msg);            
+            break;
+        case "TV":
+            console.log(receivedAPI.msg);
+            break;
+    }
 });
 
 client.on('close', function () {
