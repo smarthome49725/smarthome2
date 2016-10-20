@@ -1,1 +1,1 @@
-{ "configIP" : [{"ipAPI_RS":"10.101.33.125:8080"},{"ipPlaca":"192.168.42.132"},{"ipClientRTC":""},{"ipServerRTC":""}]}
+{ "configIP" : [{"ipAPI_RS":"10.101.33.125:8080"},{"ipPlaca":"10.101.33.125"},{"ipClientRTC":""},{"ipServerRTC":""}]}

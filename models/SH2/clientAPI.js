@@ -10,8 +10,16 @@ global.connect = function () {
 
     client.connect(8080, global.configIP.configIP[1].ipPlaca, function () {
         console.log('Connected');
-        client.write('HELLO SOFTWARE, HELLO SOFTWARE, HELLO SOFTWARE, HELLO SOFTWARE, HELLO SOFTWARE, HELLO SOFTWARE, HELLO SOFTWARE, HELLO SOFTWARE');
-        console.log(client);
+        client.write('NODEJS /level0 HTTP/1.1 \n'+
+        'Host: 000.000.000.000\n' +
+        'Connection: Upgrade\n'+
+        'Pragma: no-cache\n'+
+        'Cache-Control: no-cache\n'+
+        'Upgrade: websocket\n'+
+        'Origin: http://localhost:49725\n'+
+        'Sec-WebSocket-Version: 13\n'+        
+        'Accept-Encoding: gzip, deflate, sdch\n'+
+        'Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.6,en;q=0.4\n');                
     })
 }
 
