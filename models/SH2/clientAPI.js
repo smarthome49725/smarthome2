@@ -1,6 +1,6 @@
 ﻿var net = require('net');
 var fs = require('fs');
-var cia = require('../public/style/cia.js');
+var cia = require('../../public/style/cia.js');
 
 var client = new net.Socket();
 var receivedAPI;
