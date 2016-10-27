@@ -1,5 +1,6 @@
 ﻿var net = require('net');
 var fs = require('fs');
+var cia = require('/public/style/cia.js');
 
 var client = new net.Socket();
 var receivedAPI;
@@ -29,7 +30,10 @@ client.on('data', function (data) {
     switch (receivedAPI.code) {
         case "PORT":
             console.log(receivedAPI.msg);
-            client.write(receivedAPI.code + " 200");                        
+            client.write(receivedAPI.code + " 200");  
+            //
+             cia.acenderLampBathroom();
+             cia.sendLampBathroom();                     
             break;
         case "LAMP":
             console.log(receivedAPI.msg);            

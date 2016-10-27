@@ -1,5 +1,5 @@
 var express = require('express.io'),
-    //Cylon         = require('cylon'),
+    Cylon = require('cylon'),
     temper = require('./models/temperature.js'),
     ExeStepper = require('./models/stepper.js'),
     televisor = require('./models/tv_smart.js'),
@@ -116,7 +116,7 @@ socket.on('connection', function (socket) {
 
 
 
-/*Cylon.robot({
+Cylon.robot({
   connections: {
     galileo: {
       adaptor: 'intel-iot'
@@ -137,7 +137,8 @@ socket.on('connection', function (socket) {
     ar_Volume: {driver: 'direct-pin', pin: 13},
     tv_Increase: {driver: 'direct-pin', pin: 4},
     tv_Decrease: {driver: 'direct-pin', pin: 11},
-    tv_On_Off: {driver: 'direct-pin', pin: 12}
+    tv_On_Off: {driver: 'direct-pin', pin: 12},
+    //led_On_Off: {driver: 'direct-pin', pin:13}
   },
 
   work: function (my) {
@@ -163,7 +164,7 @@ socket.on('connection', function (socket) {
     });
   }
 }).start();
-*/
+
 app.tempBroadcast = function () {
     temper.temperature();
 },
