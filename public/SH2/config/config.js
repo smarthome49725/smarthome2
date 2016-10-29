@@ -1,6 +1,6 @@
 ﻿$('document').ready(function () {
     window.configIP;
-    window.level = window.prompt("Level", "1"); 
+    //window.level = window.prompt("Level", "1"); 
 
     /***************************************************************
      *                        CONFIG IP-API                        *  

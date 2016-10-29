@@ -3,7 +3,7 @@ window.connectWRTC = function () {
     var socket = io();
 
     // Matem compatibilidade com outros navegadores
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;                           
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
     /* O objeto pares � onde criamos e receber liga��es.
     * PeerJS usa PeerServer para metadados sess�o e sinaliza��o candidato

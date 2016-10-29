@@ -12,7 +12,7 @@ var PeerServer = require('peer').PeerServer;
 var server = PeerServer({ port: 9000, path: '/smarthome2' });
 
 app = express();
-socket = require('socket.io').listen(app.listen(49725));
+global.socket = require('socket.io').listen(app.listen(49725));
 
 app.sensorsReady = false;
 app.sensors = {};
@@ -21,102 +21,16 @@ app.use(express.static(__dirname + '/public'));
 app.http().io();
 
 
-
-//<SMARTHOME2 SAVE-IP>
-
-/***************************************************************
- *                     CONFIG IP-API                           *  
- ***************************************************************/
-var configIPBuffer;
-//READ FILE
-socket.on('connection', function (socket) {
-    socket.on('readIP', function (configIP) {
-        fs.readFile("public/config/config.json", 'utf8', function (err, configIP) {
-            if (err) {
-                return console.log(err);
-            }
-            console.log('READ CONFIG 200 OK');            
-            socket.emit('getIP_API', configIP);
-
-        });
-    });
-});
-
-//WRITE FILE
-socket.on('connection', function (socket) {
-    socket.on('saveIP', function (configIP) {
-        var jsonConfig = JSON.parse(configIP);
-        fs.writeFile("public/config/config.json", configIP, function (err) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log("SAVE CONFIG 200 OK");
-                configIPBuffer = JSON.parse(configIP);
-                if (global.configIP.configIP[1].ipPlaca != configIPBuffer.configIP[1].ipPlaca) {
-                    global.configIP.configIP[1].ipPlaca = configIPBuffer.configIP[1].ipPlaca;
-                    global.loadConfig();
-                }
-                socket.emit('getIP_API', configIP);
-            }
-        });
-
-
-    });
-});
-
-//</SMARTHOME2 SAVE-IP>
-
-
-//webSocketClient +++
+//session +++
+require('./session/session.js');
+//configIP +++
+require('./config/configIP.js');
+//webSocketClient 
 require('./models/SH2/clientAPI.js');
-//webSocketClient ---
-
-
-//SMARTHOME2 WebRTC
-socket.on('connection', function (socket) {
-    socket.on('requestPeerId', function (peer_id) {
-        var PEERID;
-        if (peer_id === 'getPeerId') {
-            console.log('requestPeerId: false');
-            PEERID = peerId.getPeerId();
-            socket.emit('requestPeerId', PEERID);
-
-
-        } else {
-            peerId.setPeerId(peer_id);
-            console.log('requestPeerId: ' + peer_id);
-        }
-    });
-});
-
-var peerId = {
-    peer_id: "",
-    setPeerId: function (peer_id) {
-        this.peer_id = peer_id;
-    },
-    getPeerId: function () {
-        return this.peer_id;
-    }
-};
-
-var flagM = true;
-socket.on('connection', function (socket) {
-    socket.on('flag', function (flag) {
-        socket.emit('flag', flagM);
-        flagM = false;
-
-        console.log('setando false para flag!');
 
 
 
-    });
-});
-//</SMARTHOME2-WebRtc>
-
-
-
-
-Cylon.robot({
+/*Cylon.robot({
   connections: {
     galileo: {
       adaptor: 'intel-iot'
@@ -164,7 +78,7 @@ Cylon.robot({
     });
   }
 }).start();
-
+*/
 app.tempBroadcast = function () {
     temper.temperature();
 },

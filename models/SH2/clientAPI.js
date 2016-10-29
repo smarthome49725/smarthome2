@@ -1,15 +1,15 @@
 ﻿var net = require('net');
 var fs = require('fs');
-var cia = require('../../public/style/cia.js');
+//var cia = require('../../public/style/cia.js');
 
 var client = new net.Socket();
 var receivedAPI;
-
+var host;
 global.configIP;
 
 global.connect = function () {
-
-    client.connect(8080, global.configIP.configIP[1].ipPlaca, function () {
+    console.log("CONNECTING WITH: " + host[0] + ":" + host[1]);
+    client.connect(host[1], host[0], function () {
         console.log('Connected');
         client.write('NODEJS /level0 HTTP/1.1 \n'+
         'Host: 000.000.000.000\n' +
@@ -46,7 +46,7 @@ client.on('data', function (data) {
 
 client.on('close', function () {
     console.log('Connection closed');
-    setTimeout(connect, 1000);
+    setTimeout(connect, 3000);
 });
 
 client.on('error', (err) => {
@@ -55,13 +55,14 @@ client.on('error', (err) => {
 
 //LOAD CONFIG AND CONNECT
 global.loadConfig = function () {
-    fs.readFile("public/config/config.json", 'utf8', function (err, configIP) {
+    fs.readFile("config/config.json", 'utf8', function (err, configIP) {
         if (err) {
             return console.log(err);
         }
         console.log('READ CONFIG 200 OK');
-        global.configIP = JSON.parse(configIP); // Para configurar o IP do websocketclient.js                        
-        console.log(global.configIP.configIP[1].ipPlaca);
+        global.configIP = JSON.parse(configIP); // Para configurar o IP do websocketclient.js
+        host = global.configIP.configIP[0].ipAPI_RS;
+        host = host.split(':');
         connect();
     });
 }
