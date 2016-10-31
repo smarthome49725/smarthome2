@@ -13,17 +13,17 @@ var tv = 0;
 var ar = 17;
 var socket = io.connect();
 
-socket.on('connect', function(data) {
+socket.on('connect', function (data) {
   console.log("Conectado");
-  socket.on('allLamp',function(data){
-    if(data.lamp_all_conect == 5){
+  socket.on('allLamp', function (data) {
+    if (data.lamp_all_conect == 5) {
       modifyLamps(1, 5);
       statusLampOn("lampbathroom");
       statusLampOn("lampkitchen");
       statusLampOn("lampbedroom");
       statusLampOn("lamp2Sala");
       statusLampOn("lamp1Sala");
-    }else if(data.lamp_all_conect != 0){
+    } else if (data.lamp_all_conect != 0) {
       connection_lamp_all = data.lamp_all_conect;
       data.lampBathroom == 0 ? statusLampOff("lampbathroom") : statusLampOn("lampbathroom");
       bathroom = data.lampBathroom;
@@ -37,17 +37,17 @@ socket.on('connect', function(data) {
       roomTwo = data.lampRoomTwo;
     }
     status();
- });
- socket.on('curtain_channel',function(data){
+  });
+  socket.on('curtain_channel', function (data) {
     data.sts_curtain == 0 ? document.getElementById("curtain_img").src = "img/cortina-fechada.png" : document.getElementById("curtain_img").src = "img/cortina-aberta.png";
-    data.sts_curtain == 0 ? document.getElementById("status_curtain").innerHTML = "Cortina Fechada": document.getElementById("status_curtain").innerHTML = "Cortina Aberta";
+    data.sts_curtain == 0 ? document.getElementById("status_curtain").innerHTML = "Cortina Fechada" : document.getElementById("status_curtain").innerHTML = "Cortina Aberta";
     statusCurtain = data.sts_curtain;
-    if(data.temp_motor  == 1){
-      block_device("curtain_img",15000);
+    if (data.temp_motor == 1) {
+      block_device("curtain_img", 15000);
     }
   });
 
-  socket.on('tv_connect',function(data){
+  socket.on('tv_connect', function (data) {
     tv = data.tv_status;
     volume = data.volume_tv;
     data.tv_status == 0 ? document.getElementById("tv_img").src = "img/tvciaOff.png" : document.getElementById("tv_img").src = "img/tvciaOn.png";
@@ -56,67 +56,67 @@ socket.on('connect', function(data) {
     document.getElementById("volume_tv").innerHTML = volume;
   });
 
-  socket.on('ar_connect',function(data){
+  socket.on('ar_connect', function (data) {
     ar = data.ar_status;
     volume_ar = data.volume_ar;
     data.ar_status == 0 ? document.getElementById("ar_img").src = "img/ar_off.png" : document.getElementById("ar_img").src = "img/ar_on.png";
     data.ar_status == 0 ? document.getElementById('collapse_ar').style.display = "none" : document.getElementById('collapse_ar').style.display = "block";
     document.getElementById("volume_ar").innerHTML = volume_ar;
   });
-  socket.on('disconnect', function(){
+  socket.on('disconnect', function () {
     location.reload();
   });
 });
 
-  socket.on('lamp_All', function(lamps) {
-   if (lamps == "lampBathroom"){
+socket.on('lamp_All', function (lamps) {
+  if (lamps == "lampBathroom") {
     acenderLampBathroom();
-   }else if (lamps == "lampKitchen"){
+  } else if (lamps == "lampKitchen") {
     acenderLampkitchen();
-   }else if (lamps == "lampBedroom"){
+  } else if (lamps == "lampBedroom") {
     acenderLampbedroom();
-   }else if (lamps == "lampRoomOne"){
+  } else if (lamps == "lampRoomOne") {
     acenderLamproomOne();
-   }else if (lamps == "lampRoomTwo"){
+  } else if (lamps == "lampRoomTwo") {
     acenderLamproomTwo();
-   }else if(lamps == "lamp_All_Home"){
+  } else if (lamps == "lamp_All_Home") {
     controlAllLamps();
-   }
-  });
+  }
+});
 
-  socket.on('tv_function',function(tv_data){
-    if(tv_data == "tv_On_Off"){
-      activeTvCia();
-    }
-  });
+socket.on('tv_function', function (tv_data) {
+  if (tv_data == "tv_On_Off") {
+    activeTvCia();
+  }
+});
 
-  socket.on('tv_volume',function(tv_volume){
-    if(tv_volume == "increase"){
-      Increase();
-    }else if(tv_volume == "decrease"){
-      decrease();
-    }
-  });
+socket.on('tv_volume', function (tv_volume) {
+  if (tv_volume == "increase") {
+    Increase();
+  } else if (tv_volume == "decrease") {
+    decrease();
+  }
+});
 
-  socket.on('ar_function',function(ar_data){
-    if(ar_data == "ar_On_Off"){
-      activeArCia();
-    }
-  });
+socket.on('ar_function', function (ar_data) {
+  if (ar_data == "ar_On_Off") {
+    activeArCia();
+  }
+});
 
-  socket.on('ar_volume',function(ar_volume){
-    if(ar_volume == "increase"){
-      Increase_ar();
-    }else if(ar_volume == "decrease"){
-      decrease_ar();
-    }
-  });
+socket.on('ar_volume', function (ar_volume) {
+  if (ar_volume == "increase") {
+    Increase_ar();
+  } else if (ar_volume == "decrease") {
+    decrease_ar();
+  }
+});
 
-  socket.on('curtain_func',function(curtain_data){
-    if(curtain_data == "control_Curtain"){
-      activeCurtain();
-    }
-  });
+socket.on('curtain_func', function (curtain_data) {
+  if (curtain_data == "control_Curtain") {
+    activeCurtain();
+  }
+});
 
 //FUNÇAO LAMPADA bathroom
 function acenderLampBathroom() {
@@ -134,7 +134,7 @@ function acenderLampBathroom() {
   status();
 }
 
-function sendLampBathroom(){
+function sendLampBathroom() {
   socket.emit('lamp_All', "lampBathroom");
 }
 
@@ -154,7 +154,7 @@ function acenderLampkitchen() {
   status();
 }
 
-function sendLampKitchen(){
+function sendLampKitchen() {
   socket.emit('lamp_All', "lampKitchen");
 }
 
@@ -174,7 +174,7 @@ function acenderLampbedroom() {
   status();
 }
 
-function sendLampBedroom(){
+function sendLampBedroom() {
   socket.emit('lamp_All', "lampBedroom");
 }
 
@@ -194,7 +194,7 @@ function acenderLamproomOne() {
   status();
 }
 
-function sendLampRoomOne(){
+function sendLampRoomOne() {
   socket.emit('lamp_All', "lampRoomOne");
 }
 
@@ -214,7 +214,7 @@ function acenderLamproomTwo() {
   status();
 }
 
-function sendLampRoomTwo(){
+function sendLampRoomTwo() {
   socket.emit('lamp_All', "lampRoomTwo");
 }
 
@@ -239,25 +239,25 @@ function controlAllLamps() {
     statusLampOn("lampbedroom");
     statusLampOn("lamp2Sala");
     statusLampOn("lamp1Sala");
-    modifyLamps(1,5);
-  }else {
+    modifyLamps(1, 5);
+  } else {
     statusLampOff("lampbathroom");
     statusLampOff("lampkitchen");
     statusLampOff("lampbedroom");
     statusLampOff("lamp2Sala");
     statusLampOff("lamp1Sala");
-    modifyLamps(0,0);
+    modifyLamps(0, 0);
   }
   block("cmn-toggle-2");
   block_all();
   status();
 }
 
-function sendLamp_All(){
-  socket.emit('lamp_All',"lamp_All_Home");
+function sendLamp_All() {
+  socket.emit('lamp_All', "lamp_All_Home");
 }
 
-function modifyLamps(un_lamp,un_all_lamp){
+function modifyLamps(un_lamp, un_all_lamp) {
   bathroom = un_lamp;
   kitchen = un_lamp;
   bedroom = un_lamp;
@@ -267,7 +267,7 @@ function modifyLamps(un_lamp,un_all_lamp){
   connection_lamp_all = un_all_lamp;
 }
 
-function statusLampOff(idLampOffimg){
+function statusLampOff(idLampOffimg) {
   document.getElementById(idLampOffimg).src = "img/leddesligada.png";
 }
 
@@ -289,14 +289,14 @@ function activeCurtain() {
     document.getElementById("status_curtain").innerHTML = "Cortina Fechando";
     nameStatus = "Cortina Fechada";
   }
-    setTimeout(function(){
+  setTimeout(function () {
     document.getElementById("status_curtain").innerHTML = nameStatus;
   }, 40000);
-  block_device("curtain_img",40000);
+  block_device("curtain_img", 40000);
 }
 
-function sendCurtain(){
-  socket.emit('curtain_func',"control_Curtain");
+function sendCurtain() {
+  socket.emit('curtain_func', "control_Curtain");
 }
 
 //tv
@@ -307,39 +307,39 @@ function activeTvCia() {
     btntvimg.src = "img/tvciaOn.png";
     document.getElementById('collapse_tv').style.display = "block";
     document.getElementById('sts_tv').innerHTML = "Ligada";
- } else {
+  } else {
     tv = 0;
     btntvimg.src = "img/tvciaOff.png";
     document.getElementById('collapse_tv').style.display = "none";
     document.getElementById('sts_tv').innerHTML = "Desligada";
   }
-  block_device("tv_img",2000);
+  block_device("tv_img", 2000);
 }
 
-function sendTvHome(){
+function sendTvHome() {
   socket.emit('tv_function', "tv_On_Off");
 }
 
-function Increase(){
-  if(volume < 50){
+function Increase() {
+  if (volume < 50) {
     volume++;
     document.getElementById("volume_tv").innerHTML = volume;
   }
 }
 
-function decrease(){
-  if(volume > 0){
+function decrease() {
+  if (volume > 0) {
     volume--;
     document.getElementById("volume_tv").innerHTML = volume;
   }
 }
 
-function sendVolume_Increase(){
+function sendVolume_Increase() {
   console.log("envia Aumento");
   socket.emit('tv_volume', "increase");
 }
 
-function sendVolume_Decrease(){
+function sendVolume_Decrease() {
   console.log("envia diminui");
   socket.emit('tv_volume', "decrease");
 }
@@ -351,66 +351,66 @@ function activeArCia() {
     ar = 1;
     btnArimg.src = "img/ar_on.png";
     document.getElementById('collapse_ar').style.display = "block";
- } else {
+  } else {
     ar = 0;
     btnArimg.src = "img/ar_off.png";
     document.getElementById('collapse_ar').style.display = "none";
   }
-  block_device("ar_img",2000);
+  block_device("ar_img", 2000);
 }
 
-function sendVolume_IncreaseAr(){
+function sendVolume_IncreaseAr() {
   socket.emit('ar_volume', "increase");
 }
 
-function sendVolume_DecreaseAr(){
+function sendVolume_DecreaseAr() {
   socket.emit('ar_volume', "decrease");
 }
 
-function sendArHome(){
+function sendArHome() {
   socket.emit('ar_function', "ar_On_Off");
 }
 
-function Increase_ar(){
-  if(volume_ar < 26){
+function Increase_ar() {
+  if (volume_ar < 26) {
     volume_ar++;
     document.getElementById("volume_ar").innerHTML = volume_ar;
   }
 }
 
-function decrease_ar(){
-  if(volume_ar > 17){
+function decrease_ar() {
+  if (volume_ar > 17) {
     volume_ar--;
     document.getElementById("volume_ar").innerHTML = volume_ar;
   }
 }
 
-function block_device(id_device,temp_device){
+function block_device(id_device, temp_device) {
   document.getElementById(id_device).disabled = true;
   document.getElementById(id_device).style.cursor = "not-allowed";
-  setTimeout(function(){
+  setTimeout(function () {
     document.getElementById(id_device).disabled = false;
     document.getElementById(id_device).style.cursor = "pointer";
   }, temp_device);
 }
 
 //FUNÇÃO PARA BLOQUEAR EM 5 SEGUNDOS
-function block(id_func){
-  if(id_func == "cmn-toggle-2"){
+function block(id_func) {
+  if (id_func == "cmn-toggle-2") {
     document.getElementById("toogle_all").style.cursor = "not-allowed";
-    setTimeout(function(){
-    document.getElementById("toogle_all").style.cursor = "pointer";
-  }, 1000);
+    setTimeout(function () {
+      document.getElementById("toogle_all").style.cursor = "pointer";
+    }, 1000);
   }
   document.getElementById(id_func).disabled = true;
   document.getElementById(id_func).style.cursor = "not-allowed";
-  setTimeout(function(){
+  setTimeout(function () {
     document.getElementById(id_func).disabled = false;
     document.getElementById(id_func).style.cursor = "pointer";
   }, 1000);
 }
 
-function block_all(){
+function block_all() {
   block("lampbathroom");
   block("lampkitchen");
   block("lampbedroom");
@@ -418,8 +418,14 @@ function block_all(){
   block("lamp2Sala");
 }
 
-(function(){
-  setTimeout(function(){
+(function () {
+  setTimeout(function () {
     location.reload();
   }, 100000);
 })();
+
+
+socket.on('FElamp', function (lamp) {
+  acenderLampBathroom();
+  //sendLampBathroom();
+});

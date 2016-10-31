@@ -7,6 +7,14 @@ var receivedAPI;
 var host;
 global.configIP;
 
+
+
+global.acenderLamp1 = function(){
+    socket.emit("FElamp", "acender lamp1");
+    console.log("FElamp");
+}   
+
+
 global.connect = function () {
     console.log("CONNECTING WITH: " + host[0] + ":" + host[1]);
     client.connect(host[1], host[0], function () {
@@ -47,6 +55,7 @@ client.on('data', function (data) {
 client.on('close', function () {
     console.log('Connection closed');
     setTimeout(connect, 3000);
+    setTimeout(acenderLamp1, 5000);
 });
 
 client.on('error', (err) => {
