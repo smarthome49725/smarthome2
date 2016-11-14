@@ -37,8 +37,10 @@
                     faceRectangle(receivedAPI.msg, receivedAPI.userId);
                     break;
                 case "userData":
-                    alert(receivedAPI.msg);
-            }         
+                    //console.log(JSON.parse(receivedAPI.msg));
+                    setUserView(receivedAPI.msg);                    
+                    break;
+            }
 
             /*if (messageEvent.data === 'detected') {
              console.log(messageEvent.data);
@@ -58,17 +60,17 @@
      *                    CONNECT WEBSOCKET                        *  
      ***************************************************************/
 
-    window.connectWebSocket = function () {      
-            socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/level' + window.level);
-            eventsWS();     
-    }  
+    window.connectWebSocket = function () {
+        socket = new WebSocket('ws://' + configIP.configIP[0].ipAPI_RS + '/level' + window.level);
+        eventsWS();
+    }
 
 
     /***************************************************************
      *                     REGISTER USER                           *  
      ***************************************************************/
 
-    $('#btCadastro').click(function () {      
+    $('#btCadastro').click(function () {
         sendCodAPI('registerUser', false);
     });
 
@@ -77,7 +79,7 @@
      ***************************************************************/
 
     $('#btUnregiste').click(function () {
-       sendCodAPI('unregisterUser', false);
+        sendCodAPI('unregisterUser', false);
     });
 
     /***************************************************************
@@ -88,14 +90,56 @@
     });
 
     /***************************************************************
-   *                       GENERATE ID USER                      *  
-   ***************************************************************/
+    *                       GENERATE ID USER                      *  
+    ***************************************************************/
     $('#btRmIdUser').click(function () {
         sendCodAPI('rmiduser', false);
     });
 
-    
-    
+    /***************************************************************
+     *                       GET USER USER                      *  
+     ***************************************************************/
+    $('#btConsultar').click(function () {
+        sendCodAPI('getuser', false);
+    });
+
+
+    function setUserView(userData) {
+        userData = JSON.parse(userData);
+        console.log(userData[0]);
+        if (userData[0]){
+            var user;
+            for (var i = 0; i < userData.length; i++) {
+                user = JSON.parse(userData[i]);
+                var html = html + "" +
+                   "<table border='1'> \
+                <tr> \
+                    <th>NOME</th> \
+                    <td>" + user.nome + "</td>\
+                </tr> \
+                <tr>\
+                    <th>Tel</th>\
+                    <td>" + user.tel + "</td> \
+                </tr> \
+                <tr>\
+                    <th>Nascimento</th>\
+                    <td>" + userData.nasc + "</td> \
+                </tr> \
+                <tr>\
+                    <th>Email</th>\
+                    <td>" + user.email + "</td> \
+                </tr> \
+            </table> \
+            <br/>";
+            }
+        } else {
+            html = "";
+        }
+
+        $('#tableUser').html(html);
+    }
+
+
 
     /***************************************************************
      *                      SEND MSG APIREALSNSE                   *  
@@ -108,25 +152,32 @@
             case "registerUser":
                 var nome = $('#name').val();
                 var tel = $('#tel').val();
-                var age = $('#age').val();
+                var nasc = $('#nasc').val();
                 var email = $('#email').val();
-                var cod = '{' + '"level"' + ':"' + window.level + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
+                var cod = '{' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
                 break;
             case "unregisterUser":
                 var nome = $('#name').val();
                 var tel = $('#tel').val();
-                var age = $('#age').val();
+                var nasc = $('#nasc').val();
                 var email = $('#email').val();
-                var cod = '{' + '"level"' + ':"' + window.level + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"age"' + ':"' + age + '",' + '"email"' + ':"' + email + '"}';
+                var cod = '{' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
                 break;
             case "geniduser":
-                cod = '{' + '"level"' + ':"' + window.level + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
+                cod = '{' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
                 break;
             case "rmiduser":
-                cod = '{' + '"level"' + ':"' + window.level + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
+                cod = '{' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
+                break;
+            case "getuser":
+                var nome = $('#name').val();
+                var tel = $('#tel').val();
+                var nasc = $('#nasc').val();
+                var email = $('#email').val();
+                var cod = '{' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
                 break;
         }
-        
+
         socket.send(cod);
         //console.log(JSON.parse(cod));
     }
@@ -168,7 +219,7 @@
         //canvas.height = imageSize.height;
 
         canvas.width = 568;
-        canvas.height = 428;     
+        canvas.height = 428;
 
         if (canvas.getContext) {
             var context = canvas.getContext('2d');

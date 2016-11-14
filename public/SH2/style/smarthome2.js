@@ -25,7 +25,7 @@
         }
     });
 
-    $('#cadastro').click(function () {
+    $('#btUsuarios').click(function () {
         if (flag2 === true) {
             $('#divForm').show();
             $('#step2').hide();

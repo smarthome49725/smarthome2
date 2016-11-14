@@ -4,7 +4,7 @@ socketIO.emit('getToken', window.level);
 
 socketIO.on('session', function (token) {
     if (token != getCookie("token")) {
-        location.href = "http://localhost:49725/";
+        //location.href = "http://localhost:49725/";
     }
 });
 
