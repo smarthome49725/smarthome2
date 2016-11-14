@@ -1,4 +1,4 @@
-﻿var net = require('net');
+var net = require('net');
 var fs = require('fs');
 //var cia = require('../../public/style/cia.js');
 
@@ -7,13 +7,65 @@ var receivedAPI;
 var host;
 global.configIP;
 
+lightBathroom = function(){
+    socket.emit("lightBathroom", "light on bathroom");
+    control_light.bathroom();
+}
 
+lightKitchen = function(){
+    socket.emit("lightKitchen", "light on kitchen");
+    control_light.kitchen();
+}
 
-global.acenderLamp1 = function(){
-    socket.emit("FElamp", "acender lamp1");
-    console.log("FElamp");
-}   
+lightBedroom = function(){
+    socket.emit("lightBedroom", "light on bedRoom");
+    control_light.bedroom();
+}
 
+lightRoom1 = function(){
+    socket.emit("lightRoom1", "light on lightRoom1");
+    control_light.roomOne();
+}
+
+lightRoom2 = function(){
+    socket.emit("lightRoom2", "light on lightRoom2");
+    control_light.roomTwo();
+}
+
+tvOnOff =  function(){
+    socket.emit("TV", "on-off TV");
+    televisor.control_tv();
+}
+
+tvIncrease = function(){
+    socket.emit("TV-Increase", "increase tv");
+    televisor.increase();
+}
+
+tvDecrease = function(){
+    socket.emit("TV-Decrease", "decrease tv");
+    televisor.decrease();
+}
+
+curtain = function(){
+    socket.emit("curtain", "curtain");
+    ExeStepper.controlMotor();
+}
+
+airConditioning = function(){
+    socket.emit("air-conditioning", "on-off air");
+    ar.control_ar();
+}
+
+airConditioningDecrease = function(){
+    socket.emit("air-conditioning-decrease", "on-off air");
+    ar.decrease();
+}
+
+airConditioningIncrease = function(){
+    socket.emit("air-conditioning-increase", "on-off air");
+    ar.increase();
+}
 
 global.connect = function () {
     console.log("CONNECTING WITH: " + host[0] + ":" + host[1]);
@@ -38,10 +90,7 @@ client.on('data', function (data) {
     switch (receivedAPI.code) {
         case "PORT":
             console.log(receivedAPI.msg);
-            client.write(receivedAPI.code + " 200");  
-            //
-             cia.acenderLampBathroom();
-             cia.sendLampBathroom();                     
+            client.write(receivedAPI.code + " 200");         
             break;
         case "LAMP":
             console.log(receivedAPI.msg);            
@@ -76,8 +125,3 @@ global.loadConfig = function () {
     });
 }
 global.loadConfig();
-
-
-
-
-
