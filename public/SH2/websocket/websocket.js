@@ -3,7 +3,8 @@
     var socket;
     var socketIO = io();
     var receivedAPI;
-
+    var userData;
+ 
     /***************************************************************
 	 *                     EVENTS WEBSOCKET                        *  
 	 ***************************************************************/
@@ -28,17 +29,22 @@
         };
 
         socket.onmessage = function (messageEvent) {
-            console.log(messageEvent.data);
+            //console.log(messageEvent.data);
             receivedAPI = JSON.parse(messageEvent.data);
-            console.log(receivedAPI);
+            //console.log(receivedAPI);
 
             switch (receivedAPI.code) {
                 case "rect":
                     faceRectangle(receivedAPI.msg, receivedAPI.userId);
                     break;
                 case "userData":
+                    userData = JSON.parse(receivedAPI.msg);
                     //console.log(JSON.parse(receivedAPI.msg));
-                    setUserView(receivedAPI.msg);                    
+                   
+                    //setUserView(receivedAPI.msg);
+
+                    //var user = getUserInView(101);
+                    //console.log(user.nome);
                     break;
             }
 
@@ -71,7 +77,12 @@
      ***************************************************************/
 
     $('#btCadastro').click(function () {
-        sendCodAPI('registerUser', false);
+        console.log(receivedAPI.userId);
+        if (!receivedAPI.userId) {
+            alert("É necessário gerar o ID do usuário para realizar o cadastro");
+        } else {
+            sendCodAPI('registerUser', false);
+        }
     });
 
     /***************************************************************
@@ -96,17 +107,35 @@
         sendCodAPI('rmiduser', false);
     });
 
+
     /***************************************************************
-     *                       GET USER USER                      *  
+     *                       GET USER IN VIEW                      *  
+     ***************************************************************/
+
+    function getUserInView(userId) {        
+        console.log(userData);
+        if (userData) {
+            for (var i = 0; i < userData.length; i++) {                
+
+                var user = JSON.parse(userData[i]);
+
+                if (user.userID == userId) {
+                    return user;
+                    
+                }
+            }
+        }
+    }
+
+    /***************************************************************
+     *                       GET USER                              *  
      ***************************************************************/
     $('#btConsultar').click(function () {
         sendCodAPI('getuser', false);
     });
 
-
     function setUserView(userData) {
-        userData = JSON.parse(userData);
-        console.log(userData[0]);
+        console.log(userData);
         if (userData[0]){
             var user;
             for (var i = 0; i < userData.length; i++) {
@@ -147,34 +176,34 @@
     function sendCodAPI(cod, rect) {
         switch (cod) {
             case "rect":
-                cod = '{' + '"level"' + ':"' + window.level + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
+                cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
                 break;
             case "registerUser":
                 var nome = $('#name').val();
                 var tel = $('#tel').val();
                 var nasc = $('#nasc').val();
-                var email = $('#email').val();
-                var cod = '{' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
+                var email = $('#email').val();                
+                var cod = '{' + '"userID"' + ':"' + receivedAPI.userId + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
                 break;
             case "unregisterUser":
                 var nome = $('#name').val();
                 var tel = $('#tel').val();
                 var nasc = $('#nasc').val();
                 var email = $('#email').val();
-                var cod = '{' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
+                var cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
                 break;
             case "geniduser":
-                cod = '{' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
+                cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
                 break;
             case "rmiduser":
-                cod = '{' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
+                cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
                 break;
             case "getuser":
                 var nome = $('#name').val();
                 var tel = $('#tel').val();
                 var nasc = $('#nasc').val();
                 var email = $('#email').val();
-                var cod = '{' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
+                var cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
                 break;
         }
 
@@ -237,7 +266,27 @@
             //User ID
             context.fillStyle = "green";
             context.font = "12pt Helvetica";
-            context.fillText("User ID: " + userId, faceRectangleX, faceRectangleY - 4);
+           //userId = userId == 'Unrecognized' ? 'Não reconhecido' : getUserInView(100);
+            //userId = userId == 'No users in view' ? 'Nenhum usuário em exibição' : getUserInView(100);
+           
+
+            var user = getUserInView(userId);
+
+
+            if (userId == 'Unrecognized') {
+                userId = 'Não reconhecido';
+            }
+
+            if (userId == 'No users in view') {
+                userId = 'Nenhum usuário em exibição';
+            }
+
+            if (userId > 0) {
+
+                userId = user.nome;
+            }            
+           
+            context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 4);            
         } else {
             alert("Canvas is not supported in your browser");
         }
