@@ -3,6 +3,7 @@
     var socket;
     var socketIO = io();
     var receivedAPI;
+    var userData;
 
     /***************************************************************
 	 *                     EVENTS WEBSOCKET                        *  
@@ -38,8 +39,8 @@
                     console.log(receivedAPI.userId);
                     break;
                 case "userData":
-                    var userData = JSON.parse(receivedAPI.msg);
-                    setUserView(userData);
+                    userData = JSON.parse(receivedAPI.msg);
+                    setUserView(userData);                    
                     break;
             }
 
@@ -303,10 +304,10 @@
             //userId = userId == 'Unrecognized' ? 'Não reconhecido' : getUserInView(100);
             //userId = userId == 'No users in view' ? 'Nenhum usuário em exibição' : getUserInView(100);
 
-
-            //var user = getUserInView(userId);
-
-            /*
+                       
+            var user = JSON.parse(userData[0]);
+            console.log(user.nome);
+            
             if (userId == 'Unrecognized') {
                 userId = 'Não reconhecido';
             }
@@ -316,9 +317,9 @@
             }
 
             if (userId > 0) {
-
-                userId = userId;
-            }*/
+                userId = user.nome;
+            }
+            
 
             context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 4);
         } else {
