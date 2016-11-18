@@ -1,6 +1,5 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="no-js" ng-app="appSmart">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,30 +18,22 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="style/socketio.js"></script>
     <script src="style/cia.js"></script>
-
     <!--<SH2>-->
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
     <script src="SH2/session/checksession.js"></script>
-
     <link rel="stylesheet" href="SH2/style/smarthome2.css">
     <script type="text/javascript" src="SH2/style/smarthome2.js"></script>
-    <script type="text/javascript" src="SH2/WebRTC/lib/jquery-3.1.0.js"></script>
-
+    <script type="text/javascript" src="SH2/WebRTC/lib/jquery-3.1.0.js"></script>   
     <!--Adicionar a biblioteca cliente PeerJS para sua página web.-->
     <script type="text/javascript" src="SH2/WebRTC/dist/peer.js"></script>
-
     <script type="text/javascript" src="SH2/WebRTC/js/webrtc.js"></script>
-
     <script type="text/javascript" src="SH2/websocket/websocket.js"></script>
     <script type="text/javascript" src="SH2/config/config.js"></script>
-
     <!--</SH2>-->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries  onload="seti()" -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-
 </head>
-
 <body ng-controller="SmartController" ng-init="init()">
     <!-- MENU DA PAGINA PRINCIPAL -->
     <nav class="navbar navbar-default navbar-static-top">
@@ -205,7 +196,6 @@
             </div>
         </div>
         <!--MODAL WEB CAM-->
-
         <div id="modal_web_cam" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -262,34 +252,31 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
-                        <h4 class="modal-title lbFace" id="myModalLabel">Not Detected</h4>
+                       
                     </div>
                     <div class="modal-body">
                         <div id="myTabContent2" class="tab-content">
                             <div class="curtain_field">
 
-
                                 <figure id="face">
-
 
                                     <div class="stream">
                                         <!-- Video area -->
                                         <div class="video-container">
+
+                                            
+
                                             <canvas id="myCanvas"></canvas>
                                             <video id="my-video"></video>
                                             <video id="remote-video" autoplay></video>
 
-                                            <article class="toggleRect">
-                                                <div class="row">
-                                                    <div class="switch">
-                                                        <input id="rect" class="cmn-toggle cmn-toggle-round" type="checkbox">
-                                                        <label for="rect"></label> <span class="toggleRectTxt">Rect</span>
-                                                    </div>
-                                                </div>
-                                            </article>
+                                            <div class="switch">
+                                                <input id="rect" class="cmn-toggle cmn-toggle-round" type="checkbox">
+                                                <label for="rect"></label>
+                                                <button class="btn btn-success" id="btGenIdUser">Gerar ID</button>
+                                            </div>                                            
 
                                         </div>
-
                                         <!--<TESTE NAV>-->
                                         <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                             <div class="btn-group" role="group">
@@ -304,24 +291,34 @@
                                         </div>
                                         <!--</TESTE NAV>-->
                                         <!--CONFIG RS-->
-
                                         <div id="divConfigIP">
                                             <fieldset>
                                                 <legend>Configurações</legend>
-                                                IP-API: <input type="text" placeholder="IP:PORTA" id="ipAPI_RS">
-                                                <br />
-                                                <br />
-                                                IP-PLACA: <input type="text" placeholder="IP" id="ipPlaca">
-                                                <br />
-                                                <br />
-                                                IP-CLIENT_RTC: <input type="text" placeholder="IP" id="ipClientRTC">
-                                                <br />
-                                                <br />
-                                                IP-SERVE_RTC: <input type="text" placeholder="IP" id="ipServerRTC">
-                                                <br />
-                                                <br />
-                                                <button id="btSaveConnectAPI_RS" class="btn btn-success">Salvar</button>
+                                                <table>
+                                                    <tr>
+                                                        <th>IP-API</th>
+                                                        <td><input type="text" placeholder="IP:PORTA" id="ipAPI_RS">
+                                                        <td>
+                                                    </tr>
+                                                    <tr>
 
+                                                        <th>IP-PLACA</th>
+                                                        <td><input type="text" placeholder="IP" id="ipPlaca"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>IP-CLIENT_RTC  :</th>
+                                                        <td><input type="text" placeholder="IP" id="ipClientRTC"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>IP-SERVE_RTC </th>
+                                                        <td><input type="text" placeholder="IP" id="ipServerRTC"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>
+                                                        <th>
+                                                        <th><button id="btSaveConnectAPI_RS" class="btn btn-success">Salvar</button></th>
+                                                    </tr>
+                                                </table>
                                             </fieldset>
                                         </div>
                                         <!--/CONFIG RS-->
@@ -351,12 +348,9 @@
                                                 </fieldset>
                                             </form>
                                             <br />
-                                            <button class="btn btn-success" id="btGenIdUser">Gen ID User</button>
                                             <button class="btn btn-success" id="btRmIdUser">RM ID User</button>
                                             <button class="btn btn-success" id="btCadastro">Cadastrar</button>
                                             <button class="btn btn-success" id="btConsultar">Consultar</button>
-                                            <button class="btn btn-success" id="btUnregiste">Excluir</button>
-
                                         </div>
                                         <!--/FORM CADASTRO-->
                                         <!--TABLE USER-->
@@ -369,7 +363,6 @@
                                                 <div id="status">
                                                     <label id="lbStatus">NOT CONNECTED</label>
                                                     <span id="StatusConnection"></span>
-
                                                     <p>Your id: <span id="my-id">...</span></p>
                                                     <!-- /STATUS -->
                                                     <div id="step3">
@@ -378,7 +371,6 @@
                                                         </p>
                                                     </div>
                                                 </div>
-
                                                 <input id="id-guest" type="text" placeholder="Call user id...">
                                                 <button id="startStream" class="btn btn-success">Start Stream</button>
                                                 <button id="make-call" class="btn btn-success">make-call</button>
@@ -386,36 +378,25 @@
                                                 <button id="hideCanvas" class="btn btn-success">hideCanvas</button>
                                                 <button id="end-monitoring" class="btn btn-success">End-Monitoring</button>
 
-
                                             </fieldset>
                                         </div>
 
-
                                         <!-- Call in progress -->
                                         <!-- Steps -->
-
 
                                     </div>
 
 
 
 
-
-
-
-
-
                                 </figure>
 
-
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
 
         <!--PAINEL PRINCIPAL DO SITE-->
         <div class="col-md-12 row1 cursor">
@@ -460,9 +441,7 @@
             </div>
         </div>
     </div>
-
     <script src="style/JS/html5.js"></script>
     <script src="style/JS/respond.js"></script>
 </body>
-
 </html>   

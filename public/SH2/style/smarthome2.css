@@ -122,11 +122,6 @@
     border-radius: 5px;
 }
 
-#ipAPI_RS {
-    margin-left: 21px;
-}
-
-
 #btSaveConnectAPI_RS {
     margin-left: 150px;
 }
@@ -156,4 +151,31 @@ float: right;*/
     float: right;
     font-size: 20px;
     margin-right: 20px;
+}
+
+a.btnExcluir:hover, a.btnExcluir:active, 
+a.btnExcluir:link, a.btnExcluir:visited{
+    float: right;
+    position: relative;
+    color: red;
+    text-decoration: none;
+}
+
+#face{
+    font-weight: bold;
+}
+
+.switch{
+    /*z-index: 100;
+    position: absolute;*/
+}
+
+#btGenIdUser{
+    /*z-index: 100;
+    position: absolute;
+    margin-left: 100px*/
+}
+
+#btUpdate{
+    padding: 2px
 }

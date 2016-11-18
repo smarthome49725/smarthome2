@@ -3,8 +3,7 @@
     var socket;
     var socketIO = io();
     var receivedAPI;
-    var userData;
- 
+
     /***************************************************************
 	 *                     EVENTS WEBSOCKET                        *  
 	 ***************************************************************/
@@ -38,13 +37,8 @@
                     faceRectangle(receivedAPI.msg, receivedAPI.userId);
                     break;
                 case "userData":
-                    userData = JSON.parse(receivedAPI.msg);
-                    //console.log(JSON.parse(receivedAPI.msg));
-                   
-                    //setUserView(receivedAPI.msg);
-
-                    //var user = getUserInView(101);
-                    //console.log(user.nome);
+                    var userData = JSON.parse(receivedAPI.msg);
+                    setUserView(userData);
                     break;
             }
 
@@ -90,6 +84,7 @@
      ***************************************************************/
 
     $('#btUnregiste').click(function () {
+        alet(userID);
         sendCodAPI('unregisterUser', false);
     });
 
@@ -112,19 +107,60 @@
      *                       GET USER IN VIEW                      *  
      ***************************************************************/
 
-    function getUserInView(userId) {        
+    function getUserInView(userId, userData) {
         console.log(userData);
         if (userData) {
-            for (var i = 0; i < userData.length; i++) {                
+            for (var i = 0; i < userData.length; i++) {
 
                 var user = JSON.parse(userData[i]);
 
                 if (user.userID == userId) {
                     return user;
-                    
+
                 }
             }
         }
+    }
+
+    /***************************************************************
+     *                       UPDATE USER                           *  
+     ***************************************************************/
+    window.updateUser = function (cod, userPosition, userName) {
+        var user = JSON.parse(window.userData[userPosition]);
+        console.log(user);
+        var html = '';
+
+        html += '<div class="panel panel-default">';
+        html += '    <div class="panel-heading">';
+        html += 'ID: ' + user.userID;
+        html += '        <a href="#" onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-remove" ></a>';
+        html += '    </div>';
+        html += '    <div class="panel-body">';
+        html += '<input id="userNome" type="text" value=' + user.nome + '><br/>';
+        html += '<input id="userTel" type="text" value=' + user.tel + '><br/>';
+        html += '<input id="userNasc" type="text" value=' + user.nasc + '><br/>';
+        html += '<input id="userEmail" type="text" value=' + user.email + '><br/>';
+        html += '<button onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
+        html += '    </div>';
+        html += '</div>';
+        $('#tableUser').html(html);
+    }
+
+    /***************************************************************
+     *                       ALTER USER                            *  
+     ***************************************************************/
+    window.alterUser = function (cod, userID, userName) {
+        if (cod == 'updateuser') {
+            if (window.confirm("Tem certeza que deseja atualizar os dados do usuário " + userName + "?")) {
+                sendCodAPI(cod, userID, false);
+            }
+        } else {
+            if (window.confirm("Tem certeza que deseja excluir o usuário " + userName + "?")) {
+                sendCodAPI(cod, userID, false);
+            }
+
+        }
+
     }
 
     /***************************************************************
@@ -136,44 +172,41 @@
 
     function setUserView(userData) {
         console.log(userData);
-        if (userData[0]){
+        window.userData = userData;
+
+        if (userData[0]) {
             var user;
+            var html = '';
             for (var i = 0; i < userData.length; i++) {
                 user = JSON.parse(userData[i]);
-                var html = html + "" +
-                   "<table border='1'> \
-                <tr> \
-                    <th>NOME</th> \
-                    <td>" + user.nome + "</td>\
-                </tr> \
-                <tr>\
-                    <th>Tel</th>\
-                    <td>" + user.tel + "</td> \
-                </tr> \
-                <tr>\
-                    <th>Nascimento</th>\
-                    <td>" + userData.nasc + "</td> \
-                </tr> \
-                <tr>\
-                    <th>Email</th>\
-                    <td>" + user.email + "</td> \
-                </tr> \
-            </table> \
-            <br/>";
+
+                html += '<div class="panel panel-default">';
+                html += '    <div class="panel-heading">';
+                html += 'ID: ' + user.userID;
+                html += '        <a href="#" onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-remove" ></a>';
+                html += '        <a href="#" onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</a>';
+                html += '    </div>';
+                html += '    <div class="panel-body">';
+                html += '<p> Nome:' + user.nome + '</p>';
+                html += '<p> Tel:' + user.tel + '</p>';
+                html += '<p>Nascimento:' + user.nasc + '</p>';
+                html += '<p>Email:' + user.email + '</p>';
+                html += '    </div>';
+                html += '</div>';
+
+
             }
         } else {
-            html = "";
+            html = '';
         }
 
         $('#tableUser').html(html);
     }
 
-
-
     /***************************************************************
      *                      SEND MSG APIREALSNSE                   *  
      ***************************************************************/
-    function sendCodAPI(cod, rect) {
+    function sendCodAPI(cod, userID, rect) {        
         switch (cod) {
             case "rect":
                 cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
@@ -182,15 +215,11 @@
                 var nome = $('#name').val();
                 var tel = $('#tel').val();
                 var nasc = $('#nasc').val();
-                var email = $('#email').val();                
+                var email = $('#email').val();
                 var cod = '{' + '"userID"' + ':"' + receivedAPI.userId + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
                 break;
-            case "unregisterUser":
-                var nome = $('#name').val();
-                var tel = $('#tel').val();
-                var nasc = $('#nasc').val();
-                var email = $('#email').val();
-                var cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
+            case "unregisterUser":                
+                var cod = '{' + '"userID"' + ':"' + userID + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
                 break;
             case "geniduser":
                 cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
@@ -205,10 +234,14 @@
                 var email = $('#email').val();
                 var cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
                 break;
+            case "updateuser":
+                var cod = '{' + '"userID"' + ':"' + userID + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + $('#userNome').val() + '",' + '"tel"' + ':"' + $('#userTel').val() + '",' + '"nasc"' + ':"' + $('#userNasc').val() + '",' + '"email"' + ':"' + $('#userEmail').val() + '"}';                
+                break;
+                
         }
 
         socket.send(cod);
-        //console.log(JSON.parse(cod));
+        console.log(JSON.parse(cod));
     }
 
 
@@ -266,11 +299,11 @@
             //User ID
             context.fillStyle = "green";
             context.font = "12pt Helvetica";
-           //userId = userId == 'Unrecognized' ? 'Não reconhecido' : getUserInView(100);
+            //userId = userId == 'Unrecognized' ? 'Não reconhecido' : getUserInView(100);
             //userId = userId == 'No users in view' ? 'Nenhum usuário em exibição' : getUserInView(100);
-           
 
-            var user = getUserInView(userId);
+
+            //var user = getUserInView(userId);
 
 
             if (userId == 'Unrecognized') {
@@ -284,9 +317,9 @@
             if (userId > 0) {
 
                 userId = user.nome;
-            }            
-           
-            context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 4);            
+            }
+
+            context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 4);
         } else {
             alert("Canvas is not supported in your browser");
         }
