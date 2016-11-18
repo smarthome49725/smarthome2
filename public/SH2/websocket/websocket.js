@@ -35,6 +35,7 @@
             switch (receivedAPI.code) {
                 case "rect":
                     faceRectangle(receivedAPI.msg, receivedAPI.userId);
+                    console.log(receivedAPI.userId);
                     break;
                 case "userData":
                     var userData = JSON.parse(receivedAPI.msg);
@@ -75,7 +76,7 @@
         if (!receivedAPI.userId) {
             alert("É necessário gerar o ID do usuário para realizar o cadastro");
         } else {
-            sendCodAPI('registerUser', false);
+            sendCodAPI('registerUser', '0', false);
         }
     });
 
@@ -85,21 +86,21 @@
 
     $('#btUnregiste').click(function () {
         alet(userID);
-        sendCodAPI('unregisterUser', false);
+        sendCodAPI('unregisterUser', '0',false);
     });
 
     /***************************************************************
      *                       GENERATE ID USER                      *  
      ***************************************************************/
     $('#btGenIdUser').click(function () {
-        sendCodAPI('geniduser', false);
+        sendCodAPI('geniduser', '0', false);
     });
 
     /***************************************************************
     *                       GENERATE ID USER                      *  
     ***************************************************************/
     $('#btRmIdUser').click(function () {
-        sendCodAPI('rmiduser', false);
+        sendCodAPI('rmiduser', '0',false);
     });
 
 
@@ -167,7 +168,7 @@
      *                       GET USER                              *  
      ***************************************************************/
     $('#btConsultar').click(function () {
-        sendCodAPI('getuser', false);
+        sendCodAPI('getuser', '0',false);
     });
 
     function setUserView(userData) {
@@ -250,10 +251,10 @@
      ***************************************************************/
     $('#rect').click(function () {
         if ($('#rect').is(':checked')) {
-            sendCodAPI("rect", true);
+            sendCodAPI("rect", '0', true);
             $('#myCanvas').show();
         } else {
-            sendCodAPI("rect", false);
+            sendCodAPI("rect", '0', false);
             $('#myCanvas').hide();
 
 
@@ -305,7 +306,7 @@
 
             //var user = getUserInView(userId);
 
-
+            /*
             if (userId == 'Unrecognized') {
                 userId = 'Não reconhecido';
             }
@@ -316,8 +317,8 @@
 
             if (userId > 0) {
 
-                userId = user.nome;
-            }
+                userId = userId;
+            }*/
 
             context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 4);
         } else {
