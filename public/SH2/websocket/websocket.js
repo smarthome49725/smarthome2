@@ -40,7 +40,7 @@
                     break;
                 case "userData":
                     userData = JSON.parse(receivedAPI.msg);
-                    setUserView(userData);                    
+                    setUserView(userData);
                     break;
             }
 
@@ -87,7 +87,7 @@
 
     $('#btUnregiste').click(function () {
         alet(userID);
-        sendCodAPI('unregisterUser', '0',false);
+        sendCodAPI('unregisterUser', '0', false);
     });
 
     /***************************************************************
@@ -101,7 +101,7 @@
     *                       GENERATE ID USER                      *  
     ***************************************************************/
     $('#btRmIdUser').click(function () {
-        sendCodAPI('rmiduser', '0',false);
+        sendCodAPI('rmiduser', '0', false);
     });
 
 
@@ -169,10 +169,11 @@
      *                       GET USER                              *  
      ***************************************************************/
     $('#btConsultar').click(function () {
-        sendCodAPI('getuser', '0',false);
+        sendCodAPI('getuser', '0', false);
     });
 
     function setUserView(userData) {
+        //alert(userData.isArray());
         console.log(userData);
         window.userData = userData;
 
@@ -208,7 +209,7 @@
     /***************************************************************
      *                      SEND MSG APIREALSNSE                   *  
      ***************************************************************/
-    function sendCodAPI(cod, userID, rect) {        
+    function sendCodAPI(cod, userID, rect) {
         switch (cod) {
             case "rect":
                 cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
@@ -220,7 +221,7 @@
                 var email = $('#email').val();
                 var cod = '{' + '"userID"' + ':"' + receivedAPI.userId + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
                 break;
-            case "unregisterUser":                
+            case "unregisterUser":
                 var cod = '{' + '"userID"' + ':"' + userID + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
                 break;
             case "geniduser":
@@ -237,9 +238,9 @@
                 var cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
                 break;
             case "updateuser":
-                var cod = '{' + '"userID"' + ':"' + userID + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + $('#userNome').val() + '",' + '"tel"' + ':"' + $('#userTel').val() + '",' + '"nasc"' + ':"' + $('#userNasc').val() + '",' + '"email"' + ':"' + $('#userEmail').val() + '"}';                
+                var cod = '{' + '"userID"' + ':"' + userID + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + $('#userNome').val() + '",' + '"tel"' + ':"' + $('#userTel').val() + '",' + '"nasc"' + ':"' + $('#userNasc').val() + '",' + '"email"' + ':"' + $('#userEmail').val() + '"}';
                 break;
-                
+
         }
 
         socket.send(cod);
@@ -304,10 +305,13 @@
             //userId = userId == 'Unrecognized' ? 'Não reconhecido' : getUserInView(100);
             //userId = userId == 'No users in view' ? 'Nenhum usuário em exibição' : getUserInView(100);
 
-                       
-            var user = JSON.parse(userData[0]);
-            console.log(user.nome);
-            
+            if (typeof (userData) == 'object' && userData[0] != undefined) {
+                var user = JSON.parse(userData[0]);
+                if (userId > 0) {
+                    userId = user.nome;
+                }
+            }
+
             if (userId == 'Unrecognized') {
                 userId = 'Não reconhecido';
             }
@@ -316,10 +320,8 @@
                 userId = 'Nenhum usuário em exibição';
             }
 
-            if (userId > 0) {
-                userId = user.nome;
-            }
             
+
 
             context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 4);
         } else {
