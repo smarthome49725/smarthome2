@@ -1,63 +1,35 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js" ng-app="appSmart">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>#C.I.A</title>
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
-    <link rel="stylesheet" href="style/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style/cia.css">
-    <link rel="stylesheet" type="text/css" href="style/dist/fonts/css/cerulean.min.css">
-    <script src="style/JS/vendor/jquery.min.js"></script>
-
-
     <!--<SH2>-->
+    <script type="text/javascript" src="SH2/WebRTC/lib/jquery-3.1.0.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha1.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="SH2/session/session.js"></script>
+    <script src="style/JS/login.js"></script> 
     <link rel="stylesheet" href="SH2/style/smarthome2.css">
+    <link rel="stylesheet" href="SH2/style/login-style.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
 </head>
 
 <body ng-controller="SmartController" ng-init="init()">
-    <nav class="navbar navbar-default navbar-static-top">
-        <img class="logo" src="img/logo.png">
-        <div class="navbar-header">
-            <h1 class="titulo-cia" title="SMAR HOME AUTOMATED - CASA INTELIGENTE AUTOMATIZADA -            C.I.A">Smart Home Automated</h1>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="col-md-1 row1 cursor">
-                     
-                <table align="center">
-                    <tr>
-                        <th>
-                            <input id="login" type="text" class="form-control" placeholder="Login" />
-                        </th>
-                    </tr>
-
-                    <tr>
-                        <th>
-                            <input id="password" type="password" class="form-control" placeholder="Senha" />
-                        </th>
-                    </tr>
-
-                    <tr>
-                        <th>
-                            <input id="btLogin" type="submit" value="Entrar" class="form-control">
-                        </th>
-                    </tr>
-
-                </table>        
-
-            <div id="alertIndex"></div>
-
-        </div>
-    </div>
-
+<div class="login-page">
+  <div class="form">
+    <form class="register-form">
+      <input type="text" placeholder="name"/>
+      <input type="text" placeholder="email address"/>
+      <button>ENVIAR</button>
+    </form>
+    <form class="login-form">
+        <input id="login" type="text" placeholder="Usuário"/>
+        <input id="password" type="password" placeholder="Senha"/>
+        <button id="btLogin" type="submit">ENTRAR</button>
+        <p class="message">Esqueceu a senha?<a href="#"> Clique aqui!</a></p>
+    </form>
+  </div>
+</div>
 </body>
 
 </html>
