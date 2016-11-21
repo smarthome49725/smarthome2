@@ -1,17 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
-  width: 360px;
-  padding: 8% 0 0;
+  width: 100%;
   margin: auto;
 }
 .form {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
+  width: 40%;
+  height:40%; 
   max-width: 360px;
-  margin: 30% auto 45%;
-  padding: 45px;
+  margin: 7% auto auto auto;
+  padding: 2%;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
@@ -22,9 +23,9 @@
   width: 100%;
   border: 0;
   margin: 0 0 15px;
-  padding: 15px;
+  padding: 1em;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 0.92em;
 }
 .form button {
   font-family: "Roboto", sans-serif;
@@ -33,7 +34,7 @@
   background: #0092D6;
   width: 100%;
   border: 0;
-  padding: 15px;
+  padding: 1em;
   color: #FFFFFF;
   font-size: 14px;
   -webkit-transition: all 0.3 ease;
@@ -55,6 +56,13 @@
 .form .register-form {
   display: none;
 }
+.logo {
+    display: block; !important
+}
+.logo img{
+    width: 50%;
+    align-items: center
+}
 .container {
   position: relative;
   z-index: 1;
@@ -67,7 +75,7 @@
   clear: both;
 }
 .container .info {
-  margin: 50px auto;
+  margin: 20% auto;
   text-align: center;
 }
 .container .info h1 {
