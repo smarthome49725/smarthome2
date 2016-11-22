@@ -1,13 +1,17 @@
 #my-video {
     position: absolute;
-    width: 568px;
-    height: 428px;
+    /*width: 568px;
+    height: 428px;*/
     border: 4px solid #000000;
+    width: 640px;
+    height: 480px;
 }
 
 #remote-video {
-    width: 568px;
-    height: 428px;
+    /*width: 568px;
+    height: 428px;*/
+    width: 640px;
+    height: 480px;
     border: 4px solid #000000;
 }
 
@@ -15,6 +19,8 @@
     position: absolute;
     border: 2px solid yellow;
     z-index: 10;
+    width: 640px;
+    height: 480px;
 }
 
 #lblMonito {

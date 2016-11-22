@@ -36,7 +36,7 @@
             switch (receivedAPI.code) {
                 case "rect":
                     faceRectangle(receivedAPI.msg, receivedAPI.userId);
-                    console.log(receivedAPI.userId);
+                    console.log(receivedAPI.userId);                    
                     break;
                 case "userData":
                     userData = JSON.parse(receivedAPI.msg);
@@ -71,13 +71,20 @@
     /***************************************************************
      *                     REGISTER USER                           *  
      ***************************************************************/
-
+    //userData[0] == undefined => No registered user
+    //!isNaN(receivedAPI.userId) => IS number
     $('#btCadastro').click(function () {
-        console.log(receivedAPI.userId);
-        if (!receivedAPI.userId) {
-            alert("É necessário gerar o ID do usuário para realizar o cadastro");
+
+        if (!isNaN(receivedAPI.userId)) {
+            if (userData[0] == undefined) {
+                console.log(receivedAPI.userId);
+                sendCodAPI('registerUser', '0', false);
+            } else {
+                var user = JSON.parse(userData[0]);
+                alert("É necessário gerar o ID do usuário para realizar o cadastro");
+            }
         } else {
-            sendCodAPI('registerUser', '0', false);
+            alert("É necessário gerar o ID do usuário para realizar o cadastro");
         }
     });
 
@@ -96,14 +103,6 @@
     $('#btGenIdUser').click(function () {
         sendCodAPI('geniduser', '0', false);
     });
-
-    /***************************************************************
-    *                       GENERATE ID USER                      *  
-    ***************************************************************/
-    $('#btRmIdUser').click(function () {
-        sendCodAPI('rmiduser', '0', false);
-    });
-
 
     /***************************************************************
      *                       GET USER IN VIEW                      *  
@@ -227,9 +226,6 @@
             case "geniduser":
                 cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
                 break;
-            case "rmiduser":
-                cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
-                break;
             case "getuser":
                 var nome = $('#name').val();
                 var tel = $('#tel').val();
@@ -251,7 +247,7 @@
     /***************************************************************
      *                     CANVAS FACE RECTANGLE                   *  
      ***************************************************************/
-    $('#myCanvas').hide();
+    document.getElementById("rect").checked = true;    
     $('#rect').click(function () {
         if ($('#rect').is(':checked')) {
             sendCodAPI("rect", '0', true);
@@ -295,18 +291,18 @@
             context.beginPath();
             context.lineWidth = 3;
             context.strokeStyle = 'yellow';
-            context.rect(faceRectangleX, faceRectangleY, faceRectangleW, faceRectangleH);
+            context.rect(faceRectangleX - 40, faceRectangleY-20, faceRectangleW, faceRectangleH);
             context.stroke();
 
             //User ID
             context.fillStyle = "green";
             context.font = "12pt Helvetica";
-            //userId = userId == 'Unrecognized' ? 'Não reconhecido' : getUserInView(100);
-            //userId = userId == 'No users in view' ? 'Nenhum usuário em exibição' : getUserInView(100);
 
-            if (typeof (userData) == 'object' && userData[0] != undefined) {
-                var user = JSON.parse(userData[0]);
-                if (userId > 0) {
+            //userData[0] == undefined => No registered user
+            //!isNaN(receivedAPI.userId) => IS number
+            if (!isNaN(receivedAPI.userId)) {
+                if (typeof userData[0] == 'string'){
+                var user = JSON.parse(userData[0]);               
                     userId = user.nome;
                 }
             }
@@ -317,7 +313,7 @@
 
             if (userId == 'No users in view') {
                 userId = 'Nenhum usuário em exibição';
-            }        
+            }
 
 
             context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 4);
