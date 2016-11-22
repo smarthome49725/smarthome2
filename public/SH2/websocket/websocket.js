@@ -251,6 +251,7 @@
     /***************************************************************
      *                     CANVAS FACE RECTANGLE                   *  
      ***************************************************************/
+    $('#myCanvas').hide();
     $('#rect').click(function () {
         if ($('#rect').is(':checked')) {
             sendCodAPI("rect", '0', true);
@@ -258,8 +259,6 @@
         } else {
             sendCodAPI("rect", '0', false);
             $('#myCanvas').hide();
-
-
         }
 
     });
@@ -318,9 +317,7 @@
 
             if (userId == 'No users in view') {
                 userId = 'Nenhum usuário em exibição';
-            }
-
-            
+            }        
 
 
             context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 4);
