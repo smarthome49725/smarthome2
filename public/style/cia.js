@@ -432,42 +432,42 @@ socket.on('lightKitchen', function (lamp) {
   acenderLampkitchen();
 });
 
-socket.on('lightBedroom'), function (lamp) {
+socket.on('lightBedroom', function (lamp) {
   acenderLampbedroom();
 });
 
-socket.on('lightRoom1'), function (lamp) {
+socket.on('lightRoom1', function (lamp) {
   acenderLamproomOne();
 });
 
-socket.on('lightRoom2'), function (lamp) {
+socket.on('lightRoom2', function (lamp) {
   acenderLamproomTwo();
 });
 
-socket.on('TV'), function (tv_on_off) {
+socket.on('TV', function (tv_on_off) {
   activeTvCia();
 });
 
-socket.on('TV-Increase'), function (tv_i) {
+socket.on('TV-Increase', function (tv_i) {
   Increase();
 });
 
-socket.on('TV-Decrease'), function (tv_d) {
+socket.on('TV-Decrease', function (tv_d) {
   decrease();
 });
 
-socket.on('curtain'), function (curtain) {
+socket.on('curtain', function (curtain) {
   activeCurtain();
 });
 
-socket.on('air-conditioning'), function (air_on_off) {
+socket.on('air-conditioning', function (air_on_off) {
   activeArCia();
 });
 
-socket.on('air-conditioning-decrease'), function (air_d) {
+socket.on('air-conditioning-decrease', function (air_d) {
   decrease_ar();
 });
 
-socket.on('air-conditioning-increase'), function (air_i) {
+socket.on('air-conditioning-increase', function (air_i) {
   Increase_ar();
 });
