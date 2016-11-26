@@ -153,6 +153,10 @@
         html += '    </div>';
         html += '</div>';
         $('#tableUser').html(html);
+
+        $(function () {
+            $("#userNasc").datepicker();
+        });
     }
 
     /***************************************************************
@@ -276,7 +280,7 @@
                 var crypPassword = CryptoJS.SHA1($('#password').val());
                 crypPassword = crypPassword.toString(CryptoJS.enc.Base64);
                 var cod = {
-                    userID: 2,//receivedAPI.userId,
+                    userID: receivedAPI.userId,
                     level: level,
                     registerLevel: $('#registerLevel').val(),
                     cod: cod,
@@ -321,7 +325,7 @@
                 var crypUserPassword = CryptoJS.SHA1($('#userPassword').val());
                 crypUserPassword = crypUserPassword.toString(CryptoJS.enc.Base64);                
                 var cod = {
-                    userID: 102,
+                    userID: userID,
                     level: level,
                     registerLevel: $('#userRegisterLevel').val(),
                     cod: cod,
