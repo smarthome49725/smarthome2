@@ -8,17 +8,16 @@
     var socketIO = io();
 
     $('#btSaveConnectAPI_RS').click(function () {
-        ipAPI_RS = $('#ipAPI_RS').val();
-        ipPlaca = $('#ipPlaca').val();
-        ipClientRTC = $('#ipClientRTC').val();
-        ipServerRTC = $('#ipServerRTC').val();
+        configIP = {
+            configIP: [
+                { ipAPI_RS: $('#ipAPI_RS').val() },
+                { ipPlaca: $('#ipPlaca').val() },
+                { ipClientRTC: $('#ipClientRTC').val() },
+                { ipServerRTC: $('#ipServerRTC').val() }
+            ]
+        };
 
-        configIP = '{ "configIP" : [' +
-   '{' + '"ipAPI_RS"' + ':"' + ipAPI_RS + '"},' +
-   '{' + '"ipPlaca"' + ':"' + ipPlaca + '"},' +
-   '{' + '"ipClientRTC"' + ':"' + ipClientRTC + '"},' +
-   '{' + '"ipServerRTC"' + ':"' + ipServerRTC + '"}]}';
-
+        configIP = JSON.stringify(configIP);                
         socketIO.emit('saveIP', configIP);
 
     });//Connection API 
@@ -32,8 +31,8 @@
         ipServerRTC = $('#ipServerRTC').val(window.configIP.configIP[3].ipServerRTC);
 
         window.connectWRTC();
-        window.connectWebSocket();        
+        window.connectWebSocket();
     });
 
-    
+
 });

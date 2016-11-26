@@ -52,4 +52,9 @@
             flag3 = true;
         }
     });
+
+    $(function () {
+        $("#nasc").datepicker();
+    });
+
 });

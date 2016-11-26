@@ -99,3 +99,7 @@
 body {
   background: rgba(0,146,214, 0.2); 
 }
+
+#btLogin{
+    margin-bottom: 15px;
+}

@@ -36,7 +36,7 @@
             switch (receivedAPI.code) {
                 case "rect":
                     faceRectangle(receivedAPI.msg, receivedAPI.userId);
-                    console.log(receivedAPI.userId);                    
+                    console.log(receivedAPI.userId);
                     break;
                 case "userData":
                     userData = JSON.parse(receivedAPI.msg);
@@ -74,8 +74,8 @@
     //userData[0] == undefined => No registered user
     //!isNaN(receivedAPI.userId) => IS number
     $('#btCadastro').click(function () {
-
-        if (!isNaN(receivedAPI.userId)) {
+        sendCodAPI('registerUser', '0', false);
+        /*if (!isNaN(receivedAPI.userId)) {
             if (userData[0] == undefined) {
                 console.log(receivedAPI.userId);
                 sendCodAPI('registerUser', '0', false);
@@ -85,7 +85,7 @@
             }
         } else {
             alert("É necessário gerar o ID do usuário para realizar o cadastro");
-        }
+        }*/
     });
 
     /***************************************************************
@@ -93,7 +93,7 @@
      ***************************************************************/
 
     $('#btUnregiste').click(function () {
-        alet(userID);
+        alert(userID);
         sendCodAPI('unregisterUser', '0', false);
     });
 
@@ -141,6 +141,14 @@
         html += '<input id="userTel" type="text" value=' + user.tel + '><br/>';
         html += '<input id="userNasc" type="text" value=' + user.nasc + '><br/>';
         html += '<input id="userEmail" type="text" value=' + user.email + '><br/>';
+        html += '<input id="userPassword" type="password" value="" placeholder="Senha"/><br/>';
+
+        html += '   <select id="userRegisterLevel">';
+        html += '      <option value="1">Proprietário</option>';
+        html += '      <option value="2">representante </option>';
+        html += '      <option value="3">residentes</option>';
+        html += '   </select><br/>';
+
         html += '<button onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
         html += '    </div>';
         html += '</div>';
@@ -179,8 +187,19 @@
         if (userData[0]) {
             var user;
             var html = '';
+            var nivAcesso;
             for (var i = 0; i < userData.length; i++) {
                 user = JSON.parse(userData[i]);
+
+                if (user.level == 1) {
+                    nivAcesso = 'Proprietário';
+                } else {
+                    if (user.level == 2) {
+                        nivAcesso = 'Representante';
+                    } else {
+                        nivAcesso = 'Residente';
+                    }
+                }
 
                 html += '<div class="panel panel-default">';
                 html += '    <div class="panel-heading">';
@@ -189,10 +208,12 @@
                 html += '        <a href="#" onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</a>';
                 html += '    </div>';
                 html += '    <div class="panel-body">';
-                html += '<p> Nome:' + user.nome + '</p>';
-                html += '<p> Tel:' + user.tel + '</p>';
-                html += '<p>Nascimento:' + user.nasc + '</p>';
-                html += '<p>Email:' + user.email + '</p>';
+                html += '<p> Nome: ' + user.nome + '</p>';
+                html += '<p> Tel: ' + user.tel + '</p>';
+                html += '<p>Nascimento: ' + user.nasc + '</p>';
+                html += '<p>Email: ' + user.email + '</p>';
+                html += '<p>Senha: ******** </p>';
+                html += '<p>Nivel de Acesso: ' + nivAcesso + '</p>';                
                 html += '    </div>';
                 html += '</div>';
 
@@ -206,39 +227,113 @@
     }
 
     /***************************************************************
+     *                       GET USERLOGIN                         *  
+     ***************************************************************/
+    window.getLogin = function (login, password) {                    
+    var cod = {
+        cod: getlogin,
+        login: login,
+        password: password
+    };
+    cod = JSON.stringify(cod);
+    console.log(JSON.parse(cod));
+    }
+
+
+    /***************************************************************
+     *                       GET Cookie                            *  
+     ***************************************************************/
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    /***************************************************************
      *                      SEND MSG APIREALSNSE                   *  
      ***************************************************************/
     function sendCodAPI(cod, userID, rect) {
+        var level = getCookie("level");        
         switch (cod) {
-            case "rect":
-                cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
+            case "rect":                
+                var cod = {
+                    userID: 0,
+                    level: level,
+                    cod: cod,
+                    rect: rect
+                };
                 break;
             case "registerUser":
-                var nome = $('#name').val();
-                var tel = $('#tel').val();
-                var nasc = $('#nasc').val();
-                var email = $('#email').val();
-                var cod = '{' + '"userID"' + ':"' + receivedAPI.userId + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
+                var crypPassword = CryptoJS.SHA1($('#password').val());
+                crypPassword = crypPassword.toString(CryptoJS.enc.Base64);
+                var cod = {
+                    userID: 2,//receivedAPI.userId,
+                    level: level,
+                    registerLevel: $('#registerLevel').val(),
+                    cod: cod,
+                    nome: $('#name').val(),
+                    tel: $('#tel').val(),
+                    nasc: $('#nasc').val(),
+                    email: $('#email').val(),
+                    password: crypPassword
+                };                
                 break;
             case "unregisterUser":
-                var cod = '{' + '"userID"' + ':"' + userID + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
+                var cod = {
+                    userID: userID,
+                    level: level,
+                    cod: cod,
+                    nome: $('#name').val(),
+                    tel: $('#tel').val(),
+                    nasc: $('#nasc').val(),
+                    email: $('#email').val()
+                };                
                 break;
             case "geniduser":
-                cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"rect"' + ':"' + rect + '"}';
+                var cod = {
+                    userID: 0,
+                    level: level,
+                    cod: cod,
+                    rect: rect
+                };                
                 break;
             case "getuser":
-                var nome = $('#name').val();
-                var tel = $('#tel').val();
-                var nasc = $('#nasc').val();
-                var email = $('#email').val();
-                var cod = '{' + '"userID"' + ':"' + "0" + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + nome + '",' + '"tel"' + ':"' + tel + '",' + '"nasc"' + ':"' + nasc + '",' + '"email"' + ':"' + email + '"}';
+                var cod = {
+                    userID: userID,
+                    level: level,
+                    cod: cod,
+                    nome: $('#name').val(),
+                    tel: $('#tel').val(),
+                    nasc: $('#nasc').val(),
+                    email: $('#email').val()
+                };                
                 break;
             case "updateuser":
-                var cod = '{' + '"userID"' + ':"' + userID + '",' + '"level"' + ':"' + "1" + '",' + '"cod"' + ':"' + cod + '",' + '"nome"' + ':"' + $('#userNome').val() + '",' + '"tel"' + ':"' + $('#userTel').val() + '",' + '"nasc"' + ':"' + $('#userNasc').val() + '",' + '"email"' + ':"' + $('#userEmail').val() + '"}';
+                var crypUserPassword = CryptoJS.SHA1($('#userPassword').val());
+                crypUserPassword = crypUserPassword.toString(CryptoJS.enc.Base64);                
+                var cod = {
+                    userID: 102,
+                    level: level,
+                    registerLevel: $('#userRegisterLevel').val(),
+                    cod: cod,
+                    nome: $('#userNome').val(),
+                    tel: $('#userTel').val(),
+                    nasc:$('#userNasc').val(),
+                    email: $('#userEmail').val(),
+                    password: crypUserPassword
+                };                
                 break;
-
         }
-
+        cod = JSON.stringify(cod);
         socket.send(cod);
         console.log(JSON.parse(cod));
     }
@@ -247,7 +342,7 @@
     /***************************************************************
      *                     CANVAS FACE RECTANGLE                   *  
      ***************************************************************/
-    document.getElementById("rect").checked = true;    
+    document.getElementById("rect").checked = true;
     $('#rect').click(function () {
         if ($('#rect').is(':checked')) {
             sendCodAPI("rect", '0', true);
@@ -291,7 +386,7 @@
             context.beginPath();
             context.lineWidth = 3;
             context.strokeStyle = 'yellow';
-            context.rect(faceRectangleX - 40, faceRectangleY-20, faceRectangleW, faceRectangleH);
+            context.rect(faceRectangleX - 40, faceRectangleY - 20, faceRectangleW, faceRectangleH);
             context.stroke();
 
             //User ID
@@ -301,8 +396,8 @@
             //userData[0] == undefined => No registered user
             //!isNaN(receivedAPI.userId) => IS number
             if (!isNaN(receivedAPI.userId)) {
-                if (typeof userData[0] == 'string'){
-                var user = JSON.parse(userData[0]);               
+                if (typeof userData[0] == 'string') {
+                    var user = JSON.parse(userData[0]);
                     userId = user.nome;
                 }
             }

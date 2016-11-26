@@ -3,38 +3,42 @@
 
 <head>
     <!--<SH2>-->
-    <script type="text/javascript" src="SH2/WebRTC/lib/jquery-3.1.0.js"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha1.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha1.js"></script>-->
+    
+    <script type="text/javascript" src="SH2/WebRTC/lib/jquery-3.1.0.js"></script>
+    <script type="text/javascript" src="SH2/lib/crypto-js-3.1.2-aes.js"></script>    
     <script src="/socket.io/socket.io.js"></script>
     <script src="SH2/session/session.js"></script>
-    <script src="style/JS/login.js"></script> 
+    <script src="style/JS/login.js"></script>
     <link rel="stylesheet" href="SH2/style/smarthome2.css">
-    <link rel="stylesheet" href="SH2/style/login-style.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+    <link rel="stylesheet" href="SH2/style/login-style.css">    
+    <script src="SH2/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="SH2/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+        
 </head>
 
 <body ng-controller="SmartController" ng-init="init()">
-<div class="login-page">
-  <div class="form">
-      <div class="logo">
-          <img src="img/logo.png">
-          <br>
-          <br>
-      </div>
-    <form class="register-form">
-      <input type="text" placeholder="name"/>
-      <input type="text" placeholder="email address"/>
-      <button>ENVIAR</button>
-    </form>
-    <form class="login-form">
-        <input id="login" type="text" placeholder="Usuário"/>
-        <input id="password" type="password" placeholder="Senha"/>
-        <button id="btLogin" type="submit">ENTRAR</button>
-        <p class="message">Esqueceu a senha?<a href="#"> Clique aqui!</a></p>
-    </form>
-  </div>
-</div>
+    <div class="login-page">
+        <div class="form">
+            <div class="logo">
+                <img src="img/logo.png">
+                <br>
+                <br>
+            </div>
+            <form class="register-form">
+                <input type="text" placeholder="name" />
+                <input type="text" placeholder="email address" />
+                <button>ENVIAR</button>
+            </form>
+            <form class="login-form">
+                <input id="login" type="text" placeholder="Usuário" />
+                <input id="password" type="password" placeholder="Senha" />
+                <!--<p class="message">Esqueceu a senha?<a href="#"> Clique aqui!</a></p>-->
+            </form>
+            <button id="btLogin" type="button">ENTRAR</button>
+            <div id="alertIndex"></div>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="no-js" ng-app="appSmart">
 <head>
     <meta charset="utf-8">
@@ -30,6 +30,14 @@
     <script type="text/javascript" src="SH2/WebRTC/js/webrtc.js"></script>
     <script type="text/javascript" src="SH2/websocket/websocket.js"></script>
     <script type="text/javascript" src="SH2/config/config.js"></script>
+
+    <!--DATAPIKER--> 
+    <link rel="stylesheet" href="SH2/lib/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+    <script src="SH2/lib/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>    
+    <!--/DATAPIKER-->
+
+    <script type="text/javascript" src="SH2/lib/crypto-js-3.1.2-aes.js"></script>
+
     <!--</SH2>-->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries  onload="seti()" -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -337,11 +345,25 @@
                                                         </tr>
                                                         <tr>
                                                             <th>Nascimento</th>
-                                                            <td><input id="nasc" type="number"></td>
+                                                            <td><input id="nasc" type="text"></td>
                                                         </tr>
                                                         <tr>
                                                             <th>E-mail</th>
                                                             <td><input id="email" type="email"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Senha</th>
+                                                            <td><input id="password" type="password"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Nível de acesso</th>
+                                                            <td>
+                                                                <select id="registerLevel">
+                                                                    <option value="1">Proprietário</option>
+                                                                    <option value="2">representante </option>
+                                                                    <option value="3">residentes</option>
+                                                                </select>
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                 </fieldset>
