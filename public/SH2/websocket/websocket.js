@@ -14,6 +14,9 @@
             console.log('CONNECTION ESTABLISHED!');
             $('#StatusConnection').css("background", "green");
             $('#lbStatus').text("CONNECTED");
+
+            //Get Alert emails and Set In view
+            getAlertEmails()
         };//Socket onopen
 
         socket.onclose = function () {
@@ -41,6 +44,9 @@
                 case "userData":
                     userData = JSON.parse(receivedAPI.msg);
                     setUserView(userData);
+                    break;
+                case "getalertemail":
+                    setEmailInView(receivedAPI.msg);
                     break;
             }
 
@@ -73,10 +79,10 @@
      ***************************************************************/
     //userData[0] == undefined => No registered user
     //!isNaN(receivedAPI.userId) => IS number
-    $('#btCadastro').click(function () {        
+    $('#btCadastro').click(function () {
         sendCodAPI('registerUser', '0', false);
         alert("Ulitize o seu email para fazer login: " + $('#email').val());
-        
+
         /*if (!isNaN(receivedAPI.userId)) {
             if (userData[0] == undefined) {
                 console.log(receivedAPI.userId);
@@ -126,6 +132,31 @@
     }
 
     /***************************************************************
+     *                       SAVE ALERT EMAIL                      *  
+     ***************************************************************/
+    $('#btSaveAlertEmail').click(function () {
+        sendCodAPI('updatealertemail', '0', false);
+    });
+
+    /***************************************************************
+     *                       GET ALERT EMAILS                      *  
+     ***************************************************************/
+    function getAlertEmails() {
+        sendCodAPI('getalertemail', '0', false);
+    }
+
+    /***************************************************************
+     *                      SET ALERT EMAILS IN VIEW               *  
+     ***************************************************************/
+    function setEmailInView(emails) {
+        emails = JSON.parse(emails);
+        $('#alertEmail1').val(emails.email1);
+        $('#alertEmail2').val(emails.email2);
+        $('#alertEmail3').val(emails.email3);
+    }
+
+
+    /***************************************************************
      *                       UPDATE USER                           *  
      ***************************************************************/
     window.updateUser = function (cod, userPosition, userName) {
@@ -133,28 +164,74 @@
         console.log(user);
         var html = '';
 
-        html += '<div class="panel panel-default">';
-        html += '    <div class="panel-heading">';
-        html += 'ID: ' + user.userID;
-        html += '        <a href="#" onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-remove" ></a>';
-        html += '    </div>';
-        html += '    <div class="panel-body">';
-        html += '<input id="userNome" type="text" value=' + user.nome + '><br/>';
-        html += '<input id="userTel" type="text" value=' + user.tel + '><br/>';
-        html += '<input id="userNasc" type="text" value=' + user.nasc + '><br/>';
-        html += '<input id="userEmail" type="text" value=' + user.email + '><br/>';
-        html += '<input id="userPassword" type="password" value="" placeholder="Senha"/><br/>';
+        if (user.blacklist == 'True') {
 
-        html += '   <select id="userRegisterLevel">';
-        html += '      <option value="1">Proprietário</option>';
-        html += '      <option value="2">representante </option>';
-        html += '      <option value="3">residentes</option>';
-        html += '   </select><br/>';
+            html += '<div class="panel panel-default">';
+            html += '    <div class="panel-heading">';
+            html += 'ID: ' + user.userID;
+            html += '        <a href="#" onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-remove" ></a>';
+            html += '    </div>';
+            html += '    <div class="panel-body">';
+            html += '<input id="userNome" type="text" placeholder="Nome" value=' + user.nome + '><br/>';
+            html += '<span>Lista Negra</span><input checked id="userBlackList" type="checkbox"/><br/>';
+            html += '<button onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
+            html += '    </div>';
+            html += '</div>';
 
-        html += '<button onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
-        html += '    </div>';
-        html += '</div>';
+        } else {
+
+            html += '<div class="panel panel-default">';
+            html += '    <div class="panel-heading">';
+            html += 'ID: ' + user.userID;
+            html += '        <a href="#" onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-remove" ></a>';
+            html += '    </div>';
+            html += '    <div class="panel-body">';
+            html += '<input id="userNome" type="text" placeholder="Nome" value=' + user.nome + '><br/>';
+            html += '<input id="userTel" type="text" placeholder="Telefone" value=' + user.tel + '><br/>';
+            html += '<input id="userNasc" type="text" placeholder="Data de Nascimento" value=' + user.nasc + '><br/>';
+            html += '<input id="userEmail" type="text" placeholder="Email" value=' + user.email + '><br/>';
+            html += '<input id="userPassword" type="password" value="" placeholder="Senha"/><br/>';
+
+            html += '   <select id="userRegisterLevel">';
+            html += '      <option value="1">Proprietário</option>';
+            html += '      <option value="2">representante </option>';
+            html += '      <option value="3">residentes</option>';
+            html += '   </select><br/>';
+
+            html += '<span>Lista Negra</span><input id="userBlackList" type="checkbox"/><br/>';
+            html += '<button onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
+            html += '    </div>';
+            html += '</div>';
+        }
+
         $('#tableUser').html(html);
+
+        $("#userBlackList").change(function () {
+            if (this.checked) {
+                $('#userTel').val("");
+                $('#userNasc').val("");
+                $('#userEmail').val("");
+                $('#userPassword').val("");
+                $('#userRegisterLevel').val("");
+
+                $('#userTel').hide();
+                $('#userNasc').hide();
+                $('#userEmail').hide();
+                $('#userPassword').hide();
+                $('#userRegisterLevel').hide();
+            } else {
+                $('#userTel').show();
+                $('#userNasc').show();
+                $('#userEmail').show();
+                $('#userPassword').show();
+                $('#userRegisterLevel').show();
+            }
+        });
+
+        $('#userRegisterLevel').val(user.level)
+
+        //$('#userBlackList').prop('checked', user.blacklist);
+        console.log(user.blacklist);
 
         $(function () {
             $("#userNasc").datepicker();
@@ -193,35 +270,57 @@
         if (userData[0]) {
             var user;
             var html = '';
-            var nivAcesso;
+            var nivAcesso = "Indefinido";
+            var blacklist;
+
             for (var i = 0; i < userData.length; i++) {
                 user = JSON.parse(userData[i]);
 
                 if (user.level == 1) {
                     nivAcesso = 'Proprietário';
-                } else {
-                    if (user.level == 2) {
-                        nivAcesso = 'Representante';
-                    } else {
-                        nivAcesso = 'Residente';
-                    }
+                }
+                if (user.level == 2) {
+                    nivAcesso = 'Representante';
+                }
+                if (user.level == 3) {
+                    nivAcesso = 'Residente';
                 }
 
-                html += '<div class="panel panel-default">';
-                html += '    <div class="panel-heading">';
-                html += 'ID: ' + user.userID;
-                html += '        <a href="#" onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-remove" ></a>';
-                html += '        <a href="#" onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</a>';
-                html += '    </div>';
-                html += '    <div class="panel-body">';
-                html += '<p> Nome: ' + user.nome + '</p>';
-                html += '<p> Tel: ' + user.tel + '</p>';
-                html += '<p>Nascimento: ' + user.nasc + '</p>';
-                html += '<p>Email: ' + user.email + '</p>';
-                html += '<p>Senha: ******** </p>';
-                html += '<p>Nivel de Acesso: ' + nivAcesso + '</p>';                
-                html += '    </div>';
-                html += '</div>';
+                if (user.blacklist == 'True') {
+                    blacklist = "Sim";
+
+                    html += '<div class="panel panel-default">';
+                    html += '    <div class="panel-heading">';
+                    html += 'ID: ' + user.userID;
+                    html += '        <a href="#" onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-remove" ></a>';
+                    html += '        <a href="#" onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</a>';
+                    html += '    </div>';
+                    html += '    <div class="panel-body">';
+                    html += '<p> Nome: ' + user.nome + '</p>';
+                    html += '<p>Lista Negra: ' + blacklist + '</p>';
+                    html += '    </div>';
+                    html += '</div>';
+
+                } else {
+                    blacklist = "Não";
+
+                    html += '<div class="panel panel-default">';
+                    html += '    <div class="panel-heading">';
+                    html += 'ID: ' + user.userID;
+                    html += '        <a href="#" onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-remove" ></a>';
+                    html += '        <a href="#" onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</a>';
+                    html += '    </div>';
+                    html += '    <div class="panel-body">';
+                    html += '<p> Nome: ' + user.nome + '</p>';
+                    html += '<p> Tel: ' + user.tel + '</p>';
+                    html += '<p>Nascimento: ' + user.nasc + '</p>';
+                    html += '<p>Email: ' + user.email + '</p>';
+                    html += '<p>Senha: ******** </p>';
+                    html += '<p>Nivel de Acesso: ' + nivAcesso + '</p>';
+                    html += '<p>Lista Negra: ' + blacklist + '</p>';
+                    html += '    </div>';
+                    html += '</div>';
+                }
 
 
             }
@@ -235,14 +334,14 @@
     /***************************************************************
      *                       GET USERLOGIN                         *  
      ***************************************************************/
-    window.getLogin = function (login, password) {                    
-    var cod = {
-        cod: getlogin,
-        login: login,
-        password: password
-    };
-    cod = JSON.stringify(cod);
-    console.log(JSON.parse(cod));
+    window.getLogin = function (login, password) {
+        var cod = {
+            cod: getlogin,
+            login: login,
+            password: password
+        };
+        cod = JSON.stringify(cod);
+        console.log(JSON.parse(cod));
     }
 
 
@@ -268,9 +367,9 @@
      *                      SEND MSG APIREALSNSE                   *  
      ***************************************************************/
     function sendCodAPI(cod, userID, rect) {
-        var level = getCookie("level");        
+        var level = getCookie("level");
         switch (cod) {
-            case "rect":                
+            case "rect":
                 var cod = {
                     userID: 0,
                     level: level,
@@ -279,19 +378,31 @@
                 };
                 break;
             case "registerUser":
-                var crypPassword = CryptoJS.SHA1($('#password').val());
-                crypPassword = crypPassword.toString(CryptoJS.enc.Base64);
-                var cod = {
-                    userID: receivedAPI.userId,
-                    level: level,
-                    registerLevel: $('#registerLevel').val(),
-                    cod: cod,
-                    nome: $('#name').val(),
-                    tel: $('#tel').val(),
-                    nasc: $('#nasc').val(),
-                    email: $('#email').val(),
-                    password: crypPassword
-                };                
+                if ($("#blackList").prop("checked")) { //User BlackList
+                    var cod = {
+                        userID: receivedAPI.userId,
+                        level: level,
+                        cod: "registerUserBL",
+                        nome: $('#name').val(),          
+                        blacklist: $("#blackList").prop("checked")
+                    };
+                } else {
+                    var crypPassword = CryptoJS.SHA1($('#password').val());
+                    crypPassword = crypPassword.toString(CryptoJS.enc.Base64);
+                    var cod = {
+                        userID: receivedAPI.userId,
+                        level: level,
+                        registerLevel: $('#registerLevel').val(),
+                        cod: cod,
+                        nome: $('#name').val(),
+                        tel: $('#tel').val(),
+                        nasc: $('#nasc').val(),
+                        email: $('#email').val(),
+                        password: crypPassword,
+                        blacklist: $("#blackList").prop("checked")
+                    };
+                }
+
                 break;
             case "unregisterUser":
                 var cod = {
@@ -302,7 +413,7 @@
                     tel: $('#tel').val(),
                     nasc: $('#nasc').val(),
                     email: $('#email').val()
-                };                
+                };
                 break;
             case "geniduser":
                 var cod = {
@@ -310,7 +421,7 @@
                     level: level,
                     cod: cod,
                     rect: rect
-                };                
+                };
                 break;
             case "getuser":
                 var cod = {
@@ -321,22 +432,39 @@
                     tel: $('#tel').val(),
                     nasc: $('#nasc').val(),
                     email: $('#email').val()
-                };                
+                };
                 break;
+            case "updatealertemail":
+                var cod = {
+                    level: level,
+                    cod: cod,
+                    email1: $('#alertEmail1').val(),
+                    email2: $('#alertEmail2').val(),
+                    email3: $('#alertEmail3').val()
+                };
+                break;
+            case "getalertemail":
+                var cod = {
+                    level: level,
+                    cod: cod
+                };
+                break;
+
             case "updateuser":
                 var crypUserPassword = CryptoJS.SHA1($('#userPassword').val());
-                crypUserPassword = crypUserPassword.toString(CryptoJS.enc.Base64);                
+                crypUserPassword = crypUserPassword.toString(CryptoJS.enc.Base64);
                 var cod = {
                     userID: userID,
                     level: level,
-                    registerLevel: $('#userRegisterLevel').val(),
+                    registerLevel: registerLevel = $('#userRegisterLevel').val() != undefined ? $('#userRegisterLevel').val() : -1,
                     cod: cod,
-                    nome: $('#userNome').val(),
-                    tel: $('#userTel').val(),
-                    nasc:$('#userNasc').val(),
-                    email: $('#userEmail').val(),
-                    password: crypUserPassword
-                };                
+                    nome: nome = $('#userNome').val() != undefined ? $('#userNome').val() : "0",
+                    tel: tel = $('#userTel').val() != undefined ? $('#userTel').val() : "0",
+                    nasc: nasc = $('#userNasc').val() != undefined ? $('#userNasc').val() : "0",
+                    email: email = $('#userEmail').val() != undefined ? $('#userEmail').val() : "0",
+                    password: crypUserPassword,
+                    blacklist: $("#userBlackList").prop("checked")
+                };
                 break;
         }
         cod = JSON.stringify(cod);

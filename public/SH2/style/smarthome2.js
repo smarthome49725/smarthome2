@@ -57,4 +57,28 @@
         $("#nasc").datepicker();
     });
 
+    $("#blackList").change(function () {
+        if (this.checked) {
+            $('#trTel').hide();
+            $('#trNasc').hide();
+            $('#trEmail').hide();
+            $('#trPassword').hide();
+            $('#trRegisterLevel').hide();
+
+            $('#tel').val("");
+            $('#nasc').val("");
+            $('#email').val("");
+            $('#password').val("");
+            $('#registerLevel').val("");
+        } else {
+            $('#trTel').show();
+            $('#trNasc').show();
+            $('#trEmail').show();
+            $('#trPassword').show();
+            $('#trRegisterLevel').show();
+        }
+    });
+
+
+
 });
