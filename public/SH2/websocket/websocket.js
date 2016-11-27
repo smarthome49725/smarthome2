@@ -73,8 +73,10 @@
      ***************************************************************/
     //userData[0] == undefined => No registered user
     //!isNaN(receivedAPI.userId) => IS number
-    $('#btCadastro').click(function () {
+    $('#btCadastro').click(function () {        
         sendCodAPI('registerUser', '0', false);
+        alert("Ulitize o seu email para fazer login: " + $('#email').val());
+        
         /*if (!isNaN(receivedAPI.userId)) {
             if (userData[0] == undefined) {
                 console.log(receivedAPI.userId);
