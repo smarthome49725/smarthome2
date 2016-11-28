@@ -27,7 +27,7 @@
         socketIO.emit('BEsetToken', level + ':' + token);
         setCookie("token", token, 1);
         setCookie("level", level, 1);
-        location.href = "http://localhost:49725/home.old.html";
+        location.href = "http://localhost:49725/home.html";
     }
 
     //SET COOKIE IN BROWSER

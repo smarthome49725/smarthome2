@@ -166,13 +166,13 @@
 
         if (user.blacklist == 'True') {
 
-            html += '<div class="panel panel-default">';
+            html += '<br/><div class="panel panel-default">';
             html += '    <div class="panel-heading">';
             html += 'ID: ' + user.userID;
-            html += '        <a href="#" onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-remove" ></a>';
+            html += '        <button onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-trash" ></button>';
             html += '    </div>';
             html += '    <div class="panel-body">';
-            html += '<input id="userNome" type="text" placeholder="Nome" value=' + user.nome + '><br/>';
+            html += '<input id="userNome" class="form-control" type="text" placeholder="Nome" value=' + user.nome + '><br/>';
             html += '<span>Lista Negra</span><input checked id="userBlackList" type="checkbox"/><br/>';
             html += '<button onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
             html += '    </div>';
@@ -180,26 +180,26 @@
 
         } else {
 
-            html += '<div class="panel panel-default">';
+            html += '<br/><div class="panel panel-default">';
             html += '    <div class="panel-heading">';
             html += 'ID: ' + user.userID;
-            html += '        <a href="#" onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-remove" ></a>';
+            html += '        <button onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-trash" ></button>';
             html += '    </div>';
             html += '    <div class="panel-body">';
-            html += '<input id="userNome" type="text" placeholder="Nome" value=' + user.nome + '><br/>';
-            html += '<input id="userTel" type="text" placeholder="Telefone" value=' + user.tel + '><br/>';
-            html += '<input id="userNasc" type="text" placeholder="Data de Nascimento" value=' + user.nasc + '><br/>';
-            html += '<input id="userEmail" type="text" placeholder="Email" value=' + user.email + '><br/>';
-            html += '<input id="userPassword" type="password" value="" placeholder="Senha"/><br/>';
+            html += '<input id="userNome" class="form-control" type="text" placeholder="Nome" value=' + user.nome + '><br/>';
+            html += '<input id="userTel" class="form-control" type="text" placeholder="Telefone" value=' + user.tel + '><br/>';
+            html += '<input id="userNasc" class="form-control" type="text" placeholder="Data de Nascimento" value=' + user.nasc + '><br/>';
+            html += '<input id="userEmail" class="form-control" type="text" placeholder="Email" value=' + user.email + '><br/>';
+            html += '<input id="userPassword" class="form-control" type="password" value="" placeholder="Senha"/><br/>';
 
-            html += '   <select id="userRegisterLevel">';
+            html += '   <select id="userRegisterLevel" class="form-control">';
             html += '      <option value="1">Proprietário</option>';
             html += '      <option value="2">representante </option>';
             html += '      <option value="3">residentes</option>';
             html += '   </select><br/>';
 
             html += '<span>Lista Negra</span><input id="userBlackList" type="checkbox"/><br/>';
-            html += '<button onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
+            html += '<button class="form-control" onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
             html += '    </div>';
             html += '</div>';
         }
@@ -289,11 +289,11 @@
                 if (user.blacklist == 'True') {
                     blacklist = "Sim";
 
-                    html += '<div class="panel panel-default">';
+                    html += '<br/><div class="panel panel-default">';
                     html += '    <div class="panel-heading">';
                     html += 'ID: ' + user.userID;
-                    html += '        <a href="#" onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-remove" ></a>';
-                    html += '        <a href="#" onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</a>';
+                    html += '        <button onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-trash" ></button>';
+                    html += '        <button onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</button>';
                     html += '    </div>';
                     html += '    <div class="panel-body">';
                     html += '<p> Nome: ' + user.nome + '</p>';
@@ -304,11 +304,11 @@
                 } else {
                     blacklist = "Não";
 
-                    html += '<div class="panel panel-default">';
+                    html += '<br/><div class="panel panel-default">';
                     html += '    <div class="panel-heading">';
                     html += 'ID: ' + user.userID;
-                    html += '        <a href="#" onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-remove" ></a>';
-                    html += '        <a href="#" onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</a>';
+                    html += '        <button onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-trash" ></button>';
+                    html += '        <button onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</button>';
                     html += '    </div>';
                     html += '    <div class="panel-body">';
                     html += '<p> Nome: ' + user.nome + '</p>';
@@ -380,7 +380,7 @@
             case "registerUser":
                 if ($("#blackList").prop("checked")) { //User BlackList
                     var cod = {
-                        userID: receivedAPI.userId,
+                        userID: 200,//receivedAPI.userId,
                         level: level,
                         cod: "registerUserBL",
                         nome: $('#name').val(),          
@@ -390,7 +390,7 @@
                     var crypPassword = CryptoJS.SHA1($('#password').val());
                     crypPassword = crypPassword.toString(CryptoJS.enc.Base64);
                     var cod = {
-                        userID: receivedAPI.userId,
+                        userID: 300,//receivedAPI.userId,
                         level: level,
                         registerLevel: $('#registerLevel').val(),
                         cod: cod,
@@ -456,7 +456,7 @@
                 var cod = {
                     userID: userID,
                     level: level,
-                    registerLevel: registerLevel = $('#userRegisterLevel').val() != undefined ? $('#userRegisterLevel').val() : -1,
+                    registerLevel: registerLevel = $('#userRegisterLevel').val() != undefined ? $('#userRegisterLevel').val() : 0,
                     cod: cod,
                     nome: nome = $('#userNome').val() != undefined ? $('#userNome').val() : "0",
                     tel: tel = $('#userTel').val() != undefined ? $('#userTel').val() : "0",
@@ -476,9 +476,9 @@
     /***************************************************************
      *                     CANVAS FACE RECTANGLE                   *  
      ***************************************************************/
-    document.getElementById("rect").checked = true;
-    $('#rect').click(function () {
-        if ($('#rect').is(':checked')) {
+    
+    $('.rect').click(function () {
+        if ($('.rect').is(':checked')) {
             sendCodAPI("rect", '0', true);
             $('#myCanvas').show();
         } else {

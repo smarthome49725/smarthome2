@@ -128,12 +128,12 @@
     border-radius: 5px;
 }
 
-#btSaveConnectAPI_RS {
+#btSaveConnectAPI_RS, #btSaveAlertEmail {
     margin-top: 5px;
     width: 100%;
 }
 
-#divConfigIP, #divForm, #step2 {
+#divConfigIP, #divRegister, #divConfigEmails, #step2 {
     background: #337ab7;
     border-radius: 5px;
     font-weight: bold;
@@ -160,8 +160,7 @@ float: right;*/
     margin-right: 20px;
 }
 
-a.btnExcluir:hover, a.btnExcluir:active, 
-a.btnExcluir:link, a.btnExcluir:visited{
+.btnExcluir{
     float: right;
     position: relative;
     color: red;

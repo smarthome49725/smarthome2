@@ -1,4 +1,4 @@
-$(function () {
+/*$(function () {
     skinChanger();
     activateNotificationAndTasksScroll();
 
@@ -101,3 +101,4 @@ function loadTracking() {
     ga('send', 'pageview');
 }
 //========================================================================================================
+*/

@@ -7,14 +7,21 @@
     var flag2 = true;
     var flag3 = true;
 
-    $('#divForm').hide();
+    var showRegister = true;
+    $('#divRegister').hide();
+
+    var showConfigIP = true;
     $('#divConfigIP').hide();
+
+    var showConfigEmails = true; 
+    $('#divConfigEmails').hide();
+
     $('#step2').hide();
 
     $('#btMonitoring').click(function () {
         if (flag === true) {
             $('#step2').show();
-            $('#divForm').hide();
+            $('#divRegister').hide();
             $('#divConfigIP').hide();
             flag = false;
             flag2 = true;
@@ -27,14 +34,14 @@
 
     $('#btUsuarios').click(function () {
         if (flag2 === true) {
-            $('#divForm').show();
+            $('#divRegister').show();
             $('#step2').hide();
             $('#divConfigIP').hide();
             flag2 = false;
             flag = true;
             flag3 = true;
         } else {
-            $('#divForm').hide();
+            $('#divRegister').hide();
             flag2 = true;
         }
     });
@@ -43,7 +50,7 @@
         if (flag3 === true) {
             $('#divConfigIP').show();
             $('#step2').hide();
-            $('#divForm').hide();
+            $('#divRegister').hide();
             flag3 = false;
             flag = true;
             flag2 = true;
@@ -76,6 +83,57 @@
             $('#trEmail').show();
             $('#trPassword').show();
             $('#trRegisterLevel').show();
+        }
+    });
+
+
+    $('#linkCadastro').click(function () {
+        $('#divConfigIP').hide();
+        showConfigIP = true;
+
+        $('#divConfigEmails').hide();
+        showConfigEmails = true;
+
+
+        if (showRegister) {
+            $('#divRegister').show();
+            showRegister = false;
+        } else {
+            $('#divRegister').hide();
+            showRegister = true;
+        }
+    });
+    
+
+    $('#linkConfigIP').click(function () {
+        $('#divRegister').hide();
+        showRegister = true;
+ 
+        $('#divConfigEmails').hide();
+        showConfigEmails = true;
+
+        if (showConfigIP) {            
+            $('#divConfigIP').show();
+            showConfigIP = false;
+        } else {
+            $('#divConfigIP').hide();
+            showConfigIP = true;
+        }
+    });
+
+    $('#linkConfigEmails').click(function () {
+        $('#divRegister').hide();
+        showRegister = true;
+
+        $('#divConfigIP').hide();
+        showConfigIP = true;
+
+        if (showConfigEmails) {
+            $('#divConfigEmails').show();
+            showConfigEmails = false;
+        } else {
+            $('#divConfigEmails').hide();
+            showConfigEmails = true;
         }
     });
 

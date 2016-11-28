@@ -10,8 +10,11 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <!--<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">-->
+    <link href="SH2/lib/cyrillic-ext.css" rel="stylesheet" type="text/css">
+
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">-->
+    <link href="SH2/lib/Material+Icons.css" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
     <link href="SH2/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -27,16 +30,16 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="SH2/css/themes/theme-blue.css" rel="stylesheet" />
-    
+
     <script src="style/JS/vendor/jquery.min.js"></script>
 
-    
+
     <!-- Bootstrap Core Js -->
     <script src="SH2/plugins/bootstrap/js/bootstrap.js"></script>
 
     <!-- Waves Effect Plugin Js -->
     <script src="SH2/plugins/node-waves/waves.js"></script>
-    
+
     <!-- Morris Plugin Js -->
     <script src="SH2/plugins/morrisjs/morris.js"></script>
 
@@ -44,37 +47,40 @@
     <script src="SH2/js/admin.js"></script>
     <script src="SH2/js/pages/index.js"></script>
     <!-- JavaScript Includes -->
-    
+
     <script src="style/JS/button.js"></script>
     <script src="style/JS/collapse.js"></script>
-    
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="style/socketio.js"></script>
-    <script src="style/cia.js"></script>
-    
-    
+    <!--<script src="style/cia.js"></script>-->
     <!--<SH2>-->
     <script src="/socket.io/socket.io.js"></script>
     <script src="SH2/lib/crypto-js-3.1.2-aes.js"></script><!--Login-->
     <script src="SH2/session/checksession.js"></script>
+    <script type="text/javascript" src="SH2/style/smarthome2.js"></script>
     <link rel="stylesheet" href="SH2/style/smarthome2.css">
     <script type="text/javascript" src="SH2/style/smarthome2.js"></script>
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
     <link href="style/style.css" rel="stylesheet">
 
+    <!--DATAPIKER-->
+    <link rel="stylesheet" href="SH2/lib/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+    <script src="SH2/lib/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <!--/DATAPIKER-->
     <!--Adicionar a biblioteca cliente PeerJS para sua página web.-->
     <script type="text/javascript" src="SH2/WebRTC/dist/peer.js"></script>
     <script type="text/javascript" src="SH2/WebRTC/js/webrtc.js"></script>
     <script type="text/javascript" src="SH2/websocket/websocket.js"></script>
     <script type="text/javascript" src="SH2/config/config.js"></script>
-    
+
     <!-- Demo Js -->
     <script src="SH2/js/demo.js"></script>
 
 </head>
 
 <body class="theme-blue" ng-controller="SmartController" ng-init="init()">
-    
+
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -108,17 +114,15 @@
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <!-- logout -->
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <i class="material-icons">input</i>
-                        </a>
+                    <li class="dropdown">           
+                        <a href="javascript:void(0);" id="exit"><span class="glyphicon glyphicon-log-out" role="button"></span> Sair</a>             
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container">
-     <div id="modal_luz" class="modal fade" role="dialog">
-         <div class="modal-dialog">
+        <div id="modal_luz" class="modal fade" role="dialog">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -131,10 +135,10 @@
                         <article class="campo_lamp_all">
                             <div class="row">
                                 <div class="pull-right">
-                                <div class="switch panel-switch-btn">
-                                    <label><input type="checkbox" id="cmn-toggle-2" onclick="controlAllLamps(); sendLamp_All();"><span class="lever switch-col-cyan"></span>Todas</label>
+                                    <div class="switch panel-switch-btn">
+                                        <label><input type="checkbox" id="cmn-toggle-2" onclick="controlAllLamps(); sendLamp_All();"><span class="lever switch-col-cyan"></span>Todas</label>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                         </article>
                     </div>
@@ -192,7 +196,7 @@
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
                     <div class="email">john.doe@example.com</div>
-                   
+
                 </div>
             </div>
             <!-- #User Info -->
@@ -213,30 +217,27 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="#">
+                                <a id="linkCadastro">
                                     <span>Cadastro</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <span>Busca</span>
-                                </a>
+  
                         </ul>
                     </li>
-                 <li>
+                    <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">settings</i>
-                            <span>Configuração</span>
+                            <span>Configurações</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="#">
-                                    <span>Configurar IP</span>
+                                <a id="linkConfigIP">
+                                    <span>IP</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <span>Configurar camera</span>
+                                <a id="linkConfigEmails">
+                                    <span>E-mails</span>
                                 </a>
                         </ul>
                     </li>
@@ -300,7 +301,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box bg-orange hover-expand-effect">
                         <div class="icon">
-                            <img src="SH2/css/svg/television-screen.svg"/>
+                            <img src="SH2/css/svg/television-screen.svg" />
                         </div>
                         <div class="content">
                             <div class="text">TELEVISÃO</div>
@@ -318,14 +319,138 @@
                             <h2>MONITORAMENTO</h2>
                             <div class="pull-right">
                                 <div class="switch panel-switch-btn">
-                                    
-                                    <label>OFF<input type="checkbox" id="realtime" checked><span class="lever switch-col-cyan"></span>ON</label>
+                                    <label>OFF<input type="checkbox" id="realtime" class="rect" checked><span class="lever switch-col-cyan"></span>ON</label>                               
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="body">
-                            <div id="real_time_chart" class="dashboard-flot-chart"></div>
+                            <!--<div id="real_time_chart" class="dashboard-flot-chart"></div>-->
+                            <canvas id="myCanvas" align="center"></canvas>
+                            <video id="my-video" align="center"></video>
+                            <video id="remote-video" autoplay align="center"></video>
+
+                            <!--CONFIG RS-->
+                            <br />
+                            <br />
+                            <div id="divConfigIP">
+                                <fieldset>
+                                    <legend>Configurações</legend>
+                                    <table>
+                                        <tr>
+                                            <th>IP-API</th>
+                                            <td>
+                                                <input type="text" placeholder="IP:PORTA" id="ipAPI_RS" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <th>IP-PLACA</th>
+                                            <td><input type="text" placeholder="IP" id="ipPlaca" class="form-control"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>IP-CLIENT_RTC  :</th>
+                                            <td><input type="text" placeholder="IP" id="ipClientRTC" class="form-control"></td>
+                                        </tr>
+                                        <tr>
+                                            <th >IP-SERVE_RTC </th>
+                                            <td><input type="text" placeholder="IP" id="ipServerRTC" class="form-control"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th><button id="btSaveConnectAPI_RS" class="btn btn-success">Salvar</button></th>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                            </div>
+                            <!--/CONFIG RS-->
+                            <!--FORM CADASTRO-->
+                            <div id="divRegister">                                
+                                <form id="form">
+                                    <fieldset>
+                                        <legend>Usuários</legend>
+                                        <table>
+                                            <tr id="trName">
+                                                <th>Nome</th>
+                                                <td><input id="name" type="text" class="form-control"></td>
+                                            </tr>
+                                            <tr id="trTel">
+                                                <th>Tel</th>
+                                                <td><input id="tel" type="text" class="form-control"></td>
+                                            </tr>
+                                            <tr id="trNasc">
+                                                <th>Nascimento</th>
+                                                <td><input id="nasc" type="text" class="form-control"></td>
+                                            </tr>
+                                            <tr id="trEmail">
+                                                <th>E-mail</th>
+                                                <td><input id="email" type="email" class="form-control"></td>
+                                            </tr>
+                                            <tr id="trPassword">
+                                                <th>Senha</th>
+                                                <td><input id="password" type="password" class="form-control"></td>
+                                            </tr>
+                                            <tr id="trRegisterLevel">
+                                                <th>Nível de acesso</th>
+                                                <td>
+                                                    <select id="registerLevel" class="form-control">
+                                                        <option value="1">Proprietário</option>
+                                                        <option value="2">representante </option>
+                                                        <option value="3">residentes</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Lista Negra</th>
+                                                <td><input id="blackList" type="checkbox" class="form-control">
+                                                    <label for="blackList"></label>     
+                                                </td>                                                
+                                            </tr>
+                                        </table>
+                                    </fieldset>
+                                </form>
+                                <br />
+                                <button class="btn btn-success" id="btCadastro">Cadastrar</button>
+                                <button class="btn btn-success" id="btConsultar">Consultar</button>
+                                <div id="tableUser"></div>
+                            </div>
+                            <!--/FORM CADASTRO-->
+
+                            <!--CONFIG Emails-->                            
+                            <div id="divConfigEmails">
+                                <fieldset>
+                                    <legend>Configurações de E-mail</legend>
+                                    <table>
+                                        <tr>
+                                            <th>Email 1 para alertas</th>
+                                            <td>
+                                                <input type="text" placeholder="Email de alerta" id="alertEmail1" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <th>Email 2 para alertas</th>
+                                            <td>
+                                                <input type="text" placeholder="Email de alerta" id="alertEmail2" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email 3 para alertas</th>
+                                            <td>
+                                                <input type="text" placeholder="Email de alerta" id="alertEmail3" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <th><button id="btSaveAlertEmail" class="btn btn-success">Salvar</button></th>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                            </div>
+                            <!--/Config Emails -->
+
+
                         </div>
                     </div>
                 </div>
@@ -342,27 +467,27 @@
                                     Sala Principal
                                     <span class="pull-right"><b>Ligada</b> <small>Desligada</small></span>
                                 </li>
-                                
+
                                 <li>
                                     Sala de Jantar
                                     <span class="pull-right"><b>Ligada</b> <small>Desligada</small></span>
                                 </li>
-                                
+
                                 <li>
                                     Quarto
                                     <span class="pull-right"><b>Desligada</b> <small>Ligada</small></span>
                                 </li>
-                                
+
                                 <li>
                                     Banheiro
                                     <span class="pull-right"><b>Ligada</b> <small>Desligada</small></span>
                                 </li>
-                                
+
                                 <li>
                                     Cozinha
                                     <span class="pull-right"><b>Desligada</b> <small>Ligada</small></span>
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -410,7 +535,7 @@
                 </div>
                 <!-- #END# Latest Social Trends -->
                 <!-- Answered Tickets -->
-                
+
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="card">
                         <div class="body bg-teal bg-light-green">
@@ -419,7 +544,7 @@
                                 <!-- AQUI AQUELE GIF DA CORTINA ABRINDO -->
                             </ul>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -431,12 +556,12 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
     </section>
-    
+
 </body>
 
 </html>
