@@ -3,6 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
+    <script src="style/JS/vendor/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="SH2/session/checksession.js"></script>
+
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>SMART HOME II</title>
@@ -31,8 +35,6 @@
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="SH2/css/themes/theme-blue.css" rel="stylesheet" />
 
-    <script src="style/JS/vendor/jquery.min.js"></script>
-
 
     <!-- Bootstrap Core Js -->
     <script src="SH2/plugins/bootstrap/js/bootstrap.js"></script>
@@ -51,13 +53,11 @@
     <script src="style/JS/button.js"></script>
     <script src="style/JS/collapse.js"></script>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="style/socketio.js"></script>
     <!--<script src="style/cia.js"></script>-->
     <!--<SH2>-->
-    <script src="/socket.io/socket.io.js"></script>
+
     <script src="SH2/lib/crypto-js-3.1.2-aes.js"></script><!--Login-->
-    <script src="SH2/session/checksession.js"></script>
+
     <script type="text/javascript" src="SH2/style/smarthome2.js"></script>
     <link rel="stylesheet" href="SH2/style/smarthome2.css">
     <script type="text/javascript" src="SH2/style/smarthome2.js"></script>
@@ -190,12 +190,13 @@
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
             <div class="user-info">
-                <div class="image">
-                    <img src="SH2/images/user.png" width="48" height="48" alt="User" />
+                <div class="image">                    
+                    <img id="imgLogin" src="SH2/images/user0.png" width="48" height="48" alt="User" />
+
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                    <div class="email">john.doe@example.com</div>
+                    <div id="infoName" class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
+                    <div id="infoEmail" class="email"></div>
 
                 </div>
             </div>

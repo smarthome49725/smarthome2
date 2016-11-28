@@ -14,9 +14,17 @@
             console.log('CONNECTION ESTABLISHED!');
             $('#StatusConnection').css("background", "green");
             $('#lbStatus').text("CONNECTED");
+                        
+            //Get Imagem login and Set In view
+            getImgLogin();
 
             //Get Alert emails and Set In view
-            getAlertEmails()
+            setTimeout(function () {
+                getAlertEmails();
+            }, 4000);
+            
+           
+
         };//Socket onopen
 
         socket.onclose = function () {
@@ -31,23 +39,37 @@
             $('#lbStatus').text("NOT CONNECTED");
         };
 
-        socket.onmessage = function (messageEvent) {
+        socket.onmessage = function (messageEvent) {            
             //console.log(messageEvent.data);
-            receivedAPI = JSON.parse(messageEvent.data);
-            //console.log(receivedAPI);
+            if (typeof messageEvent.data == 'string') {
 
-            switch (receivedAPI.code) {
-                case "rect":
-                    faceRectangle(receivedAPI.msg, receivedAPI.userId);
-                    console.log(receivedAPI.userId);
-                    break;
-                case "userData":
-                    userData = JSON.parse(receivedAPI.msg);
-                    setUserView(userData);
-                    break;
-                case "getalertemail":
-                    setEmailInView(receivedAPI.msg);
-                    break;
+                receivedAPI = JSON.parse(messageEvent.data);
+                //console.log(receivedAPI);
+                document.img = receivedAPI;
+
+                switch (receivedAPI.code) {
+                    case "rect":
+                        faceRectangle(receivedAPI.msg, receivedAPI.userId);
+                        console.log(receivedAPI.userId);
+                        break;
+                    case "userData":
+                        userData = JSON.parse(receivedAPI.msg);
+                        setUserView(userData);
+                        break;
+                    case "getalertemail":
+                        setEmailInView(receivedAPI.msg);
+                        break;
+                    case "img":
+                        document.img64 = 'data:image/png;base64,' + receivedAPI.msg;
+
+                        $('#imgLogin').attr('src', document.img64);
+
+                        break;
+                }
+
+            } else {                
+                document.img = messageEvent.data;
+                document.getElementById("imgLogin").src = URL.createObjectURL(document.img);
             }
 
             /*if (messageEvent.data === 'detected') {
@@ -144,6 +166,14 @@
     function getAlertEmails() {
         sendCodAPI('getalertemail', '0', false);
     }
+
+    /***************************************************************
+     *                       GET IMG LOGIN                         *  
+     ***************************************************************/
+    function getImgLogin() {
+        sendCodAPI('getimglogin', '0', false);
+    }
+
 
     /***************************************************************
      *                      SET ALERT EMAILS IN VIEW               *  
@@ -332,18 +362,23 @@
     }
 
     /***************************************************************
-     *                       GET USERLOGIN                         *  
+     *                       SET INFO USER LOGGED                  *  
      ***************************************************************/
-    window.getLogin = function (login, password) {
-        var cod = {
-            cod: getlogin,
-            login: login,
-            password: password
-        };
-        cod = JSON.stringify(cod);
-        console.log(JSON.parse(cod));
-    }
+    $('#infoName').html(getCookie('nome'));
+    $('#infoEmail').html(getCookie('email'));
 
+
+
+
+    /***************************************************************
+     *                       GET Cookie                            *  
+     ***************************************************************/
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=http://localhost:49725/home.html";
+    }
 
     /***************************************************************
      *                       GET Cookie                            *  
@@ -367,7 +402,8 @@
      *                      SEND MSG APIREALSNSE                   *  
      ***************************************************************/
     function sendCodAPI(cod, userID, rect) {
-        var level = getCookie("level");
+        var level = getCookie("level");       
+
         switch (cod) {
             case "rect":
                 var cod = {
@@ -383,7 +419,7 @@
                         userID: 200,//receivedAPI.userId,
                         level: level,
                         cod: "registerUserBL",
-                        nome: $('#name').val(),          
+                        nome: $('#name').val(),
                         blacklist: $("#blackList").prop("checked")
                     };
                 } else {
@@ -416,8 +452,7 @@
                 };
                 break;
             case "geniduser":
-                var cod = {
-                    userID: 0,
+                var cod = {                    
                     level: level,
                     cod: cod,
                     rect: rect
@@ -449,6 +484,13 @@
                     cod: cod
                 };
                 break;
+            case "getimglogin":
+                var cod = {
+                    userID: getCookie("userID"),
+                    level: level,
+                    cod: cod
+                };
+                break;
 
             case "updateuser":
                 var crypUserPassword = CryptoJS.SHA1($('#userPassword').val());
@@ -466,6 +508,7 @@
                     blacklist: $("#userBlackList").prop("checked")
                 };
                 break;
+                
         }
         cod = JSON.stringify(cod);
         socket.send(cod);
@@ -476,7 +519,7 @@
     /***************************************************************
      *                     CANVAS FACE RECTANGLE                   *  
      ***************************************************************/
-    
+
     $('.rect').click(function () {
         if ($('.rect').is(':checked')) {
             sendCodAPI("rect", '0', true);

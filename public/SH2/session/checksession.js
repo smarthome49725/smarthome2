@@ -4,13 +4,19 @@ socketIO.emit('getToken', window.level);
 
 socketIO.on('session', function (token) {
     if (token != getCookie("token")) {
-        //location.href = "http://localhost:49725/";
+        location.href = "http://localhost:49725/";
     }
 });
 
 $('document').ready(function () {
     $('#exit').click(function () {
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        document.cookie = "level=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        document.cookie = "nasc=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        document.cookie = "nome=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        document.cookie = "tel=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+        document.cookie = "userID=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
         location.href = "http://localhost:49725/";
     });
 });
