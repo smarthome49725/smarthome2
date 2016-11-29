@@ -8101,3 +8101,8 @@ html.ie11 .bs-searchbox .form-control {
 #form-cadastro{
     margin: 2.2em !important;
 }
+
+
+#form-ip label{
+    margin-left: 2px;
+}

@@ -124,14 +124,7 @@
 }
 
 #btSaveConnectAPI_RS, #btSaveAlertEmail {
-    margin-top: 5px;
-    width: 100%;
-}
-
-#divConfigIP, #divRegister, #divConfigEmails, #step2 {
-    border-radius: 5px;
-    font-weight: bold;
-    padding: 10px;
+    left: 40%;
 }
 
 .toggleRect {

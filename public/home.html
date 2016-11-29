@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js" ng-app="appSmart">
 
 <head>
@@ -223,7 +223,7 @@
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <th><button id="btSaveAlertEmail" class="btn btn-success">Salvar</button></th>
+                                        <th><button id="btSaveAlertEmail" class="btn btn-primary btn-lg m-l-15 waves-effect">Salvar</button></th>
                                     </tr>
                                 </table>
                             </fieldset>
@@ -246,75 +246,79 @@
                         </h4>
                     </div>
                     <div id="divConfigIP" class="modal-body">
-                         <form id="form-cadastro" class="form-horizontal">
-                            <div class="row clearfix">
-                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                    <label for="ipAPI_RS">API</label>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" placeholder="0.0.0.0.0:0000" id="ipAPI_RS" class="form-control">
+                        <div class="row clearfix">
+                             <form id="form-ip" class="form-horizontal">
+                                <div class="row clearfix">
+                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <label for="ipAPI_RS">API</label>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" placeholder="0.0.0.0.0:0000" id="ipAPI_RS" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row clearfix">
-                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                    <label for="ipPlaca">PLACA</label>
-                                </div>
-                                
-                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" placeholder="0.0.0.0.0" id="ipPlaca" class="form-control">
+                                <div class="row clearfix">
+                                 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <label for="ipPlaca">PLACA</label>
+                                    </div>
+
+                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" placeholder="0.0.0.0.0" id="ipPlaca" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                             
-                             <div class="row clearfix">
-                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                    <label for="ipClientRTC">RTC(client)</label>
-                                </div>
-                                
-                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" placeholder="0.0.0.0.0" id="ipClientRTC" class="form-control">
+
+                                <!-- <div class="row clearfix">
+                                 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <label for="ipClientRTC">RTC(client)</label>
+                                    </div>
+
+                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" placeholder="0.0.0.0.0" id="ipClientRTC" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                 <div class="row clearfix">
+                                 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <label for="ipClientRTC">RTC(client)</label>
+                                    </div>
+
+                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" placeholder="0.0.0.0.0" id="ipClientRTC" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        
-                             <div class="row clearfix">
-                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                    <label for="ipClientRTC">RTC(client)</label>
-                                </div>
-                                
-                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" placeholder="0.0.0.0.0" id="ipClientRTC" class="form-control">
+                                  <div class="row clearfix">
+                                 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <label for="ipServerRTC">RTC(server)</label>
+                                    </div>
+
+                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" placeholder="IP" id="ipServerRTC" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
-                            </div>
-                              <div class="row clearfix">
-                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                    <label for="ipServerRTC">RTC(server)</label>
-                                </div>
-                                
-                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" placeholder="IP" id="ipServerRTC" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                <button id="btSaveConnectAPI_RS" class="btn btn-success">Salvar</button>
-                        </form>
+                                 <br>
+                                    <button id="btSaveConnectAPI_RS" class="btn btn-primary btn-lg m-l-15 waves-effect">Salvar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -682,8 +686,10 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
 </body>
 
 </html>
+   
