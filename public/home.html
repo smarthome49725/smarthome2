@@ -684,7 +684,7 @@
                         <div class="body bg-teal bg-light-green">
                             <div class="font-bold m-b--35">Cortina</div>
                             <ul class="dashboard-stat-list">
-                                <!-- AQUI AQUELE GIF DA CORTINA ABRINDO -->
+                                 <img id="curtain_img" class="cursor" src="img/cortina-fechada.png" onclick="activeCurtain(); sendCurtain();">
                             </ul>
                         </div>
 
@@ -695,7 +695,24 @@
                         <div class="body bg-orange">
                             <div class="font-bold m-b--35">Televisão</div>
                             <ul class="dashboard-stat-list">
-                                <!-- AQUI AQUELE GIF DA tv ligada -->
+                                <li>
+                                    <img id="tv_img" src="img/tvciaOff.png" onclick="activeTvCia(); sendTvHome();" title="Televisor">
+                                </li>
+                            <div class="collapse" id="collapse_tv">
+                        <div class="well">
+                            <button class="btn_-" onclick="decrease(); sendVolume_Decrease();">
+                                <i class="glyphicon glyphicon-chevron-down"
+                                   data-position="icon only"></i>
+                            </button>
+                            <div class="volume">
+                                <span id="volume_tv">0</span> <span class="volume_out">Volume</span>
+                            </div>
+                            <button class="btn_" onclick="Increase(); sendVolume_Increase();">
+                                <i class="glyphicon glyphicon-chevron-up"
+                                   data-position="icon only"></i>
+                            </button>
+                        </div>
+                    </div>
                             </ul>
                         </div>
                     </div>
@@ -709,4 +726,3 @@
 </body>
 
 </html>
-   
