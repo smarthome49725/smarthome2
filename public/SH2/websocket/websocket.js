@@ -102,13 +102,13 @@
     //userData[0] == undefined => No registered user
     //!isNaN(receivedAPI.userId) => IS number
     $('#btCadastro').click(function () {
-        sendCodAPI('registerUser', '0', false);
+        document.sendCodAPI('registerUser', '0', false);
         alert("Ulitize o seu email para fazer login: " + $('#email').val());
 
         /*if (!isNaN(receivedAPI.userId)) {
             if (userData[0] == undefined) {
                 console.log(receivedAPI.userId);
-                sendCodAPI('registerUser', '0', false);
+                document.sendCodAPI('registerUser', '0', false);
             } else {
                 var user = JSON.parse(userData[0]);
                 alert("É necessário gerar o ID do usuário para realizar o cadastro");
@@ -124,14 +124,14 @@
 
     $('#btUnregiste').click(function () {
         alert(userID);
-        sendCodAPI('unregisterUser', '0', false);
+        document.sendCodAPI('unregisterUser', '0', false);
     });
 
     /***************************************************************
      *                       GENERATE ID USER                      *  
      ***************************************************************/
     $('#btGenIdUser').click(function () {
-        sendCodAPI('geniduser', '0', false);
+        document.sendCodAPI('geniduser', '0', false);
     });
 
     /***************************************************************
@@ -157,21 +157,21 @@
      *                       SAVE ALERT EMAIL                      *  
      ***************************************************************/
     $('#btSaveAlertEmail').click(function () {
-        sendCodAPI('updatealertemail', '0', false);
+        document.sendCodAPI('updatealertemail', '0', false);
     });
 
     /***************************************************************
      *                       GET ALERT EMAILS                      *  
      ***************************************************************/
     function getAlertEmails() {
-        sendCodAPI('getalertemail', '0', false);
+        document.sendCodAPI('getalertemail', '0', false);
     }
 
     /***************************************************************
      *                       GET IMG LOGIN                         *  
      ***************************************************************/
     function getImgLogin() {
-        sendCodAPI('getimglogin', '0', false);
+        document.sendCodAPI('getimglogin', '0', false);
     }
 
 
@@ -274,11 +274,11 @@
     window.alterUser = function (cod, userID, userName) {
         if (cod == 'updateuser') {
             if (window.confirm("Tem certeza que deseja atualizar os dados do usuário " + userName + "?")) {
-                sendCodAPI(cod, userID, false);
+                document.sendCodAPI(cod, userID, false);
             }
         } else {
             if (window.confirm("Tem certeza que deseja excluir o usuário " + userName + "?")) {
-                sendCodAPI(cod, userID, false);
+                document.sendCodAPI(cod, userID, false);
             }
 
         }
@@ -289,7 +289,7 @@
      *                       GET USER                              *  
      ***************************************************************/
     $('#btConsultar').click(function () {
-        sendCodAPI('getuser', '0', false);
+        document.sendCodAPI('getuser', '0', false);
     });
 
     function setUserView(userData) {
@@ -401,7 +401,7 @@
     /***************************************************************
      *                      SEND MSG APIREALSNSE                   *  
      ***************************************************************/
-    function sendCodAPI(cod, userID, rect) {
+    document.sendCodAPI = function (cod, userID, rect) {
         var level = getCookie("level");       
 
         switch (cod) {
@@ -522,11 +522,13 @@
 
     $('.rect').click(function () {
         if ($('.rect').is(':checked')) {
-            sendCodAPI("rect", '0', true);
+            document.sendCodAPI ("rect", '0', true);
             $('#myCanvas').show();
+            $('#my-video').show();
         } else {
-            sendCodAPI("rect", '0', false);
+            document.sendCodAPI("rect", '0', false);
             $('#myCanvas').hide();
+            $('#my-video').hide();
         }
 
     });

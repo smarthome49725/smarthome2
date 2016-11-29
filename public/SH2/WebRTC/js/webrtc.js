@@ -50,10 +50,17 @@ window.connectWRTC = function () {
     });
 
 
-    $('#startStream').click(function () {
+    /*$('.rect').click(function () {
         // Get things started 
         // inicia stream de video e audio     
         step1();
+    });*/
+
+
+    $(".rect").change(function () {
+        if (this.checked) {
+            step1();
+        } 
     });
 
     // Click handlers setup
@@ -96,6 +103,7 @@ window.connectWRTC = function () {
             $('#my-video').prop('src', URL.createObjectURL(stream));
 
             window.localStream = stream;
+            document.sendCodAPI("rect", '0', true);
         }, function () {
             alert('ERRO STEP 1');
         });

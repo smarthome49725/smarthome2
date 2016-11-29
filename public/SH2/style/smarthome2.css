@@ -1,26 +1,21 @@
 #my-video {
     position: absolute;
-    /*width: 568px;
-    height: 428px;*/
-    /*width: 640px;
-    height: 480px;*/
-    width: 738px;
-    height: 425px;
+    width: 640px;
+    height: 480px;
 }
 
-#remote-video {
-    /*width: 568px;
-    height: 428px;*/
-    width: 738px;
-    height: 425px;
+
+#remote-video{
+    width: 640px;
+    height: 480px;
 }
 
 #myCanvas {
     position: absolute;
     border: 2px solid yellow;
     z-index: 10;
-    width: 738px;
-    height: 425px;
+    width: 640px;
+    height: 480px;
 }
 
 #lblMonito {
