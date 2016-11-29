@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="no-js" ng-app="appSmart">
 
 <head>
@@ -476,7 +476,7 @@
                                         <h2>CADASTRO</h2>
                                 </div>
                                     <form id="form-cadastro" class="form-horizontal">
-                                            <div class="row clearfix">
+                                            <div class="row clearfix" id="formName">
                                                 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                                     <label for="name">Nome</label>
                                                 </div>
@@ -489,7 +489,7 @@
                                                 </div>
                                             </div>
                                         
-                                         <div class="row clearfix">
+                                         <div class="row clearfix" id="formEmail">
                                                 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                                     <label id="labelEmail" for="email">E-mail</label>
                                                 </div>
@@ -502,7 +502,7 @@
                                                 </div>
                                             </div>
                                         
-                                            <div class="row clearfix">
+                                            <div class="row clearfix" id="formTel">
                                                 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                                     <label for="tel">Telefone</label>
                                                 </div>
@@ -515,7 +515,7 @@
                                                 </div>
                                             </div>
                                         
-                                        <div class="row clearfix">
+                                        <div class="row clearfix" id="formNasc">
                                                 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                                     <label for="nasc">Nascimento</label>
                                                 </div>
@@ -528,7 +528,7 @@
                                                 </div>
                                             </div>
                                         
-                                        <div class="row clearfix">
+                                        <div class="row clearfix" id="formPassword">
                                                 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                                     <label for="password">Senha</label>
                                                 </div>
@@ -541,7 +541,7 @@
                                                 </div>
                                             </div>
                                         
-                                         <div class="row clearfix">
+                                         <div class="row clearfix" id="formRegisterLevel">
                                                 <div class="col-lg-2 col-md-2 col-sm-6 col-xs-5 form-control-label">
                                                 <label for="registerlevel">Nível de acesso</label>
                                                 </div>
@@ -549,7 +549,7 @@
                                                     <div class="form-group">
                                                         <div class="form-line">
                                                             <select id="registerLevel" class="form-control">
-                                                                <option selected="selected">Selecione</option>
+                                                                <option value="selecion" selected="selected">Selecione</option>
                                                                 <option value="1">Proprietário</option>
                                                                 <option value="2">representante </option>
                                                                 <option value="3">residentes</option>
@@ -561,7 +561,7 @@
                                             
                                         <div class="row clearfix">
                                             <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                                 <input id="blackList" type="checkbox" checked="checked" class="filled-in">
+                                                 <input id="blackList" type="checkbox" class="filled-in">
                                                 <label for="blackList">Lista Negra</label>
                                             </div>
                                         </div>
