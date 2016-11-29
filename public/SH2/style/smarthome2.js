@@ -60,10 +60,6 @@ $('document').ready(function () {
         }
     });
 
-    $(function () {
-        $("#nasc").datepicker();
-    });
-
     $("#blackList").change(function () {
         if (this.checked) {
             $('#name').attr('placeholder', 'Digite o nome do suspeito');
