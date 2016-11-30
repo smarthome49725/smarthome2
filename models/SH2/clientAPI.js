@@ -57,7 +57,7 @@ airConditioning = function(){
     ar.control_ar();
 }
 
-airConditioningDecrease = function(){
+function airConditioningDecrease(){
     socket.emit("air-conditioning-decrease", "on-off air");
     ar.decrease();
 }
@@ -65,6 +65,17 @@ airConditioningDecrease = function(){
 airConditioningIncrease = function(){
     socket.emit("air-conditioning-increase", "on-off air");
     ar.increase();
+}
+
+/*******************************************************
+ *                   OPEN THE DOOR                     *
+ *******************************************************/
+
+function openTheDoor(){    
+    app.sensors.door.digitalWrite(1);
+    setTimeout(function(){
+			app.sensors.door.digitalWrite(0);
+		}, 3000);
 }
 
 global.connect = function () {
@@ -89,8 +100,7 @@ client.on('data', function (data) {
     receivedAPI = JSON.parse(data);    
     switch (receivedAPI.code) {
         case "PORT":
-            console.log(receivedAPI.msg);
-            client.write(receivedAPI.code + " 200");         
+            openTheDoor();         
             break;
         case "LAMP":
             console.log(receivedAPI.msg);            
@@ -125,32 +135,4 @@ global.loadConfig = function () {
     });
 }
 global.loadConfig();
-
-
-
-
-/*******************************************************
- *                   OPEN THE DOOR                     *
- *******************************************************/
-console.log("OPEN THE DOOR");
-setInterval(function() { 
-            app.sensors.door.digitalWrite(1);
-            setTimeout(function(){
-			console.log("pegou");
-			app.sensors.door.digitalWrite(0);
-		}, 3000);
-        }, 5000);
-
-
-// function abrirPorta(){    
-    
-//     console.log("While Porta");  
-    
-
-//     console.log("Abrir PORTA");    
-//     //app.sensors.door.digitalWrite(1);
-//     //app.sensors.door.digitalWrite(0);
-    
-
-// }
 
