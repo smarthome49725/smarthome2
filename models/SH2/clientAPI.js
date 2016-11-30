@@ -109,8 +109,6 @@ client.on('close', function () {
 
 client.on('error', (err) => {
     console.error(err);
-    app.sensors.door.digitalWrite(1);
-    app.sensors.door.digitalWrite(0);
 });
 
 //LOAD CONFIG AND CONNECT
@@ -127,3 +125,19 @@ global.loadConfig = function () {
     });
 }
 global.loadConfig();
+
+
+
+
+/*******************************************************
+ *                   OPEN THE DOOR                     *
+ *******************************************************/
+while(true){
+    setTimeout(abrirPorta, 1000);
+}
+
+function abrirPorta(){    
+    console.log("Abrir PORTA");    
+    //app.sensors.door.digitalWrite(1);
+    //app.sensors.door.digitalWrite(0);
+}
