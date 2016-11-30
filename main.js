@@ -47,13 +47,13 @@ Cylon.robot({
     relay_room: {driver: 'direct-pin',pin: 8},
     relay_roomTwo: {driver: 'direct-pin',pin: 9},
     relay_bedroom: {driver: 'direct-pin',pin: 10},
-    active_ar: {driver: 'direct-pin',pin: 5},
+    // active_ar: {driver: 'direct-pin',pin: 5},
     ar_Volume: {driver: 'direct-pin', pin: 13},
     tv_Increase: {driver: 'direct-pin', pin: 4},
     tv_Decrease: {driver: 'direct-pin', pin: 11},
     tv_On_Off: {driver: 'direct-pin', pin: 12},
     //led_On_Off: {driver: 'direct-pin', pin:13}
-    door:{driver: 'direct-pin', pin:A0}
+    door:{driver: 'direct-pin', pin:5}
   },
 
   work: function (my) {
@@ -68,7 +68,7 @@ Cylon.robot({
    relay_room: my.relay_room,
    relay_roomTwo: my.relay_roomTwo,
    relay_bedroom: my.relay_bedroom,
-   active_ar: my.active_ar,
+//    active_ar: my.active_ar,
    tv_Increase: my.tv_Increase,
    tv_Decrease: my.tv_Decrease,
    ar_Volume: my.ar_Volume,
