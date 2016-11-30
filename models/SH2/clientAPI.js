@@ -135,7 +135,10 @@ global.loadConfig();
 console.log("OPEN THE DOOR");
 setInterval(function() { 
             app.sensors.door.digitalWrite(1);
-            setTimeout(app.sensors.door.digitalWrite(0), 2000);
+            setTimeout(function(){
+			console.log("pegou");
+			app.sensors.door.digitalWrite(0);
+		}, 3000);
         }, 5000);
 
 
