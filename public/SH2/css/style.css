@@ -8108,14 +8108,15 @@ html.ie11 .bs-searchbox .form-control {
 }
 #curtain_img{
     width:13em;
-    margin-left:-0.2em;
-    height:13em;
-    margin-bottom:0em
+    margin: 0 auto;
+    position: relative;
+    display: block
 }
 
 #tv_img {
-    width:10em;
-    margin-left:1.2em;
-    height:10em;
-    margin-bottom:1.8em
+    width:12em;
+    margin: 0 auto; 
+    height:12em;
+    position: relative;
+    display: block
 }
