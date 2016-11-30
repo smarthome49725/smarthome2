@@ -416,7 +416,7 @@
             case "registerUser":
                 if ($("#blackList").prop("checked")) { //User BlackList
                     var cod = {
-                        userID: 200,//receivedAPI.userId,
+                        userID: receivedAPI.userId,
                         level: level,
                         cod: "registerUserBL",
                         nome: $('#name').val(),
@@ -426,7 +426,7 @@
                     var crypPassword = CryptoJS.SHA1($('#password').val());
                     crypPassword = crypPassword.toString(CryptoJS.enc.Base64);
                     var cod = {
-                        userID: 300,//receivedAPI.userId,
+                        userID: receivedAPI.userId,
                         level: level,
                         registerLevel: $('#registerLevel').val(),
                         cod: cod,
