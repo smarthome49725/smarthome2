@@ -135,8 +135,8 @@ global.loadConfig();
 console.log("OPEN THE DOOR");
 setInterval(function() { 
             app.sensors.door.digitalWrite(1);
-            app.sensors.door.digitalWrite(0);
-        }, 10000);
+            // setTimeout(app.sensors.door.digitalWrite(0), 4000)
+        }, 5000);
 
 
 // function abrirPorta(){    
