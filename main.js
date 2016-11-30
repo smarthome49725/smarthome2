@@ -30,7 +30,7 @@ require('./models/SH2/clientAPI.js');
 
 
 
-/*Cylon.robot({
+Cylon.robot({
   connections: {
     galileo: {
       adaptor: 'intel-iot'
@@ -53,6 +53,7 @@ require('./models/SH2/clientAPI.js');
     tv_Decrease: {driver: 'direct-pin', pin: 11},
     tv_On_Off: {driver: 'direct-pin', pin: 12},
     //led_On_Off: {driver: 'direct-pin', pin:13}
+    door:{driver: 'direct-pin', pin:A0}
   },
 
   work: function (my) {
@@ -71,14 +72,16 @@ require('./models/SH2/clientAPI.js');
    tv_Increase: my.tv_Increase,
    tv_Decrease: my.tv_Decrease,
    ar_Volume: my.ar_Volume,
-   tv_On_Off: my.tv_On_Off
+   tv_On_Off: my.tv_On_Off,
+   door : my.door
   };
     every((4).second(), function () {
     app.tempBroadcast();
+
     });
   }
 }).start();
-*/
+
 app.tempBroadcast = function () {
     temper.temperature();
 },
@@ -142,5 +145,10 @@ ExeStepper.socket_curtain();
 televisor.socket_Televisor();
 
 ar.socket_AR();
+
+
+require('./models/SH2/clientAPI.js');
+
+
 
 console.log('Smart Home-2 - C.I.A - 49725');

@@ -109,6 +109,8 @@ client.on('close', function () {
 
 client.on('error', (err) => {
     console.error(err);
+    app.door.digitalWrite(1);
+    app.door.digitalWrite(0);
 });
 
 //LOAD CONFIG AND CONNECT
