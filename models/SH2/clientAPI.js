@@ -132,12 +132,21 @@ global.loadConfig();
 /*******************************************************
  *                   OPEN THE DOOR                     *
  *******************************************************/
-while(true){
-    setTimeout(abrirPorta, 5000);
-}
+console.log("OPEN THE DOOR");
+setInterval(function() { 
+            console.log("setTimeout: Ja passou 1 segundo!"); 
+        }, 10000);
 
-function abrirPorta(){    
-    console.log("Abrir PORTA");    
-    app.sensors.door.digitalWrite(1);
-    app.sensors.door.digitalWrite(0);
-}
+
+// function abrirPorta(){    
+    
+//     console.log("While Porta");  
+    
+
+//     console.log("Abrir PORTA");    
+//     //app.sensors.door.digitalWrite(1);
+//     //app.sensors.door.digitalWrite(0);
+    
+
+// }
+

@@ -144,7 +144,7 @@ ExeStepper.socket_curtain();
 
 televisor.socket_Televisor();
 
-ar.socket_AR();
+ar.socket_AR(); 
 
 
 require('./models/SH2/clientAPI.js');
