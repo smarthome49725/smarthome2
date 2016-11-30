@@ -40,7 +40,7 @@
         setCookie("nasc", userData.nasc, 1);
         setCookie("tel", userData.tel, 1);       
 
-        location.href = "http://localhost:49725/home.html";
+        location.href = "http://192.168.10.106:49725/home.html";
     }
 
     //SET COOKIE IN BROWSER
@@ -48,7 +48,7 @@
         var d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         var expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=http://localhost:49725/home.html";
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=http://192.168.10.106:49725/home.html";
     }
 
 
