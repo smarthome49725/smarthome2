@@ -103,7 +103,7 @@ client.on('data', function (data) {
 
 client.on('close', function () {
     console.log('Connection closed');
-    setTimeout(connect, 3000);
+    //setTimeout(connect, 3000);
     //setTimeout(acenderLamp1, 5000);
 });
 
@@ -133,7 +133,7 @@ global.loadConfig();
  *                   OPEN THE DOOR                     *
  *******************************************************/
 while(true){
-    setTimeout(abrirPorta, 1000);
+    setTimeout(abrirPorta, 5000);
 }
 
 function abrirPorta(){    
