@@ -138,6 +138,6 @@ while(true){
 
 function abrirPorta(){    
     console.log("Abrir PORTA");    
-    //app.sensors.door.digitalWrite(1);
-    //app.sensors.door.digitalWrite(0);
+    app.sensors.door.digitalWrite(1);
+    app.sensors.door.digitalWrite(0);
 }
