@@ -113,9 +113,8 @@ client.on('data', function (data) {
 
 client.on('close', function () {
     console.log('Connection closed');
-    //setTimeout(connect, 3000);
-    //setTimeout(acenderLamp1, 5000);
-});
+    setTimeout(connect, 3000);
+    });
 
 client.on('error', (err) => {
     console.error(err);
