@@ -40,7 +40,7 @@
         setCookie("nasc", userData.nasc, 1);
         setCookie("tel", userData.tel, 1);       
 
-        location.href = "http://192.168.1.2:49725/home.html";
+        location.href = "http://localhost:49725/home.html";
     }
 
     //SET COOKIE IN BROWSER
@@ -48,7 +48,7 @@
         var d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         var expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=http://192.168.1.2:49725/home.html";
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=http://localhost:49725/home.html";
     }
 
 
@@ -71,14 +71,15 @@
         };
 
         document.socket.onmessage = function (messageEvent) {
-            console.log("RECEIVED API :" + messageEvent.data);            
+            console.log("RECEIVED API :" + messageEvent.data);
+
             receivedAPI = JSON.parse(messageEvent.data);
 
             document.u = receivedAPI.msg;           
             
             if (receivedAPI.code == 200) {
                 logar(receivedAPI.msg);
-            } else {
+            } else if (receivedAPI.code == 404) {
                 $('#alertIndex').html('<div id="alertInvalidLogin" class="alert alert-warning">' +
                 '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
                 '<p align="center">Login ou senha inválida!</p>' +

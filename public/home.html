@@ -59,7 +59,7 @@
     <!-- Slimscroll Plugin Js -->
     <script src="SH2/js/jquery.slimscroll.js"></script>
 
-    <!--<script src="style/cia.js"></script>-->
+    <script src="style/cia.js"></script>
     <!--<SH2>-->
 
     <script src="SH2/lib/crypto-js-3.1.2-aes.js"></script><!--Login-->
@@ -492,12 +492,12 @@
                             <h2>MONITORAMENTO</h2>
                             <div class="pull-right">
                                 <div class="switch panel-switch-btn">
-                                    <label>OFF<input type="checkbox" id="realtime" class="rect"><span class="lever switch-col-cyan"></span>ON</label>
+                                    <label>OFF<input type="checkbox" checked id="realtime" class="rect"><span class="lever switch-col-cyan"></span>ON</label>
                                 </div>
                             </div>
 
                         </div>
-                        <div class="body">
+                        <div class="body" id="monitoring">
                             <!--<div id="real_time_chart" class="dashboard-flot-chart"></div>-->
                             <canvas id="myCanvas" align="center"></canvas>
                             <video id="my-video" autoplay align="center"></video>
@@ -609,6 +609,7 @@
                             <!--/FORM CADASTRO-->
 
                         </div>
+                        <div id="userInfo"></div>
                     </div>
                 </div>
                 <!-- #END# CPU Usage -->

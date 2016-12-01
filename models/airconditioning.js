@@ -88,4 +88,4 @@ exports.socket_AR = function () {
   });
 };
 
-//cliente.connect('ws://192.168.1.254:81/');
+//cliente.connect('ws://192.168.10.12154:81/');

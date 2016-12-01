@@ -100,7 +100,7 @@ client.on('data', function (data) {
     receivedAPI = JSON.parse(data);    
     switch (receivedAPI.code) {
         case "PORT":
-            openTheDoor();         
+            //openTheDoor();         
             break;
         case "LAMP":
             console.log(receivedAPI.msg);            

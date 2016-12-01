@@ -241,7 +241,7 @@
             html += '</div>';
         }
 
-        $('#tableUser').html(html);
+        $('#userInfo').html(html);
 
         $("#userBlackList").change(function () {
             if (this.checked) {
@@ -365,7 +365,7 @@
             html = '';
         }
 
-        $('#tableUser').html(html);
+        $('#userInfo').html(html);
     }
 
     /***************************************************************
@@ -384,7 +384,7 @@
         var d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         var expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=http://192.168.1.2:49725/home.html";
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=http://localhost:49725/home.html";
     }
 
     /***************************************************************
@@ -527,9 +527,9 @@
      *                     CANVAS FACE RECTANGLE                   *  
      ***************************************************************/
 
-    $('.rect').click(function () {
+    /*$('.rect').click(function () {
         if ($('.rect').is(':checked')) {
-            document.sendCodAPI ("rect", '0', true);
+            //document.sendCodAPI ("rect", '0', true);
             $('#myCanvas').show();
             $('#my-video').show();
         } else {
@@ -538,7 +538,7 @@
             $('#my-video').hide();
         }
 
-    });
+    });*/
 
 
     $("#hideCanvas").click(function () {
@@ -571,33 +571,60 @@
 
             context.beginPath();
             context.lineWidth = 3;
-            context.strokeStyle = 'yellow';
-            context.rect(faceRectangleX - 40, faceRectangleY - 20, faceRectangleW, faceRectangleH);
-            context.stroke();
 
-            //User ID
-            context.fillStyle = "green";
             context.font = "12pt Helvetica";
 
-            //userData[0] == undefined => No registered user
-            //!isNaN(receivedAPI.userId) => IS number
+
+
+
             if (!isNaN(receivedAPI.userId)) {
                 if (typeof userData[0] == 'string') {
                     var user = JSON.parse(userData[0]);
+
                     userId = user.nome;
+
+                    if (user.blacklist == 'True') {                   
+                    context.fillStyle = "red";
+                    context.strokeStyle = 'red';               
+                    } else {
+                        context.fillStyle = "green";
+                        context.strokeStyle = 'green';
+                    }                    
+                    //setUserView(userData);
+                    context.rect(faceRectangleX - 40, faceRectangleY - 20, faceRectangleW, faceRectangleH);
+                    context.stroke();
+                    context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 25);
+                } else {
+                    context.fillStyle = "yellow";
+                    context.strokeStyle = 'yellow';
+                    context.rect(faceRectangleX - 40, faceRectangleY - 20, faceRectangleW, faceRectangleH);
+                    context.stroke();
+                    context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 25);
                 }
+
+
             }
 
             if (userId == 'Unrecognized') {
                 userId = 'Não reconhecido';
+                context.fillStyle = "yellow";
+                context.strokeStyle = 'yellow';
+                context.rect(faceRectangleX - 40, faceRectangleY - 20, faceRectangleW, faceRectangleH);
+                context.stroke();
+                context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 25);
+                $('#userInfo').html('');
             }
 
             if (userId == 'No users in view') {
                 userId = 'Nenhum usuário em exibição';
+                $('#userInfo').html('');
             }
+            
+     
+    
 
-
-            context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 4);
+    
+           
         } else {
             alert("Canvas is not supported in your browser");
         }

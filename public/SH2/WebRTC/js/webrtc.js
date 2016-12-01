@@ -49,19 +49,13 @@ window.connectWRTC = function () {
         // Return to step 2 if error occurs   
     });
 
-
-    /*$('.rect').click(function () {
-        // Get things started 
-        // inicia stream de video e audio     
-        step1();
-    });*/
-
-
     $(".rect").change(function () {
         if (this.checked) {
             step1();
         } 
     });
+
+    step1();
 
     // Click handlers setup
     //$(function(){ //fun��o autoexecut�vel    
@@ -103,7 +97,13 @@ window.connectWRTC = function () {
             $('#my-video').prop('src', URL.createObjectURL(stream));
 
             window.localStream = stream;
-            document.sendCodAPI("rect", '0', true);
+            if (window.localStream.active) {
+                setTimeout(function () {                  
+                    document.sendCodAPI("rect", '0', true);
+                }, 8000);
+            
+        }
+
         }, function () {
             alert('ERRO STEP 1');
         });

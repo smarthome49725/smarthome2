@@ -88,4 +88,4 @@ exports.socket_Televisor = function () {
   });
 };
 
-//cliente.connect('ws://192.168.1.254:81/');
+//cliente.connect('ws://localhost54:81/');

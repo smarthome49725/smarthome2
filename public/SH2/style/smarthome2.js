@@ -13,7 +13,7 @@ $('document').ready(function () {
     var showConfigIP = true;
     $('#divConfigIP').hide();
 
-    var showConfigEmails = true; 
+    var showConfigEmails = true;
     $('#divConfigEmails').hide();
 
     $('#step2').hide();
@@ -102,16 +102,16 @@ $('document').ready(function () {
             showRegister = true;
         }
     });
-    
+
 
     $('#linkConfigIP').click(function () {
         $('#divRegister').hide();
         showRegister = true;
- 
+
         $('#divConfigEmails').hide();
         showConfigEmails = true;
 
-        if (showConfigIP) {            
+        if (showConfigIP) {
             $('#divConfigIP').show();
             showConfigIP = false;
         } else {
@@ -135,6 +135,19 @@ $('document').ready(function () {
             showConfigEmails = true;
         }
     });
+
+
+
+
+    $(".rect").change(function () {
+        if (this.checked) {
+            $('#monitoring').show();
+        } else {
+            $('#monitoring').hide();
+        }
+    });
+
+
 
 
 

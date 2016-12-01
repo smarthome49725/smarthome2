@@ -11,8 +11,7 @@
 }
 
 #myCanvas {
-    position: absolute;
-    border: 2px solid yellow;
+    position: absolute;    
     z-index: 10;
     width: 640px;
     height: 480px;
