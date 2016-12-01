@@ -1,6 +1,6 @@
 ﻿$('document').ready(function () {
     var socketIO = io();
-    var socket;
+    document.socket;
 
     var login;
     var password;
@@ -40,7 +40,7 @@
         setCookie("nasc", userData.nasc, 1);
         setCookie("tel", userData.tel, 1);       
 
-        location.href = "http://192.168.10.106:49725/home.html";
+        location.href = "http://192.168.1.2:49725/home.html";
     }
 
     //SET COOKIE IN BROWSER
@@ -48,7 +48,7 @@
         var d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         var expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=http://192.168.10.106:49725/home.html";
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=http://192.168.1.2:49725/home.html";
     }
 
 
@@ -56,19 +56,21 @@
      *                     EVENTS WEBSOCKET                        *  
      ***************************************************************/
     function eventsWS() {
-        socket.onopen = function () {
+        document.socket.onopen = function () {
             console.log('CONNECTION ESTABLISHED!');
+            $('#StatusConnection').css("background", "green");
         };
 
-        socket.onclose = function () {
+        document.socket.onclose = function () {
             console.log('CLOSED CONNECTION!');
+            $('#StatusConnection').css("background", "red");
         };
 
-        socket.onerror = function (errorEvent) {
+        document.socket.onerror = function (errorEvent) {
             console.log(errorEvent);
         };
 
-        socket.onmessage = function (messageEvent) {
+        document.socket.onmessage = function (messageEvent) {
             console.log("RECEIVED API :" + messageEvent.data);            
             receivedAPI = JSON.parse(messageEvent.data);
 
@@ -93,13 +95,22 @@
      ***************************************************************/
 
     function connectWebSocket(ipAPI_RS) {
-        socket = new WebSocket('ws://' + ipAPI_RS + '/level1');
+        document.socket = new WebSocket('ws://' + ipAPI_RS + '/level1');
         eventsWS();
     }
 
+
     /***************************************************************
- *                       GET USERLOGIN                         *  
- ***************************************************************/
+     *                    RESTART CONNECTION                       *  
+     ***************************************************************/
+    $('#restartConnection').click(function () {
+        location.reload(true);        
+    });
+    
+
+    /***************************************************************
+     *                       GET USERLOGIN                         *  
+     ***************************************************************/
     function getLogin(login, password) {
         var cod = {
             cod: "getlogin",
@@ -108,7 +119,7 @@
         };
         cod = JSON.stringify(cod);
         console.log(JSON.parse(cod));
-        socket.send(cod);
+        document.socket.send(cod);
     }
 
     socketIO.on('getIP_API', function (configIP) {

@@ -97,6 +97,13 @@
 
 
     /***************************************************************
+     *                    RESTART CONNECTION                       *  
+     ***************************************************************/
+    $('#restartConnection').click(function () {
+        location.reload(true);
+    });
+
+    /***************************************************************
      *                     REGISTER USER                           *  
      ***************************************************************/
     //userData[0] == undefined => No registered user
@@ -377,7 +384,7 @@
         var d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         var expires = "expires=" + d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=http://192.168.10.106:49725/home.html";
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=http://192.168.1.2:49725/home.html";
     }
 
     /***************************************************************
