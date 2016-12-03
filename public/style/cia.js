@@ -39,8 +39,8 @@ socket.on('connect', function (data) {
     status();
   });
   socket.on('curtain_channel', function (data) {
-    data.sts_curtain == 0 ? document.getElementById("curtain_img").src = "img/cortina-fechada.png" : document.getElementById("curtain_img").src = "img/cortina-aberta.png";
-    data.sts_curtain == 0 ? document.getElementById("status_curtain").innerHTML = "Cortina Fechada" : document.getElementById("status_curtain").innerHTML = "Cortina Aberta";
+    //data.sts_curtain == 0 ? document.getElementById("curtain_img").src = "img/cortina-fechada.png" : document.getElementById("curtain_img").src = "img/cortina-aberta.png";
+    //data.sts_curtain == 0 ? document.getElementById("status_curtain").innerHTML = "Cortina Fechada" : document.getElementById("status_curtain").innerHTML = "Cortina Aberta";
     statusCurtain = data.sts_curtain;
     if (data.temp_motor == 1) {
       block_device("curtain_img", 15000);
@@ -52,7 +52,7 @@ socket.on('connect', function (data) {
     volume = data.volume_tv;
     data.tv_status == 0 ? document.getElementById("tv_img").src = "img/tvciaOff.png" : document.getElementById("tv_img").src = "img/tvciaOn.png";
     data.tv_status == 0 ? document.getElementById('collapse_tv').style.display = "none" : document.getElementById('collapse_tv').style.display = "block";
-    data.tv_status == 0 ? document.getElementById('sts_tv').innerHTML = "Desligada" : document.getElementById('sts_tv').innerHTML = "Ligada";
+    //data.tv_status == 0 ? document.getElementById('sts_tv').innerHTML = "Desligada" : document.getElementById('sts_tv').innerHTML = "Ligada";
     document.getElementById("volume_tv").innerHTML = volume;
   });
 
@@ -64,7 +64,7 @@ socket.on('connect', function (data) {
     document.getElementById("volume_ar").innerHTML = volume_ar;
   });
   socket.on('disconnect', function () {
-    location.reload();
+    //location.reload();
   });
 });
 
@@ -304,12 +304,12 @@ function activeCurtain() {
   if (statusCurtain == 0) {
     document.getElementById("curtain_img").src = "img/cortina-aberta.png";
     statusCurtain = 1;
-    document.getElementById("status_curtain").innerHTML = "Cortina Abrindo";
+    //document.getElementById("status_curtain").innerHTML = "Cortina Abrindo";
     nameStatus = "Cortina Aberta";
   } else {
     document.getElementById("curtain_img").src = "img/cortina-fechada.png";
     statusCurtain = 0;
-    document.getElementById("status_curtain").innerHTML = "Cortina Fechando";
+    //document.getElementById("status_curtain").innerHTML = "Cortina Fechando";
     nameStatus = "Cortina Fechada";
   }
   setTimeout(function () {
@@ -329,12 +329,12 @@ function activeTvCia() {
     tv = 1;
     btntvimg.src = "img/tvciaOn.png";
     document.getElementById('collapse_tv').style.display = "block";
-    document.getElementById('sts_tv').innerHTML = "Ligada";
+    //document.getElementById('sts_tv').innerHTML = "Ligada";
   } else {
     tv = 0;
     btntvimg.src = "img/tvciaOff.png";
     document.getElementById('collapse_tv').style.display = "none";
-    document.getElementById('sts_tv').innerHTML = "Desligada";
+    //document.getElementById('sts_tv').innerHTML = "Desligada";
   }
   block_device("tv_img", 2000);
 }
@@ -420,9 +420,9 @@ function block_device(id_device, temp_device) {
 //FUNÇÃO PARA BLOQUEAR EM 5 SEGUNDOS
 function block(id_func) {
   if (id_func == "cmn-toggle-2") {
-    document.getElementById("toogle_all").style.cursor = "not-allowed";
+    //document.getElementById("toogle_all").style.cursor = "not-allowed";
     setTimeout(function () {
-      document.getElementById("toogle_all").style.cursor = "pointer";
+      //document.getElementById("toogle_all").style.cursor = "pointer";
     }, 1000);
   }
   document.getElementById(id_func).disabled = true;
