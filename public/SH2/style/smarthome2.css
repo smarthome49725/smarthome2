@@ -176,3 +176,12 @@ float: right;*/
 #btUpdate {
     padding: 2px;
 }
+
+
+#allLamps{
+    margin-right: 35px;
+}
+
+.modal-content, .info-box, .card, .body, #myCanvas, #my-video, #remote-video{
+    border-radius: 20px !important;
+}
