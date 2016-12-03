@@ -183,5 +183,5 @@ float: right;*/
 }
 
 .modal-content, .info-box, .card, .body, #myCanvas, #my-video, #remote-video{
-    border-radius: 20px !important;
+    border-radius: 5px !important;
 }
