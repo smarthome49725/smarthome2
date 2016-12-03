@@ -6,53 +6,58 @@ var client = new net.Socket();
 var receivedAPI;
 var host;
 global.configIP;
+var temper = require('../temperature.js'),
+    ExeStepper = require('../stepper.js'),
+    televisor = require('../tv_smart.js'),
+    ar = require('../airconditioning.js'),
+    control_light = require('../lamps.js');
 
-lightBathroom = function(){
+function lightBathroom() {
     socket.emit("lightBathroom", "light on bathroom");
     control_light.bathroom();
 }
 
-lightKitchen = function(){
+function lightKitchen(){
     socket.emit("lightKitchen", "light on kitchen");
     control_light.kitchen();
 }
 
-lightBedroom = function(){
+function lightBedroom(){
     socket.emit("lightBedroom", "light on bedRoom");
     control_light.bedroom();
 }
 
-lightRoom1 = function(){
+function lightRoom1(){
     socket.emit("lightRoom1", "light on lightRoom1");
     control_light.roomOne();
 }
 
-lightRoom2 = function(){
+function lightRoom2(){
     socket.emit("lightRoom2", "light on lightRoom2");
     control_light.roomTwo();
 }
 
-tvOnOff =  function(){
+function tvOnOff(){
     socket.emit("TV", "on-off TV");
     televisor.control_tv();
 }
 
-tvIncrease = function(){
+function tvIncrease(){
     socket.emit("TV-Increase", "increase tv");
     televisor.increase();
 }
 
-tvDecrease = function(){
+function tvDecrease(){
     socket.emit("TV-Decrease", "decrease tv");
     televisor.decrease();
 }
 
-curtain = function(){
+function curtain(){
     socket.emit("curtain", "curtain");
     ExeStepper.controlMotor();
 }
 
-airConditioning = function(){
+function airConditioning(){
     socket.emit("air-conditioning", "on-off air");
     ar.control_ar();
 }
@@ -62,7 +67,7 @@ function airConditioningDecrease(){
     ar.decrease();
 }
 
-airConditioningIncrease = function(){
+function airConditioningIncrease(){
     socket.emit("air-conditioning-increase", "on-off air");
     ar.increase();
 }
@@ -97,16 +102,62 @@ global.connect = function () {
 
 client.on('data', function (data) {
     //console.log('Received: ' + data);
-    receivedAPI = JSON.parse(data);    
-    switch (receivedAPI.code) {
+    dataReiceived = JSON.parse(data);    
+    switch (dataReiceived.code) {
         case "PORT":
-            openTheDoor();         
-            break;
-        case "LAMP":
-            console.log(receivedAPI.msg);            
-            break;
-        case "TV":
-            console.log(receivedAPI.msg);
+            //openTheDoor();
+            var userCustom = JSON.parse(dataReiceived.msg);
+            console.log(userCustom.lightBathroom);         
+            if (userCustom.lightBathroom == "True"){
+                if (control_light.bathroom == 0){
+                    console.log('liguei, biiiiur');
+                    lightBathroom();
+                }
+
+            }
+            else if (userCustom.lightKitchen == True){
+                if (control_light.kitchen == 0){
+                    lightKitchen();
+                }
+
+            }
+            else if (userCustom.lightBedroom == True){
+                if (control_light.bedroom == 0){
+                    lightBedroom();
+                }
+
+            }
+            else if (userCustom.lightRoom1 == True){
+                if (control_light.roomOne == 0){
+                    lightRoom1();
+                }
+
+            }
+            else if (userCustom.lightRoom2 == True){
+                if (control_light.roomTwo == 0){
+                    lightRoom2();
+                }
+
+            }
+            else if (userCustom.TV == True){
+                if (televisor.status_tv == 0){
+                    tvOnOff();
+                }
+
+            }
+
+            else if (userCustom.curtain == True){
+                if (ExeStepper.motor == 0){
+                    curtain();
+                }
+
+            }
+            else if (userCustom.air_conditioning == True){
+                if (ar.status_ar == 0){
+                    airConditioning();
+                }
+
+            }
             break;
     }
 });
