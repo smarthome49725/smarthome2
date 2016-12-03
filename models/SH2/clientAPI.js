@@ -96,11 +96,11 @@ global.connect = function () {
 }
 
 client.on('data', function (data) {
-    console.log('Received: ' + data);
+    //console.log('Received: ' + data);
     receivedAPI = JSON.parse(data);    
     switch (receivedAPI.code) {
         case "PORT":
-            //openTheDoor();         
+            openTheDoor();         
             break;
         case "LAMP":
             console.log(receivedAPI.msg);            

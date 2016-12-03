@@ -461,7 +461,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-light-green hover-expand-effect">
+                    <div class="info-box bg-light-green hover-expand-effect" onclick="activeCurtain(); sendCurtain();">
                         <div class="icon">
                             <img src="SH2/css/svg/curtain.svg">
                         </div>
@@ -472,7 +472,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-orange hover-expand-effect">
+                    <div class="info-box bg-orange hover-expand-effect" onclick="activeTvCia(); sendTvHome();">
                         <div class="icon">
                             <img src="SH2/css/svg/television-screen.svg" />
                         </div>
@@ -698,7 +698,7 @@
                             <div class="body bg-teal bg-light-green">
                                 <div class="font-bold m-b--35">Cortina</div>
                                 <ul class="dashboard-stat-list">
-                                    <img id="curtain_img" class="cursor" src="img/cortina-fechada.png" onclick="activeCurtain(); sendCurtain();">
+                                    <img id="curtain_img" class="cursor" src="img/cortina-fechada.png">
                                 </ul>
                             </div>
 
@@ -710,22 +710,37 @@
                                 <div class="font-bold m-b--35">Televisão</div>
                                 <ul class="dashboard-stat-list">
                                     <li>
-                                        <img id="tv_img" src="img/tvciaOn.png" onclick="activeTvCia(); sendTvHome();" title="Televisor">
+                                        <img id="tv_img" src="img/tvciaOff.png" title="Televisor">
                                     </li>
                                     <div class="collapse" id="collapse_tv">
-                                        <div class="well">
-                                            <button class="btn_-" onclick="decrease(); sendVolume_Decrease();">
+                                        <div class="container-fluid">
+                                         <!--   <button onclick="decrease(); sendVolume_Decrease();">
                                                 <i class="glyphicon glyphicon-chevron-down"
                                                    data-position="icon only"></i>
                                             </button>
-                                            <div class="volume">
-                                                <span id="volume_tv">0</span> <span class="volume_out">Volume</span>
+                                            <div>
+                                                <span id="volume_tv">0</span> <span>Volume</span>
                                             </div>
-                                            <button class="btn_" onclick="Increase(); sendVolume_Increase();">
+                                            <button onclick="Increase(); sendVolume_Increase();">
                                                 <i class="glyphicon glyphicon-chevron-up"
                                                    data-position="icon only"></i>
+                                            </button>-->
+                                        
+                                        
+                                    
+                                        <span>Volume:</span>
+                                        <br/>
+                                        <div class="pull-left" style="display:inline-block">
+                                            <button class="btn btn-xs waves-effect pull-left" style="background:none; border:none; box-shadow:none;">
+                                                <i class="material-icons" onclick="Increase(); sendVolume_Increase();">add</i>
+                                            </button>
+                                            <br/>
+                                            <button class="btn btn-xs waves-effect pull-left" style="background:none; border:none; box-shadow:none;">
+                                                <i class="material-icons" onclick="decrease(); sendVolume_Decrease();">remove</i>
                                             </button>
                                         </div>
+                                        <div style="font-size:2.5em; margin-left:1em; margin-top:2%;" id="volume_tv">0</div>
+                                    </div>
                                     </div>
                                 </ul>
                             </div>
