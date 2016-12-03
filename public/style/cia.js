@@ -76,7 +76,7 @@ socket.on('lamp_All', function (lamps) {
   } else if (lamps == "lampBedroom") {
     acenderLampbedroom();
   } else if (lamps == "lampRoomOne") {
-    acenderLamproomOne();
+    acenderLamproomOne();    
   } else if (lamps == "lampRoomTwo") {
     acenderLamproomTwo();
   } else if (lamps == "lamp_All_Home") {
@@ -124,10 +124,12 @@ function acenderLampBathroom() {
     bathroom = 1;
     connection_lamp_all += 1;
     statusLampOn("lampbathroom");
+    $('#statusLightBathroom').text('Ligada'); //SH2
   } else {
     bathroom = 0;
     statusLampOff("lampbathroom");
     connection_lamp_all -= 1;
+    $('#statusLightBathroom').text('Desligada'); //SH2
   }
   block("lampbathroom");
   block("cmn-toggle-2");
@@ -144,10 +146,12 @@ function acenderLampkitchen() {
     kitchen = 1;
     statusLampOn("lampkitchen");
     connection_lamp_all += 1;
+    $('#statusLightKitchen').text('Ligada'); //SH2
   } else {
     kitchen = 0;
     statusLampOff("lampkitchen");
     connection_lamp_all -= 1;
+    $('#statusLightKitchen').text('Desligada'); //SH2
   }
   block("lampkitchen");
   block("cmn-toggle-2");
@@ -163,11 +167,13 @@ function acenderLampbedroom() {
   if (bedroom == 0) {
     bedroom = 1;
     statusLampOn("lampbedroom");
-    connection_lamp_all += 1;
+    connection_lamp_all += 1;    
+    $('#statusLightBedroom').text('Ligada'); //SH2
   } else {
     bedroom = 0;
     statusLampOff("lampbedroom");
     connection_lamp_all -= 1;
+    $('#statusLightBedroom').text('Desligada'); //SH2
   }
   block("lampbedroom");
   block("cmn-toggle-2");
@@ -184,10 +190,12 @@ function acenderLamproomOne() {
     roomOne = 1;
     statusLampOn("lamp1Sala");
     connection_lamp_all += 1;
+    $('#statusLightRoom1').text('Ligada'); //SH2
   } else {
     roomOne = 0;
     statusLampOff("lamp1Sala");
     connection_lamp_all -= 1;
+    $('#statusLightRoom1').text('Desligada'); //SH2
   }
   block("lamp1Sala");
   block("cmn-toggle-2");
@@ -204,10 +212,12 @@ function acenderLamproomTwo() {
     roomTwo = 1;
     statusLampOn("lamp2Sala");
     connection_lamp_all += 1;
+    $('#statusLightRoom2').text('Ligada'); //SH2
   } else {
     roomTwo = 0;
     statusLampOff("lamp2Sala");
     connection_lamp_all -= 1;
+    $('#statusLightRoom2').text('Desligada'); //SH2
   }
   block("lamp2Sala");
   block("cmn-toggle-2");
@@ -240,6 +250,13 @@ function controlAllLamps() {
     statusLampOn("lamp2Sala");
     statusLampOn("lamp1Sala");
     modifyLamps(1, 5);
+
+    $('#statusLightBathroom').text('Ligada'); //SH2
+    $('#statusLightKitchen').text('Ligada'); //SH2
+    $('#statusLightBedroom').text('Ligada'); //SH2
+    $('#statusLightRoom1').text('Ligada'); //SH2
+    $('#statusLightRoom2').text('Ligada'); //SH2
+
   } else {
     statusLampOff("lampbathroom");
     statusLampOff("lampkitchen");
@@ -247,6 +264,12 @@ function controlAllLamps() {
     statusLampOff("lamp2Sala");
     statusLampOff("lamp1Sala");
     modifyLamps(0, 0);
+
+    $('#statusLightBathroom').text('Desligada'); //SH2
+    $('#statusLightKitchen').text('Desligada'); //SH2
+    $('#statusLightBedroom').text('Desligada'); //SH2
+    $('#statusLightRoom1').text('Desligada'); //SH2
+    $('#statusLightRoom2').text('Desligada'); //SH2
   }
   block("cmn-toggle-2");
   block_all();

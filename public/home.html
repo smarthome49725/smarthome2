@@ -161,14 +161,14 @@
                         <!--CAMPO SALA - LAMPADA 1-->
                         <article class="campo_funcionalidade">
                             <figure class="lampada1">
-                                <label class="label-button"><span>Sala 1º</span></label>
+                                <label class="label-button"><span>Sala Principal</span></label>
                                 <input type="image" id="lamp1Sala" src="img/leddesligada.png" onclick="acenderLamproomOne(); sendLampRoomOne();" title="SALA - Lampada 1">
                             </figure>
                         </article>
                         <!--CAMPO SALA - LAMPADA 2-->
                         <article class="campo_funcionalidade">
                             <figure class="lampada1">
-                                <label class="label-button"><span>Sala 2º</span></label>
+                                <label class="label-button"><span>Sala de Jantar</span></label>
                                 <input type="image" id="lamp2Sala" src="img/leddesligada.png" onclick="acenderLamproomTwo(); sendLampRoomTwo();" title="SALA - Lampada 2">
                             </figure>
                         </article>
@@ -749,23 +749,23 @@
                                 <ul class="dashboard-stat-list">
                                     <li>
                                         Sala Principal
-                                        <span class="pull-right"><b>Ligada</b> <small>Desligada</small></span>
+                                        <span id="statusLightRoom1" class="pull-right">Desligada</span>
                                     </li>
                                     <li>
                                         Sala de Jantar
-                                        <span class="pull-right"><b>Ligada</b> <small>Desligada</small></span>
+                                        <span id="statusLightRoom2" class="pull-right">Desligada</span>
                                     </li>
                                     <li>
                                         Quarto
-                                        <span class="pull-right"><b>Desligada</b> <small>Ligada</small></span>
+                                        <span id="statusLightBedroom" class="pull-right">Desligada</span>
                                     </li>
                                     <li>
                                         Banheiro
-                                        <span class="pull-right"><b>Ligada</b> <small>Desligada</small></span>
+                                        <span id="statusLightBathroom" class="pull-right">Desligada</span>
                                     </li>
                                     <li>
                                         Cozinha
-                                        <span class="pull-right"><b>Desligada</b> <small>Ligada</small></span>
+                                        <span id="statusLightKitchen" class="pull-right">Desligada</span>
                                     </li>
                                 </ul>
                             </div>
