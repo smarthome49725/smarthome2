@@ -1,40 +1,30 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="no-js" ng-app="appSmart">
-
 <head>
     <meta charset="UTF-8">
     <script src="style/JS/vendor/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="SH2/session/checksession.js"></script>
-
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>SMART HOME II</title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-
     <!-- Google Fonts -->
     <!--<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">-->
     <link href="SH2/lib/cyrillic-ext.css" rel="stylesheet" type="text/css">
-
     <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">-->
     <link href="SH2/lib/Material+Icons.css" rel="stylesheet" type="text/css">
-
     <!-- Bootstrap Core Css -->
     <link href="SH2/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
-
     <!-- Waves Effect Css -->
     <link href="SH2/plugins/node-waves/waves.css" rel="stylesheet" />
-
     <!-- Morris Chart Css-->
     <link href="SH2/plugins/morrisjs/morris.css" rel="stylesheet" />
-
     <!-- Custom Css -->
     <link href="SH2/css/style.css" rel="stylesheet">
-
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="SH2/css/themes/theme-blue.css" rel="stylesheet" />
-
 
     <!-- Bootstrap Core Js -->
     <script src="SH2/plugins/bootstrap/js/bootstrap.js"></script>
@@ -44,46 +34,34 @@
     <!--/DATAPIKER-->
     <!-- Waves Effect Plugin Js -->
     <script src="SH2/plugins/node-waves/waves.js"></script>
-
     <!-- Morris Plugin Js -->
     <script src="SH2/plugins/morrisjs/morris.js"></script>
-
     <!-- Custom Js -->
     <script src="SH2/js/admin.js"></script>
     <script src="SH2/js/pages/index.js"></script>
     <!-- JavaScript Includes -->
-
     <script src="style/JS/button.js"></script>
     <script src="style/JS/collapse.js"></script>
-
     <!-- Slimscroll Plugin Js -->
     <script src="SH2/js/jquery.slimscroll.js"></script>
-
     <script src="style/cia.js"></script>
     <!--<SH2>-->
-
     <script src="SH2/lib/crypto-js-3.1.2-aes.js"></script><!--Login-->
-
     <script type="text/javascript" src="SH2/style/smarthome2.js"></script>
     <link rel="stylesheet" href="SH2/style/smarthome2.css">
     <script type="text/javascript" src="SH2/style/smarthome2.js"></script>
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
     <link href="style/style.css" rel="stylesheet">
 
-
     <!--Adicionar a biblioteca cliente PeerJS para sua página web.-->
     <script type="text/javascript" src="SH2/WebRTC/dist/peer.js"></script>
     <script type="text/javascript" src="SH2/WebRTC/js/webrtc.js"></script>
     <script type="text/javascript" src="SH2/websocket/websocket.js"></script>
     <script type="text/javascript" src="SH2/config/config.js"></script>
-
     <!-- Demo Js -->
     <script src="SH2/js/demo.js"></script>
-
 </head>
-
 <body class="theme-blue" ng-controller="SmartController" ng-init="init()">
-
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -119,7 +97,6 @@
                     <!-- logout -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" id="exit"><span class="glyphicon glyphicon-log-out" role="button"></span></a>
-
                         <div class="dropdown">
                             <button class="dropdown-toggle" type="button" id="StatusConnection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 Conexão API
@@ -130,7 +107,6 @@
                                 <!--<li role="separator" class="divider"></li>-->
                             </ul>
                         </div>
-
 
                     </li>
                 </ul>
@@ -200,45 +176,43 @@
                 </div>
             </div>
         </div>
+        <div id="Modal_ar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Ar-Condicionado</h4>
+                    </div>
+                    <div class="modal-body">
+                        <article class="campo_funcionalidade_TV cursor text-center">
+                            <figure>
+                                <input style="width:60%; height:60%;" type="image" id="ar_img" src="img/ar_off.png" onclick="activeArCia(); sendArHome();">
+                            </figure>
+                        </article>
+                        <div class="collapse text-center" id="collapse_ar">
+                            <div class="well">
 
-    <div id="Modal_ar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">Ar-Condicionado</h4>
-                </div>
-                <div class="modal-body">
-                    <article class="campo_funcionalidade_TV cursor text-center">
-                        <figure>
-                            <input style="width:60%; height:60%;" type="image" id="ar_img" src="img/ar_off.png" onclick="activeArCia(); sendArHome();">
-                        </figure>
-                    </article>
-                    <div class="collapse text-center" id="collapse_ar">
-                        <div class="well">
-                            
-                            <button class="btn btn-xs waves-effect pull-left" style="background:none; border:none; box-shadow:none;" onclick="Increase_ar(); sendVolume_IncreaseAr();">
-                                <i class="material-icons">add</i>
-                            </button>
-                            
-                            
-                            <button class="btn btn-xs waves-effect pull-left" style="background:none; border:none; box-shadow:none;" onclick="decrease_ar(); sendVolume_DecreaseAr();">
-                            <i class="material-icons">remove</i>
-                            </button>
-                            
-                            <div class="volume">
-                                <span id="volume_ar">0</span> <span class="volume_out">Volume</span>
+                                <button class="btn btn-xs waves-effect pull-left" style="background:none; border:none; box-shadow:none;" onclick="Increase_ar(); sendVolume_IncreaseAr();">
+                                    <i class="material-icons">add</i>
+                                </button>
+
+
+                                <button class="btn btn-xs waves-effect pull-left" style="background:none; border:none; box-shadow:none;" onclick="decrease_ar(); sendVolume_DecreaseAr();">
+                                    <i class="material-icons">remove</i>
+                                </button>
+
+                                <div class="volume">
+                                    <span id="volume_ar">0</span> <span class="volume_out">Volume</span>
+                                </div>
+
                             </div>
-                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
 
         <div id="modal_email" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -259,7 +233,6 @@
                                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                             <label for="alertEmail1">Email 1</label>
                                         </div>
-
                                         <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
@@ -297,11 +270,9 @@
                                 </form>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
         <div id="modal_ip" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -334,7 +305,6 @@
                                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                             <label for="ipPlaca">PLACA</label>
                                         </div>
-
                                         <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
@@ -343,7 +313,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <!-- <div class="row clearfix">
                                      <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                             <label for="ipClientRTC">RTC(client)</label>
@@ -357,12 +326,10 @@
                                             </div>
                                         </div>
                                     </div> -->
-
                                     <div class="row clearfix">
                                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                             <label for="ipClientRTC">RTC(client)</label>
                                         </div>
-
                                         <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
@@ -375,7 +342,6 @@
                                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                             <label for="ipServerRTC">RTC(server)</label>
                                         </div>
-
                                         <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
@@ -383,7 +349,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                     <br>
                                     <button id="btSaveConnectAPI_RS" class="btn btn-primary btn-lg m-l-15 waves-effect">Salvar</button>
@@ -392,7 +357,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -404,12 +368,10 @@
             <div class="user-info">
                 <div class="image">
                     <img id="imgLogin" src="SH2/images/user0.png" width="48" height="48" alt="User" />
-
                 </div>
                 <div class="info-container">
                     <div id="infoName" class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
                     <div id="infoEmail" class="email"></div>
-
                 </div>
             </div>
             <!-- #User Info -->
@@ -434,7 +396,6 @@
                                     <span>Cadastro</span>
                                 </a>
                             </li>
-
                         </ul>
                     </li>
                     <li>
@@ -469,7 +430,6 @@
             <!-- #Footer -->
         </aside>
     </section>
-
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
@@ -535,14 +495,12 @@
                                     <label>OFF<input type="checkbox" checked id="realtime" class="rect"><span class="lever switch-col-cyan"></span>ON</label>
                                 </div>
                             </div>
-
                         </div>
                         <div class="body" id="monitoring">
                             <!--<div id="real_time_chart" class="dashboard-flot-chart"></div>-->
                             <canvas id="myCanvas" align="center"></canvas>
                             <video id="my-video" autoplay align="center"></video>
                             <video id="remote-video" autoplay align="center"></video>
-
 
                             <!--FORM CADASTRO-->
                             <div id="divRegister" class="row clearfix">
@@ -562,7 +520,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row clearfix" id="formEmail">
                                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                             <label id="labelEmail" for="email">E-mail</label>
@@ -575,7 +532,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row clearfix" id="formTel">
                                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                             <label for="tel">Telefone</label>
@@ -588,7 +544,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row clearfix" id="formNasc">
                                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                             <label for="nasc">Nascimento</label>
@@ -601,7 +556,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row clearfix" id="formPassword">
                                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                             <label for="password">Senha</label>
@@ -614,7 +568,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row clearfix" id="formRegisterLevel">
                                         <div class="col-lg-2 col-md-2 col-sm-6 col-xs-5 form-control-label">
                                             <label for="registerlevel">Nível de acesso</label>
@@ -632,7 +585,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row clearfix">
                                         <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                                             <input id="blackList" type="checkbox" class="filled-in">
@@ -640,6 +592,141 @@
                                         </div>
                                     </div>
 
+                                    <br />
+                                    <br />
+
+                                    <!--Custom House-->
+                                    <div id="customHouse">
+
+                                        <!--Bathroom-->
+                                        <div class="row clearfix panel-switch-btn" id="">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                <label for="lightBathroom">Lampada do Banheiro</label>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <div class="switch">
+                                                            <label>OFF<input type="checkbox" checked id="lightBathroom" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Kitchen-->
+                                        <div class="row clearfix panel-switch-btn" id="">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                <label for="lightKitchen">Lampada da Cozinha</label>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <div class="switch">
+                                                            <label>OFF<input type="checkbox" checked id="lightKitchen" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Bedroom-->
+                                        <div class="row clearfix panel-switch-btn" id="">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                <label for="lightBedroom">Lampada do quarto</label>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <div class="switch">
+                                                            <label>OFF<input type="checkbox" checked id="lightBedroom" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Room1-->
+                                        <div class="row clearfix panel-switch-btn" id="">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                <label for="lightRoom1">Lampada da 2º sala</label>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <div class="switch">
+                                                            <label>OFF<input type="checkbox" checked id="lightRoom1" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Room2-->
+                                        <div class="row clearfix panel-switch-btn" id="">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                <label for="lightRoom2">Lampada da 2ª sala</label>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <div class="switch">
+                                                            <label>OFF<input type="checkbox" checked id="lightRoom2" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--TV-->
+                                        <div class="row clearfix panel-switch-btn" id="">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                <label for="TV">Televisão</label>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <div class="switch">
+                                                            <label>OFF<input type="checkbox" checked id="TV" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Curtain-->
+                                        <div class="row clearfix panel-switch-btn" id="">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                <label for="curtain">Cortina</label>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <div class="switch">
+                                                            <label>OFF<input type="checkbox" checked id="curtain" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--air_conditioning-->
+                                        <div class="row clearfix panel-switch-btn" id="">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                <label for="air_conditioning">Ar-condicionado</label>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <div class="switch">
+                                                            <label>OFF<input type="checkbox" checked id="air_conditioning" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </form>
                                 <br />
                                 <button class="btn btn-primary btn-lg m-l-15 waves-effect" id="btCadastro">Cadastrar</button>
@@ -649,7 +736,7 @@
                             <!--/FORM CADASTRO-->
                             <div id="userInfo"></div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <!-- #END# CPU Usage -->
@@ -664,27 +751,22 @@
                                         Sala Principal
                                         <span class="pull-right"><b>Ligada</b> <small>Desligada</small></span>
                                     </li>
-
                                     <li>
                                         Sala de Jantar
                                         <span class="pull-right"><b>Ligada</b> <small>Desligada</small></span>
                                     </li>
-
                                     <li>
                                         Quarto
                                         <span class="pull-right"><b>Desligada</b> <small>Ligada</small></span>
                                     </li>
-
                                     <li>
                                         Banheiro
                                         <span class="pull-right"><b>Ligada</b> <small>Desligada</small></span>
                                     </li>
-
                                     <li>
                                         Cozinha
                                         <span class="pull-right"><b>Desligada</b> <small>Ligada</small></span>
                                     </li>
-
                                 </ul>
                             </div>
                         </div>
@@ -732,7 +814,6 @@
                     </div>
                     <!-- #END# Latest Social Trends -->
                     <!-- Answered Tickets -->
-
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                         <div class="card">
                             <div class="body bg-teal bg-light-green">
@@ -741,7 +822,6 @@
                                     <img id="curtain_img" class="cursor" src="img/cortina-fechada.png">
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -754,44 +834,41 @@
                                     </li>
                                     <div class="collapse" id="collapse_tv">
                                         <div class="container-fluid">
-                                         <!--   <button onclick="decrease(); sendVolume_Decrease();">
-                                                <i class="glyphicon glyphicon-chevron-down"
-                                                   data-position="icon only"></i>
-                                            </button>
-                                            <div>
-                                                <span id="volume_tv">0</span> <span>Volume</span>
+                                            <!--   <button onclick="decrease(); sendVolume_Decrease();">
+                                                   <i class="glyphicon glyphicon-chevron-down"
+                                                      data-position="icon only"></i>
+                                               </button>
+                                               <div>
+                                                   <span id="volume_tv">0</span> <span>Volume</span>
+                                               </div>
+                                               <button onclick="Increase(); sendVolume_Increase();">
+                                                   <i class="glyphicon glyphicon-chevron-up"
+                                                      data-position="icon only"></i>
+                                               </button>-->
+
+
+
+                                            <span>Volume:</span>
+                                            <br />
+                                            <div class="pull-left" style="display:inline-block">
+                                                <button class="btn btn-xs waves-effect pull-left" style="background:none; border:none; box-shadow:none;">
+                                                    <i class="material-icons" onclick="Increase(); sendVolume_Increase();">add</i>
+                                                </button>
+                                                <br />
+                                                <button class="btn btn-xs waves-effect pull-left" style="background:none; border:none; box-shadow:none;">
+                                                    <i class="material-icons" onclick="decrease(); sendVolume_Decrease();">remove</i>
+                                                </button>
                                             </div>
-                                            <button onclick="Increase(); sendVolume_Increase();">
-                                                <i class="glyphicon glyphicon-chevron-up"
-                                                   data-position="icon only"></i>
-                                            </button>-->
-                                        
-                                        
-                                    
-                                        <span>Volume:</span>
-                                        <br/>
-                                        <div class="pull-left" style="display:inline-block">
-                                            <button class="btn btn-xs waves-effect pull-left" style="background:none; border:none; box-shadow:none;">
-                                                <i class="material-icons" onclick="Increase(); sendVolume_Increase();">add</i>
-                                            </button>
-                                            <br/>
-                                            <button class="btn btn-xs waves-effect pull-left" style="background:none; border:none; box-shadow:none;">
-                                                <i class="material-icons" onclick="decrease(); sendVolume_Decrease();">remove</i>
-                                            </button>
+                                            <div style="font-size:2.5em; margin-left:1em; margin-top:2%;" id="volume_tv">0</div>
                                         </div>
-                                        <div style="font-size:2.5em; margin-left:1em; margin-top:2%;" id="volume_tv">0</div>
-                                    </div>
                                     </div>
                                 </ul>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 </body>
-
 </html>   
