@@ -313,7 +313,7 @@ function activeCurtain() {
     nameStatus = "Cortina Fechada";
   }
   setTimeout(function () {
-    document.getElementById("status_curtain").innerHTML = nameStatus;
+    //document.getElementById("status_curtain").innerHTML = nameStatus;
   }, 40000);
   block_device("curtain_img", 40000);
 }
