@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js" ng-app="appSmart">
 
 <head>
@@ -211,24 +211,27 @@
                     <h4 class="modal-title" id="myModalLabel">Ar-Condicionado</h4>
                 </div>
                 <div class="modal-body">
-                    <article class="campo_funcionalidade_TV cursor">
+                    <article class="campo_funcionalidade_TV cursor text-center">
                         <figure>
-                            <input type="image" id="ar_img" src="img/ar_off.png" onclick="activeArCia(); sendArHome();">
+                            <input style="width:60%; height:60%;" type="image" id="ar_img" src="img/ar_off.png" onclick="activeArCia(); sendArHome();">
                         </figure>
                     </article>
-                    <div class="collapse" id="collapse_ar">
+                    <div class="collapse text-center" id="collapse_ar">
                         <div class="well">
-                            <button class="btn_-" onclick="decrease_ar(); sendVolume_DecreaseAr();">
-                                <i class="glyphicon glyphicon-chevron-down"
-                                   data-position="icon only"></i>
+                            
+                            <button class="btn btn-xs waves-effect pull-left" style="background:none; border:none; box-shadow:none;" onclick="Increase_ar(); sendVolume_IncreaseAr();">
+                                <i class="material-icons">add</i>
                             </button>
+                            
+                            
+                            <button class="btn btn-xs waves-effect pull-left" style="background:none; border:none; box-shadow:none;" onclick="decrease_ar(); sendVolume_DecreaseAr();">
+                            <i class="material-icons">remove</i>
+                            </button>
+                            
                             <div class="volume">
                                 <span id="volume_ar">0</span> <span class="volume_out">Volume</span>
                             </div>
-                            <button class="btn_" onclick="Increase_ar(); sendVolume_IncreaseAr();">
-                                <i class="glyphicon glyphicon-chevron-up"
-                                   data-position="icon only"></i>
-                            </button>
+                            
                         </div>
                     </div>
                 </div>
@@ -791,4 +794,4 @@
 
 </body>
 
-</html>
+</html>   
