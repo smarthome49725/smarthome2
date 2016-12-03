@@ -418,11 +418,11 @@ function block_all() {
   block("lamp2Sala");
 }
 
-(function () {
+/*(function () {
   setTimeout(function () {
     location.reload();
   }, 100000);
-})();
+})();*/
 
 socket.on('lightBathroom', function (lamp) {
   acenderLampBathroom();
