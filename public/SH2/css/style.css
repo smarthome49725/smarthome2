@@ -8107,10 +8107,11 @@ html.ie11 .bs-searchbox .form-control {
     margin-left: 2px;
 }
 #curtain_img{
-    width:13em;
+    width:12em;
     margin: 0 auto;
     position: relative;
-    display: block
+    display: block;
+    margin-bottom: 26px;
 }
 
 #tv_img {
