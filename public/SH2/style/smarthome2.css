@@ -182,6 +182,10 @@ float: right;*/
     margin-right: 35px;
 }
 
+#statusHouse{
+
+}
+
 .modal-content, .info-box, .card, .body, #myCanvas, #my-video, #remote-video{
     border-radius: 20px !important;
 }
