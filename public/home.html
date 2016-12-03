@@ -200,6 +200,43 @@
                 </div>
             </div>
         </div>
+
+    <div id="Modal_ar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Ar-Condicionado</h4>
+                </div>
+                <div class="modal-body">
+                    <article class="campo_funcionalidade_TV cursor">
+                        <figure>
+                            <input type="image" id="ar_img" src="img/ar_off.png" onclick="activeArCia(); sendArHome();">
+                        </figure>
+                    </article>
+                    <div class="collapse" id="collapse_ar">
+                        <div class="well">
+                            <button class="btn_-" onclick="decrease_ar(); sendVolume_DecreaseAr();">
+                                <i class="glyphicon glyphicon-chevron-down"
+                                   data-position="icon only"></i>
+                            </button>
+                            <div class="volume">
+                                <span id="volume_ar">0</span> <span class="volume_out">Volume</span>
+                            </div>
+                            <button class="btn_" onclick="Increase_ar(); sendVolume_IncreaseAr();">
+                                <i class="glyphicon glyphicon-chevron-up"
+                                   data-position="icon only"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
         <div id="modal_email" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -448,13 +485,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" data-toggle="modal" data-target="#Modal_ar">
                     <div class="info-box bg-cyan hover-expand-effect">
                         <div class="icon">
                             <img src="SH2/css/svg/thermometer2.svg">
                         </div>
                         <div class="content">
-                            <div class="text">TEMPERATURA</div>
+                            <div class="text" style="font-size:0.83em;">AR CONDICIONADO</div>
                             <h4>21°C</h4>
                             <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
