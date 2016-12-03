@@ -22,8 +22,6 @@
             setTimeout(function () {
                 getAlertEmails();
             }, 4000);
-            
-           
 
         };//Socket onopen
 
@@ -71,17 +69,6 @@
                 document.img = messageEvent.data;
                 document.getElementById("imgLogin").src = URL.createObjectURL(document.img);
             }
-
-            /*if (messageEvent.data === 'detected') {
-             console.log(messageEvent.data);
-             $(".lbFace").text("Detected");
-             $('#my-video').css("border", "5px solid yellow");
-             $('#remote-video').css("border", "5px solid yellow");
-             } else {
-             $(".lbFace").text("Not Detected");
-             $('#my-video').css("border", "5px solid red");
-             $('#remote-video').css("border", "5px solid red");
-             }*/
         };
 
     }//eventsWS
@@ -422,31 +409,29 @@
                 };
                 break;
             case "registerUser":
-                if ($("#blackList").prop("checked")) { //User BlackList
-                    var cod = {
-                        userID: receivedAPI.userId,
-                        level: level,
-                        cod: "registerUserBL",
-                        nome: $('#name').val(),
-                        blacklist: $("#blackList").prop("checked")
-                    };
-                } else {
-                    var crypPassword = CryptoJS.SHA1($('#password').val());
-                    crypPassword = crypPassword.toString(CryptoJS.enc.Base64);
-                    var cod = {
-                        userID: receivedAPI.userId,
-                        level: level,
-                        registerLevel: $('#registerLevel').val(),
-                        cod: cod,
-                        nome: $('#name').val(),
-                        tel: $('#tel').val(),
-                        nasc: $('#nasc').val(),
-                        email: $('#email').val(),
-                        password: crypPassword,
-                        blacklist: $("#blackList").prop("checked")
-                    };
-                }
-
+                var crypPassword = CryptoJS.SHA1($('#password').val());
+                crypPassword = crypPassword.toString(CryptoJS.enc.Base64);
+                var cod = {
+                    userID: receivedAPI.userId,
+                    level: level,
+                    registerLevel: $('#registerLevel').val(),
+                    cod: cod,
+                    nome: $('#name').val(),
+                    tel: $('#tel').val(),
+                    nasc: $('#nasc').val(),
+                    email: $('#email').val(),
+                    password: crypPassword,
+                    blacklist: $("#blackList").prop("checked"),
+                        
+                    lightBathroom: $("#lightBathroom").prop("checked"),
+                    lightKitchen: $("#lightKitchen").prop("checked"),
+                    lightBedroom: $("#lightBedroom").prop("checked"),
+                    lightRoom1: $("#lightRoom1").prop("checked"),
+                    lightRoom2: $("#lightRoom2").prop("checked"),
+                    TV: $("TV").prop("checked"),                   
+                    curtain: $("#curtain").prop("checked"),
+                    air_conditioning: $("#air_conditioning").prop("checked")                    
+                };
                 break;
             case "unregisterUser":
                 var cod = {
@@ -513,7 +498,16 @@
                     nasc: nasc = $('#userNasc').val() != undefined ? $('#userNasc').val() : "0",
                     email: email = $('#userEmail').val() != undefined ? $('#userEmail').val() : "0",
                     password: crypUserPassword,
-                    blacklist: $("#userBlackList").prop("checked")
+                    blacklist: $("#userBlackList").prop("checked"),
+
+                    lightBathroom: $("#lightBathroom").prop("checked"),
+                    lightKitchen: $("#lightKitchen").prop("checked"),
+                    lightBedroom: $("#lightBedroom").prop("checked"),
+                    lightRoom1: $("#lightRoom1").prop("checked"),
+                    lightRoom2: $("#lightRoom2").prop("checked"),
+                    TV: $("TV").prop("checked"),
+                    curtain: $("#curtain").prop("checked"),
+                    air_conditioning: $("#air_conditioning").prop("checked")
                 };
                 break;
                 
