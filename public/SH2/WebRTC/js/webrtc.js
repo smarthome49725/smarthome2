@@ -8,7 +8,7 @@ window.connectWRTC = function () {
     /* O objeto pares � onde criamos e receber liga��es.
     * PeerJS usa PeerServer para metadados sess�o e sinaliza��o candidato
     * debug: 3 (imprime todos os logs)
-    */    
+    */
     var peer = new Peer(window.level, {
         host: window.configIP.configIP[1].ipPlaca,
         port: 9000,
@@ -24,7 +24,25 @@ window.connectWRTC = function () {
             ]
         }
     });
-   
+
+    /***************************************************************
+     *                       GET Cookie                            *  
+     ***************************************************************/
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
     /* Cada objeto de pares � atribu�do um aleat�rio, exclusivo ID quando ele � criado.
      * Exibe o id do peer qundo a conex�o 
      */
@@ -52,10 +70,12 @@ window.connectWRTC = function () {
     $(".rect").change(function () {
         if (this.checked) {
             step1();
-        } 
+        }
     });
-
-    step1();
+        
+    if (getCookie('level') == '1') {
+        step1();
+    }
 
     // Click handlers setup
     //$(function(){ //fun��o autoexecut�vel    
@@ -98,11 +118,11 @@ window.connectWRTC = function () {
 
             window.localStream = stream;
             if (window.localStream.active) {
-                setTimeout(function () {                  
+                setTimeout(function () {
                     document.sendCodAPI("rect", '0', true);
                 }, 8000);
-            
-        }
+
+            }
 
         }, function () {
             alert('ERRO STEP 1');
