@@ -4,6 +4,7 @@
     var socketIO = io();
     var receivedAPI;
     var userData;
+    var userInView;
 
     /***************************************************************
 	 *                     EVENTS WEBSOCKET                        *  
@@ -51,19 +52,19 @@
                         console.log(receivedAPI.userId);
                         break;
                     case "userData":                        
-                        userData = JSON.parse(receivedAPI.msg);
-                        console.log(userData);
-                        document.userData = JSON.parse(userData);
+                        userData = JSON.parse(receivedAPI.msg);                                                
                         setUserView(userData);
+                        break;
+                    case "userinview":
+                        userInView = JSON.parse(receivedAPI.msg);
+                        setUserView(userInView);
                         break;
                     case "getalertemail":
                         setEmailInView(receivedAPI.msg);
-                        break;
+                        break;                   
                     case "img":
                         document.img64 = 'data:image/png;base64,' + receivedAPI.msg;
-
                         $('#imgLogin').attr('src', document.img64);
-
                         break;
                 }
 
@@ -791,8 +792,8 @@
 
 
             if (!isNaN(receivedAPI.userId)) {
-                if (typeof userData[0] == 'string') {
-                    var user = JSON.parse(userData[0]);
+                if (typeof userInView[0] == 'string') {
+                    var user = JSON.parse(userInView[0]);
 
                     userId = user.nome;
 
@@ -805,7 +806,7 @@
                         context.strokeStyle = 'green';
                         document.getElementById('soundAlert').pause();
                     }                    
-                    //setUserView(userData);
+                    //setUserView(userInView);
                     context.rect(faceRectangleX - 40, faceRectangleY - 20, faceRectangleW, faceRectangleH);
                     context.stroke();
                     context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 25);
