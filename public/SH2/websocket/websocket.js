@@ -798,10 +798,12 @@
 
                     if (user.blacklist == 'True') {                   
                     context.fillStyle = "red";
-                    context.strokeStyle = 'red';               
+                    context.strokeStyle = 'red';
+                    document.getElementById('soundAlert').play();
                     } else {
                         context.fillStyle = "green";
                         context.strokeStyle = 'green';
+                        document.getElementById('soundAlert').pause();
                     }                    
                     //setUserView(userData);
                     context.rect(faceRectangleX - 40, faceRectangleY - 20, faceRectangleW, faceRectangleH);
@@ -813,6 +815,7 @@
                     context.rect(faceRectangleX - 40, faceRectangleY - 20, faceRectangleW, faceRectangleH);
                     context.stroke();
                     context.fillText("Usuário: " + userId, faceRectangleX, faceRectangleY - 25);
+                    document.getElementById('soundAlert').pause();
                 }
 
 
