@@ -213,7 +213,7 @@
             html += '    <div class="panel-body">';
             
             //NOME   
-            html += '           <div class="row clearfix">';
+            html += '           <div class="row clearfix" id="divUserNome">';
             html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
             html += '                   <label for="userNome">Nome</label>';
             html += '               </div>';
@@ -226,7 +226,7 @@
             html += '               </div>';
             html += '           </div>';
             //E-mail
-            html += '           <div class="row clearfix">';
+            html += '           <div class="row clearfix" id="divUserEmail">';
             html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
             html += '                   <label for="userEmail">E-mail</label>';
             html += '               </div>';
@@ -239,7 +239,7 @@
             html += '               </div>';
             html += '           </div>';
             //TELEPHONE
-            html += '           <div class="row clearfix">';
+            html += '           <div class="row clearfix" id="divUserTel">';
             html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
             html += '                   <label for="userTel">Telefone</label>';
             html += '               </div>';
@@ -252,7 +252,7 @@
             html += '               </div>';
             html += '           </div>';
             //Birth
-            html += '           <div class="row clearfix">';
+            html += '           <div class="row clearfix" id="divUserNasc">';
             html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
             html += '                   <label for="userNasc">Nascimento</label>';
             html += '               </div>';
@@ -265,7 +265,7 @@
             html += '               </div>';
             html += '           </div>';
             //PASSWORD
-            html += '           <div class="row clearfix">';
+            html += '           <div class="row clearfix" id="divUserPassword">';
             html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
             html += '                   <label for="userPassword">Senha</label>';
             html += '               </div>';
@@ -278,7 +278,7 @@
             html += '               </div>';
             html += '           </div>';      
             //LEVEL
-            html += '           <div class="row clearfix">';
+            html += '           <div class="row clearfix" id="divUserRegisterLevel">';
             html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
             html += '                   <label for="userPassword">Nível de acesso</label>';
             html += '               </div>';
@@ -286,7 +286,8 @@
             html += '                   <div class="form-group">';
             html += '                       <div class="form-line">';
             html += '                           <select id="userRegisterLevel" class="form-control">';
-            html += '                                <option value="1">Proprietário</option>';
+            html += '                               <option value="selecion">Selecione</option>';
+            html += '                               <option value="1">Proprietário</option>';
             html += '                               <option value="2">representante </option>';
             html += '                               <option value="3">residentes</option>';
             html += '                            </select>';
@@ -302,7 +303,7 @@
             html += '               </div>';
             html += '           </div>';
 
-            html += '<button class="btn btn-primary btn-lg m-l-15 waves-effect" onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
+            html += '           <button class="btn btn-primary btn-lg m-l-15 waves-effect" onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
               
             html += '     </div>';
             html += '   </div>';
@@ -311,24 +312,25 @@
         $('#userInfo').html(html);
 
         $("#userBlackList").change(function () {
-            if (this.checked) {
-                $('#userTel').val("");
-                $('#userNasc').val("");
+            if (this.checked) {                
                 $('#userEmail').val("");
+                $('#userTel').val("");
+                $('#userNasc').val("");                
                 $('#userPassword').val("");
                 $('#userRegisterLevel').val("");
 
-                $('#userTel').hide();
-                $('#userNasc').hide();
-                $('#userEmail').hide();
-                $('#userPassword').hide();
-                $('#userRegisterLevel').hide();
+                $('#divUserEmail').hide();
+                $('#divUserTel').hide();                
+                $('#divUserNasc').hide();
+                $('#divUserPassword').hide();
+                $('#divUserRegisterLevel').hide();
             } else {
-                $('#userTel').show();
-                $('#userNasc').show();
-                $('#userEmail').show();
-                $('#userPassword').show();
-                $('#userRegisterLevel').show();
+                $('#divUserEmail').show();
+                $('#divUserTel').show();
+                $('#divUserNasc').show();
+                $('#divUserPassword').show();
+                $('#divUserRegisterLevel').show();
+                $('#userRegisterLevel').val('selecion')
             }
         });
 
