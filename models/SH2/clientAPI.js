@@ -107,7 +107,7 @@ client.on('data', function (data) {
     dataReiceived = JSON.parse(data);
     switch (dataReiceived.code) {
         case "PORT":
-            openTheDoor();
+            //openTheDoor();
             var userCustom = JSON.parse(dataReiceived.msg);
             console.log(userCustom);
             socket.emit("lightBathroom", userCustom.lightBathroom);
@@ -116,6 +116,7 @@ client.on('data', function (data) {
             socket.emit("lightRoom1", userCustom.lightRoom1);
             socket.emit("lightRoom2", userCustom.lightRoom2);
             socket.emit("TV", userCustom.TV);
+            socket.emit("TV-Increase", userCustom.TV_Increase);
             socket.emit("curtain", userCustom.curtain);
             socket.emit("air-conditioning", userCustom.air_conditioning);
 

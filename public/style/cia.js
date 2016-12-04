@@ -508,7 +508,16 @@ socket.on('TV', function (tv_on_off) {
 });
 
 socket.on('TV-Increase', function (tv_i) {
-    Increase();
+    console.log(tv_i);
+    function volTV() {        
+        if (volume == tv_i) {
+            clearInterval(volTVIncrease);           
+        } else {
+            console.log(volume);
+            Increase();
+        }
+    }
+    volTVIncrease = setInterval(volTV, 300);
 });
 
 socket.on('TV-Decrease', function (tv_d) {
