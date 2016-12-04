@@ -204,29 +204,108 @@
             html += '</div>';
 
         } else {
-
+            
             html += '<br/><div class="panel panel-default">';
             html += '    <div class="panel-heading">';
             html += 'ID: ' + user.userID;
             html += '        <button onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-trash" ></button>';
             html += '    </div>';
             html += '    <div class="panel-body">';
-            html += '<input id="userNome" class="form-control" type="text" placeholder="Nome" value=' + user.nome + '><br/>';
-            html += '<input id="userTel" class="form-control" type="text" placeholder="Telefone" value=' + user.tel + '><br/>';
-            html += '<input id="userNasc" class="form-control" type="text" placeholder="Data de Nascimento" value=' + user.nasc + '><br/>';
-            html += '<input id="userEmail" class="form-control" type="text" placeholder="Email" value=' + user.email + '><br/>';
-            html += '<input id="userPassword" class="form-control" type="password" value="" placeholder="Senha"/><br/>';
+            
+            //NOME   
+            html += '           <div class="row clearfix">';
+            html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                   <label for="userNome">Nome</label>';
+            html += '               </div>';
+            html += '               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7" style="margin: 0 0 0 0;">';
+            html += '                   <div class="form-group">';
+            html += '                       <div class="form-line">';
+            html += '                           <input id="userNome" class="form-control" type="text" placeholder="Nome" value=' + user.nome + '>';
+            html += '                       </div>';
+            html += '                   </div>';
+            html += '               </div>';
+            html += '           </div>';
+            //E-mail
+            html += '           <div class="row clearfix">';
+            html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                   <label for="userEmail">E-mail</label>';
+            html += '               </div>';
+            html += '               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7" style="margin: 0 0 0 0;">';
+            html += '                   <div class="form-group">';
+            html += '                       <div class="form-line">';
+            html += '                           <input id="userEmail" class="form-control" type="text" placeholder="Email" value=' + user.email + '>';
+            html += '                       </div>';
+            html += '                   </div>';
+            html += '               </div>';
+            html += '           </div>';
+            //TELEPHONE
+            html += '           <div class="row clearfix">';
+            html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                   <label for="userTel">Telefone</label>';
+            html += '               </div>';
+            html += '               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7" style="margin: 0 0 0 0;">';
+            html += '                   <div class="form-group">';
+            html += '                       <div class="form-line">';
+            html += '                           <input id="userTel" class="form-control" type="text" placeholder="Telefone" value=' + user.tel + '>';
+            html += '                       </div>';
+            html += '                   </div>';
+            html += '               </div>';
+            html += '           </div>';
+            //Birth
+            html += '           <div class="row clearfix">';
+            html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                   <label for="userNasc">Nascimento</label>';
+            html += '               </div>';
+            html += '               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7" style="margin: 0 0 0 0;">';
+            html += '                   <div class="form-group">';
+            html += '                       <div class="form-line">';
+            html += '                           <input id="userNasc" class="form-control" type="text" placeholder="Data de Nascimento" value=' + user.nasc + '>';
+            html += '                       </div>';
+            html += '                   </div>';
+            html += '               </div>';
+            html += '           </div>';
+            //PASSWORD
+            html += '           <div class="row clearfix">';
+            html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                   <label for="userPassword">Senha</label>';
+            html += '               </div>';
+            html += '               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7" style="margin: 0 0 0 0;">';
+            html += '                   <div class="form-group">';
+            html += '                       <div class="form-line">';
+            html += '                           <input id="userPassword" class="form-control" type="password" value="" placeholder="Senha"/>';
+            html += '                       </div>';
+            html += '                   </div>';
+            html += '               </div>';
+            html += '           </div>';      
+            //LEVEL
+            html += '           <div class="row clearfix">';
+            html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                   <label for="userPassword">Nível de acesso</label>';
+            html += '               </div>';
+            html += '               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7" style="margin: 0 0 0 0;">';
+            html += '                   <div class="form-group">';
+            html += '                       <div class="form-line">';
+            html += '                           <select id="userRegisterLevel" class="form-control">';
+            html += '                                <option value="1">Proprietário</option>';
+            html += '                               <option value="2">representante </option>';
+            html += '                               <option value="3">residentes</option>';
+            html += '                            </select>';
+            html += '                       </div>';
+            html += '                   </div>';
+            html += '               </div>';
+            html += '           </div>';
+            //BLACKLIST
+            html += '           <div class="row clearfix">';
+            html += '               <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">';
+            html += '                    <input id="userBlackList" type="checkbox" class="filled-in"/>';
+            html += '                    <label for="userBlackList">Lista Negra</label>';
+            html += '               </div>';
+            html += '           </div>';
 
-            html += '   <select id="userRegisterLevel" class="form-control">';
-            html += '      <option value="1">Proprietário</option>';
-            html += '      <option value="2">representante </option>';
-            html += '      <option value="3">residentes</option>';
-            html += '   </select><br/>';
-
-            html += '<span>Lista Negra</span><input id="userBlackList" type="checkbox"/><br/>';
-            html += '<button class="form-control" onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
-            html += '    </div>';
-            html += '</div>';
+            html += '<button class="btn btn-primary btn-lg m-l-15 waves-effect" onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
+              
+            html += '     </div>';
+            html += '   </div>';
         }
 
         $('#userInfo').html(html);

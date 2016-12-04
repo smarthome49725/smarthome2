@@ -2,12 +2,14 @@
     position: absolute;
     width: 640px;
     height: 480px;
+    margin: 0 12%;
 }
 
 
 #remote-video {
     width: 640px;
     height: 480px;
+    margin: 0 12%;
 }
 
 #myCanvas {
@@ -15,6 +17,7 @@
     z-index: 10;
     width: 640px;
     height: 480px;
+    margin: 0 12%;
 }
 
 #lblMonito {
