@@ -50,8 +50,10 @@
                         faceRectangle(receivedAPI.msg, receivedAPI.userId);
                         console.log(receivedAPI.userId);
                         break;
-                    case "userData":
+                    case "userData":                        
                         userData = JSON.parse(receivedAPI.msg);
+                        console.log(userData);
+                        document.userData = JSON.parse(userData);
                         setUserView(userData);
                         break;
                     case "getalertemail":
@@ -203,8 +205,7 @@
             html += '    </div>';
             html += '</div>';
 
-        } else {
-            
+        } else {            
             html += '<br/><div class="panel panel-default">';
             html += '    <div class="panel-heading">';
             html += 'ID: ' + user.userID;
@@ -301,15 +302,152 @@
             html += '                    <input id="userBlackList" type="checkbox" class="filled-in"/>';
             html += '                    <label for="userBlackList">Lista Negra</label>';
             html += '               </div>';
-            html += '           </div>';
+            html += '           </div>';                    
+      
+            html += '     </div>';
+          
+            //Custom House';
+            html += '                       <div id="customHouse">';           
+            //                           <!--Bathroom-->
+            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                                   <label for="updateLightBathroom">Lampada do Banheiro</label>';
+            html += '                               </div>';
+            html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
+            html += '                                   <div class="form-group">';
+            html += '                                       <div class="form-line">';
+            html += '                                           <div class="switch">';
+            html += '                                               <label>OFF<input type="checkbox" id="updateLightBathroom" class=""><span class="lever switch-col-cyan"></span>ON</label>';
+            html += '                                           </div>';
+            html += '                                       </div>';
+            html += '                                   </div>';
+            html += '                               </div>';
+            html += '                           </div>';          
+            //                           <!--Kitchen-->
+            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                                   <label for="updateLightKitchen">Lampada da Cozinha</label>';
+            html += '                               </div>';
+            html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
+            html += '                                   <div class="form-group">';
+            html += '                                       <div class="form-line">';
+            html += '                                           <div class="switch">';
+            html += '                                               <label>OFF<input type="checkbox" id="updateLightKitchen" class=""><span class="lever switch-col-cyan"></span>ON</label>';
+            html += '                                           </div>';
+            html += '                                       </div>';
+            html += '                                   </div>';
+            html += '                               </div>';
+            html += '                           </div>';        
+            //                           <!--Bedroom-->';
+            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                                   <label for="updateLightBedroom">Lampada do quarto</label>';
+            html += '                               </div>';
+            html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
+            html += '                                   <div class="form-group">';
+            html += '                                       <div class="form-line">';
+            html += '                                           <div class="switch">';
+            html += '                                               <label>OFF<input type="checkbox" id="updateLightBedroom" class=""><span class="lever switch-col-cyan"></span>ON</label>';
+            html += '                                           </div>';
+            html += '                                       </div>';
+            html += '                                   </div>';
+            html += '                               </div>';
+            html += '                           </div>';         
+            //                           <!--Room1-->
+            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                                   <label for="updateLightRoom1">Lampada da 2º sala</label>';
+            html += '                               </div>';
+            html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
+            html += '                                   <div class="form-group">';
+            html += '                                       <div class="form-line">';
+            html += '                                           <div class="switch">';
+            html += '                                               <label>OFF<input type="checkbox" id="updateLightRoom1" class=""><span class="lever switch-col-cyan"></span>ON</label>';
+            html += '                                           </div>';
+            html += '                                       </div>';
+            html += '                                   </div>';
+            html += '                               </div>';
+            html += '                           </div>';        
+            //                           <!--Room2-->
+            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                                   <label for="updateLightRoom2">Lampada da 2ª sala</label>';
+            html += '                               </div>';
+            html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
+            html += '                                   <div class="form-group">';
+            html += '                                       <div class="form-line">';
+            html += '                                           <div class="switch">';
+            html += '                                               <label>OFF<input type="checkbox" id="updateLightRoom2" class=""><span class="lever switch-col-cyan"></span>ON</label>';
+            html += '                                           </div>';
+            html += '                                       </div>';
+            html += '                                   </div>';
+            html += '                               </div>';
+            html += '                           </div>';
+        
+            //                           <!--TV-->';
+            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                                   <label for="updateTV">Televisão</label>';
+            html += '                               </div>';
+            html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
+            html += '                                   <div class="form-group">';
+            html += '                                       <div class="form-line">';
+            html += '                                           <div class="switch">';
+            html += '                                               <label>OFF<input type="checkbox" id="updateTV" class=""><span class="lever switch-col-cyan"></span>ON</label>';
+            html += '                                           </div>';
+            html += '                                       </div>';
+            html += '                                   </div>';
+            html += '                               </div>';
+            html += '                           </div>';
+        
+            //                           <!--Curtain-->';
+            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                                   <label for="updateCurtain">Cortina</label>';
+            html += '                               </div>';
+            html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
+            html += '                                   <div class="form-group">';
+            html += '                                       <div class="form-line">';
+            html += '                                           <div class="switch">';
+            html += '                                               <label>OFF<input type="checkbox" id="updateCurtain" class=""><span class="lever switch-col-cyan"></span>ON</label>';
+            html += '                                           </div>';
+            html += '                                       </div>';
+            html += '                                   </div>';
+            html += '                               </div>';
+            html += '                           </div>';
+            //                           <!--air_conditioning-->';
+            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                                   <label for="updateAir_conditioning">Ar-condicionado</label>';
+            html += '                               </div>';
+            html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
+            html += '                                   <div class="form-group">';
+            html += '                                       <div class="form-line">';
+            html += '                                           <div class="switch">';
+            html += '                                               <label>OFF<input type="checkbox" id="updateAir_conditioning" class=""><span class="lever switch-col-cyan"></span>ON</label>';
+            html += '                                           </div>';
+            html += '                                       </div>';
+            html += '                                   </div>';
+            html += '                               </div>';
+            html += '                           </div>';
+            
+            html += '                       </div>';
 
             html += '           <button class="btn btn-primary btn-lg m-l-15 waves-effect" onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
-              
-            html += '     </div>';
+
             html += '   </div>';
         }
 
         $('#userInfo').html(html);
+        
+        $("#updateLightBathroom").prop("checked", $.parseJSON(user.lightBathroom.toLowerCase()));
+        $("#updateLightKitchen").prop("checked", $.parseJSON(user.lightKitchen.toLowerCase()));
+        $("#updateLightBedroom").prop("checked", $.parseJSON(user.lightBathroom.toLowerCase()));
+        $("#updateLightRoom1").prop("checked", $.parseJSON(user.lightBedroom.toLowerCase()));
+        $("#updateLightRoom2").prop("checked", $.parseJSON(user.lightRoom1.toLowerCase()));
+        $("#updateTV").prop("checked", $.parseJSON(user.lightRoom2.toLowerCase()));
+        $("#updateCurtain").prop("checked", $.parseJSON(user.TV.toLowerCase()));
+        $("#updateAir_conditioning").prop("checked", $.parseJSON(user.air_conditioning.toLowerCase()));
 
         $("#userBlackList").change(function () {
             if (this.checked) {                
@@ -493,7 +631,7 @@
                 var crypPassword = CryptoJS.SHA1($('#password').val());
                 crypPassword = crypPassword.toString(CryptoJS.enc.Base64);
                 var cod = {
-                    userID: receivedAPI.userId,
+                    userID: 110,//receivedAPI.userId,
                     level: level,
                     registerLevel: $('#registerLevel').val(),
                     cod: cod,
@@ -509,7 +647,7 @@
                     lightBedroom: $("#lightBedroom").prop("checked"),
                     lightRoom1: $("#lightRoom1").prop("checked"),
                     lightRoom2: $("#lightRoom2").prop("checked"),
-                    TV: $("TV").prop("checked"),                   
+                    TV: $("#TV").prop("checked"),                   
                     curtain: $("#curtain").prop("checked"),
                     air_conditioning: $("#air_conditioning").prop("checked")                    
                 };
@@ -565,12 +703,11 @@
                     cod: cod
                 };
                 break;
-
             case "updateuser":
                 var crypUserPassword = CryptoJS.SHA1($('#userPassword').val());
                 crypUserPassword = crypUserPassword.toString(CryptoJS.enc.Base64);
                 var cod = {
-                    userID: userID,
+                    userID: 110,//userID,
                     level: level,
                     registerLevel: registerLevel = $('#userRegisterLevel').val() != undefined ? $('#userRegisterLevel').val() : 0,
                     cod: cod,
@@ -581,14 +718,14 @@
                     password: crypUserPassword,
                     blacklist: $("#userBlackList").prop("checked"),
 
-                    lightBathroom: $("#lightBathroom").prop("checked"),
-                    lightKitchen: $("#lightKitchen").prop("checked"),
-                    lightBedroom: $("#lightBedroom").prop("checked"),
-                    lightRoom1: $("#lightRoom1").prop("checked"),
-                    lightRoom2: $("#lightRoom2").prop("checked"),
-                    TV: $("TV").prop("checked"),
-                    curtain: $("#curtain").prop("checked"),
-                    air_conditioning: $("#air_conditioning").prop("checked")
+                    lightBathroom: $("#updateLightBathroom").prop("checked"),
+                    lightKitchen: $("#updateLightKitchen").prop("checked"),
+                    lightBedroom: $("#updateLightBedroom").prop("checked"),
+                    lightRoom1: $("#updateLightRoom1").prop("checked"),
+                    lightRoom2: $("#updateLightRoom2").prop("checked"),
+                    TV: $("#updateTV").prop("checked"),
+                    curtain: $("#updateCurtain").prop("checked"),
+                    air_conditioning: $("#updateAir_conditioning").prop("checked")
                 };
                 break;
                 
