@@ -90,24 +90,13 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.html">SmartHome II</a>
+                <a id="StatusConnection" class="navbar-brand" href="index.html">SmartHome II</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <!-- logout -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" id="exit"><span class="glyphicon glyphicon-log-out" role="button"></span></a>
-                        <div class="dropdown">
-                            <button class="dropdown-toggle" type="button" id="StatusConnection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Conexão API
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="dropdow-menu">
-                                <li><a href="#" id="restartConnection">Reiniciar</a></li>
-                                <!--<li role="separator" class="divider"></li>-->
-                            </ul>
-                        </div>
-
                     </li>
                 </ul>
             </div>
@@ -414,6 +403,12 @@
                                 <a id="linkConfigEmails" data-toggle="modal" data-target="#modal_email">
                                     <span>E-mails</span>
                                 </a>
+                            </li>
+                            <li>
+                                <a id="restartConnection">
+                                    <span>Reiniciar Conexão</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -606,7 +601,7 @@
                                         <!--Bathroom-->
                                         <hr />
                                         <h4>Lâmpadas</h4>
-                                        <br/>
+                                        <br />
                                         <div class="row clearfix panel-switch-btn" id="">
                                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                                 <label for="lightBathroom">Banheiro</label>

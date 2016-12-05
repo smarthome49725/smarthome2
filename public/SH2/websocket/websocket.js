@@ -13,8 +13,7 @@
     window.eventsWS = function () {
         socket.onopen = function () {
             console.log('CONNECTION ESTABLISHED!');
-            $('#StatusConnection').css("background", "green");
-            $('#lbStatus').text("CONNECTED");
+            $('#StatusConnection').css("background", "#8BC34A");
                         
             //Get Imagem login and Set In view
             getImgLogin();
@@ -28,8 +27,7 @@
 
         socket.onclose = function () {
             console.log('CLOSED CONNECTION!');
-            $('#StatusConnection').css("background", "red");
-            $('#lbStatus').text("NOT CONNECTED");
+            $('#StatusConnection').css("background", "#E91E63");
         };
 
         socket.onerror = function (errorEvent) {

@@ -103,3 +103,12 @@ body {
 #btLogin{
     margin-bottom: 15px;
 }
+
+#StatusConnection, .dropdown, #dropdow-menu {
+    width: 90px;
+    font-size: 10px;
+    padding: 1px;
+    margin: 0;
+    float: right;
+    min-width: 0px;
+}

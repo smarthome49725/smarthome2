@@ -102,22 +102,12 @@
 }
 
 
-#StatusConnection, .dropdown, #dropdow-menu {
-    width: 90px;
-    font-size: 10px;
-    padding: 1px;
-    margin: 0;
-    float: right;
-    min-width: 0px;
+#StatusConnection{
+    border-radius: 10px; 
 }
 
 #dropdow-menu {
     font-size: 12px;
-}
-
-#restartConnection {
-    padding: 0 0 0 5px;
-    margin: 0;    
 }
 
 #lbStatus {
