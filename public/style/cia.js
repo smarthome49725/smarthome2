@@ -137,7 +137,7 @@ function acenderLampBathroom() {
 }
 
 function sendLampBathroom() {
-    //socket.emit('lamp_All', "lampBathroom");
+    socket.emit('lamp_All', "lampBathroom");
 }
 
 // FUNÇAO DA LAMPADA DA kitchen
@@ -159,7 +159,7 @@ function acenderLampkitchen() {
 }
 
 function sendLampKitchen() {
-    //socket.emit('lamp_All', "lampKitchen");
+    socket.emit('lamp_All', "lampKitchen");
 }
 
 // FUNÇAO DA LAMPADA DO bedroom
@@ -181,7 +181,7 @@ function acenderLampbedroom() {
 }
 
 function sendLampBedroom() {
-    //socket.emit('lamp_All', "lampBedroom");
+    socket.emit('lamp_All', "lampBedroom");
 }
 
 // FUNÇAO DA LAMPADA 1 DA SALA
@@ -203,7 +203,7 @@ function acenderLamproomOne() {
 }
 
 function sendLampRoomOne() {
-    //socket.emit('lamp_All', "lampRoomOne");
+    socket.emit('lamp_All', "lampRoomOne");
 }
 
 //FUNÇAO DA LAMPADA 2 DA SALA
@@ -225,7 +225,7 @@ function acenderLamproomTwo() {
 }
 
 function sendLampRoomTwo() {
-    //socket.emit('lamp_All', "lampRoomTwo");
+    socket.emit('lamp_All', "lampRoomTwo");
 }
 
 function status() {
@@ -277,7 +277,7 @@ function controlAllLamps() {
 }
 
 function sendLamp_All() {
-    //socket.emit('lamp_All', "lamp_All_Home");
+    socket.emit('lamp_All', "lamp_All_Home");
 }
 
 function modifyLamps(un_lamp, un_all_lamp) {
@@ -319,7 +319,7 @@ function activeCurtain() {
 }
 
 function sendCurtain() {
-    //socket.emit('curtain_func', "control_Curtain");
+    socket.emit('curtain_func', "control_Curtain");
 }
 
 //tv
@@ -340,7 +340,7 @@ function activeTvCia() {
 }
 
 function sendTvHome() {
-    //socket.emit('tv_function', "tv_On_Off");
+    socket.emit('tv_function', "tv_On_Off");
 }
 
 function Increase() {
@@ -359,7 +359,7 @@ function decrease() {
 
 function sendVolume_Increase() {
     console.log("envia Aumento");
-    //socket.emit('tv_volume', "increase");
+    socket.emit('tv_volume', "increase");
 }
 
 function sendVolume_Decrease() {
@@ -391,7 +391,7 @@ function sendVolume_DecreaseAr() {
 }
 
 function sendArHome() {
-    //socket.emit('ar_function', "ar_On_Off");
+    socket.emit('ar_function', "ar_On_Off");
 }
 
 function Increase_ar() {
