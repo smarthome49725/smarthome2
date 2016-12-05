@@ -308,11 +308,13 @@
             html += '     </div>';
           
             //Custom House';
-            html += '                       <div id="customHouse">';           
+            html += '                       <div id="customHouse">';
+            html += '                           <hr/>';
+            html += '                           <h4 style="margin-left: 40px">Lânpadas:</h4><br/>';
             //                           <!--Bathroom-->
             html += '                           <div class="row clearfix panel-switch-btn" id="">';
             html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
-            html += '                                   <label for="updateLightBathroom">Lampada do Banheiro</label>';
+            html += '                                   <label for="updateLightBathroom">Banheiro</label>';
             html += '                               </div>';
             html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
             html += '                                   <div class="form-group">';
@@ -327,7 +329,7 @@
             //                           <!--Kitchen-->
             html += '                           <div class="row clearfix panel-switch-btn" id="">';
             html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
-            html += '                                   <label for="updateLightKitchen">Lampada da Cozinha</label>';
+            html += '                                   <label for="updateLightKitchen">Cozinha</label>';
             html += '                               </div>';
             html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
             html += '                                   <div class="form-group">';
@@ -342,7 +344,7 @@
             //                           <!--Bedroom-->';
             html += '                           <div class="row clearfix panel-switch-btn" id="">';
             html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
-            html += '                                   <label for="updateLightBedroom">Lampada do quarto</label>';
+            html += '                                   <label for="updateLightBedroom">Quarto</label>';
             html += '                               </div>';
             html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
             html += '                                   <div class="form-group">';
@@ -357,7 +359,7 @@
             //                           <!--Room1-->
             html += '                           <div class="row clearfix panel-switch-btn" id="">';
             html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
-            html += '                                   <label for="updateLightRoom1">Lampada da 2º sala</label>';
+            html += '                                   <label for="updateLightRoom1">Sala Princilal</label>';
             html += '                               </div>';
             html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
             html += '                                   <div class="form-group">';
@@ -370,9 +372,9 @@
             html += '                               </div>';
             html += '                           </div>';        
             //                           <!--Room2-->
-            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                           <div class="row clearfix panel-switch-btn" style="margin: 0 0 0 0;">';
             html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
-            html += '                                   <label for="updateLightRoom2">Lampada da 2ª sala</label>';
+            html += '                                   <label for="updateLightRoom2">Sala de Jantar</label>';
             html += '                               </div>';
             html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
             html += '                                   <div class="form-group">';
@@ -384,7 +386,8 @@
             html += '                                   </div>';
             html += '                               </div>';
             html += '                           </div>';
-        
+
+            html += '                           <hr/>';
             //                           <!--TV-->';
             html += '                           <div class="row clearfix panel-switch-btn" id="">';
             html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
@@ -418,7 +421,7 @@
             html += '                           </div>';
             //                           <!--air_conditioning-->';
             html += '                           <div class="row clearfix panel-switch-btn" id="">';
-            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label" style="padding: 0 0 0 0;">';
             html += '                                   <label for="updateAir_conditioning">Ar-condicionado</label>';
             html += '                               </div>';
             html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
@@ -502,8 +505,8 @@
 
     /***************************************************************
      *                       GET USER                              *  
-     ***************************************************************/
-    $('#btConsultar').click(function () {
+     ***************************************************************/    
+    $('#btConsultar').click(function () {        
         document.sendCodAPI('getuser', '0', false);
     });
 
@@ -548,6 +551,16 @@
 
                 } else {
                     blacklist = "Não";
+                    user.blacklist
+                    var lightBathroom = user.lightBathroom == "True" ? "Ligar" : "Desligar";
+                    var lightKitchen = user.lightKitchen == "True" ? "Ligar" : "Desligar";                    
+                    var lightBedroom = user.lightBedroom == "True" ? "Ligar" : "Desligar";
+                    var lightRoom1 = user.lightRoom1 == "True" ? "Ligar" : "Desligar";
+                    var lightRoom2 = user.lightRoom2 == "True" ? "Ligar" : "Desligar";
+                    var TV = user.TV == "True" ? "Ligar" : "Desligar";
+                    var curtain = user.curtain == "True" ? "Ligar" : "Desligar";
+                    var air_conditioning = user.air_conditioning == "True" ? "Ligar" : "Desligar";
+                    
 
                     html += '<br/><div class="panel panel-default">';
                     html += '    <div class="panel-heading">';
@@ -563,6 +576,21 @@
                     html += '<p>Senha: ******** </p>';
                     html += '<p>Nivel de Acesso: ' + nivAcesso + '</p>';
                     html += '<p>Lista Negra: ' + blacklist + '</p>';
+
+                    html += '<hr/>';
+                    html += '<h4>Lânpadas:</h4>';                   
+
+                    html += '<p>Banheiro: ' + lightBathroom + '</p>';
+                    html += '<p>Cozinha: ' + lightKitchen + '</p>';
+                    html += '<p>Quarto: ' + lightBedroom + '</p>';
+                    html += '<p>Sala Principal: ' + lightRoom1 + '</p>';
+                    html += '<p>Sala de Jantar: ' + lightRoom2 + '</p>';
+                    html += '<hr/>';
+                    html += '<p>Televisão: ' + TV + '</p>';
+                    html += '<p>Cortina: ' + curtain + '</p>';
+                    html += '<p>Ar-Condicionado: ' + air_conditioning + '</p>';
+                 
+
                     html += '    </div>';
                     html += '</div>';
                 }
