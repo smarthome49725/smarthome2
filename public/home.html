@@ -968,5 +968,27 @@
             </div>
         </div>
     </section>
+
+    <script>
+         $("#customHouse").hide();
+         $("#btBack").hide();
+
+         function stepnext(pStep, pBlack){
+
+             if (pStep != 2) {
+                $("#customHouse").hide();
+                $("#mainRegister").show();
+                $("#btCustom").show();
+                $("#btBack").hide();
+             } else {
+                $("#customHouse").show();
+                $("#mainRegister").hide();
+                $("#btCustom").hide();
+                $("#btBack").show();
+             }
+         }
+    </script>
+
 </body>
+
 </html>   
