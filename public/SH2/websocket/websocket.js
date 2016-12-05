@@ -200,11 +200,34 @@
             html += '        <button onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-trash" ></button>';
             html += '    </div>';
             html += '    <div class="panel-body">';
-            html += '<input id="userNome" class="form-control" type="text" placeholder="Nome" value=' + user.nome + '><br/>';
-            html += '<span>Lista Negra</span><input checked id="userBlackList" type="checkbox"/><br/>';
-            html += '<button onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
-            html += '    </div>';
-            html += '</div>';
+
+            //NOME   
+            html += '           <div class="row clearfix" id="divUserNome">';
+            html += '               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                   <label for="userNome">Nome</label>';
+            html += '               </div>';
+            html += '               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7" style="margin: 0 0 0 0;">';
+            html += '                   <div class="form-group">';
+            html += '                       <div class="form-line">';
+            html += '                           <input id="userNome" class="form-control" type="text" placeholder="Nome" value=' + user.nome + '>';
+            html += '                       </div>';
+            html += '                   </div>';
+            html += '               </div>';
+            html += '           </div>';
+
+            //BLACKLIST
+            html += '           <div class="row clearfix">';
+            html += '               <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">';
+            html += '                    <input id="userBlackList" type="checkbox" class="filled-in"/>';
+            html += '                    <label for="userBlackList">Lista Negra</label>';
+            html += '               </div>';
+            html += '           </div>';
+
+            html += '     </div>';        
+
+            html += '           <button class="btn btn-primary btn-lg m-l-15 waves-effect" onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button><br/>';
+
+            html += '   <br/></div>';
 
         } else {            
             html += '<br/><div class="panel panel-default">';
@@ -437,9 +460,9 @@
             
             html += '                       </div>';
 
-            html += '           <button class="btn btn-primary btn-lg m-l-15 waves-effect" onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button>';
+            html += '           <button class="btn btn-primary btn-lg m-l-15 waves-effect" onclick="window.alterUser(\'' + 'updateuser' + '\'   ,   \'' + user.userID + '\' ,  \'' + user.nome + '\');" class="btn btn-success" id="btUpdate1">Atualizar</button><br/>';
 
-            html += '   </div>';
+            html += ' <br/> </div>';
         }
 
         $('#userInfo').html(html);
@@ -452,9 +475,9 @@
         $("#updateTV").prop("checked", $.parseJSON(user.lightRoom2.toLowerCase()));
         $("#updateCurtain").prop("checked", $.parseJSON(user.TV.toLowerCase()));
         $("#updateAir_conditioning").prop("checked", $.parseJSON(user.air_conditioning.toLowerCase()));
-
+       
         $("#userBlackList").change(function () {
-            if (this.checked) {                
+            if (this.checked) {
                 $('#userEmail').val("");
                 $('#userTel').val("");
                 $('#userNasc').val("");                
@@ -466,13 +489,14 @@
                 $('#divUserNasc').hide();
                 $('#divUserPassword').hide();
                 $('#divUserRegisterLevel').hide();
+                $('#customHouse').hide();
             } else {
                 $('#divUserEmail').show();
                 $('#divUserTel').show();
                 $('#divUserNasc').show();
                 $('#divUserPassword').show();
-                $('#divUserRegisterLevel').show();
-                $('#userRegisterLevel').val('selecion')
+                $('#divUserRegisterLevel').show();               
+                $('#userRegisterLevel').val('selecion')                
             }
         });
 
