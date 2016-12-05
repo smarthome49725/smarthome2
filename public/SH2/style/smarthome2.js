@@ -10,11 +10,8 @@ $('document').ready(function () {
     var showRegister = true;
     $('#divRegister').hide();
 
-    var showConfigIP = true;
-    $('#divConfigIP').hide();
-
-    var showConfigEmails = true;
-    $('#divConfigEmails').hide();
+    var showQueryUser = true;
+    $('#divQueryUser').hide();
 
     $('#step2').hide();
 
@@ -46,19 +43,6 @@ $('document').ready(function () {
         }
     });
 
-    $('#btShowConfig').click(function () {
-        if (flag3 === true) {
-            $('#divConfigIP').show();
-            $('#step2').hide();
-            $('#divRegister').hide();
-            flag3 = false;
-            flag = true;
-            flag2 = true;
-        } else {
-            $('#divConfigIP').hide();
-            flag3 = true;
-        }
-    });
 
     $("#blackList").change(function () {
         if (this.checked) {
@@ -87,57 +71,32 @@ $('document').ready(function () {
 
 
     $('#linkCadastro').click(function () {
-        $('#divConfigIP').hide();
-        showConfigIP = true;
-
-        $('#divConfigEmails').hide();
-        showConfigEmails = true;
-
-
+        $('#divQueryUser').hide();
+        $('#userInfo').hide();
+        showQueryUser = true;
         if (showRegister) {
             $('#divRegister').show();
             showRegister = false;
         } else {
             $('#divRegister').hide();
             showRegister = true;
+            $('#userInfo').show();
         }
     });
 
 
-    $('#linkConfigIP').click(function () {
+    $('#linkConsulta').click(function () {
         $('#divRegister').hide();
         showRegister = true;
-
-        $('#divConfigEmails').hide();
-        showConfigEmails = true;
-
-        if (showConfigIP) {
-            $('#divConfigIP').show();
-            showConfigIP = false;
+        if (showQueryUser) {
+            $('#divQueryUser').show();
+            showQueryUser = false;
         } else {
-            $('#divConfigIP').hide();
-            showConfigIP = true;
+            $('#divQueryUser').hide();
+            showQueryUser = true;
         }
     });
-
-    $('#linkConfigEmails').click(function () {
-        $('#divRegister').hide();
-        showRegister = true;
-
-        $('#divConfigIP').hide();
-        showConfigIP = true;
-
-        if (showConfigEmails) {
-            $('#divConfigEmails').show();
-            showConfigEmails = false;
-        } else {
-            $('#divConfigEmails').hide();
-            showConfigEmails = true;
-        }
-    });
-
-
-
+    
 
     $(".rect").change(function () {
         if (this.checked) {
@@ -145,9 +104,7 @@ $('document').ready(function () {
         } else {
             $('#monitoring').hide();
         }
-    });
-
-    
+    });  
 
 
 

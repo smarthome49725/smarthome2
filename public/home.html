@@ -90,7 +90,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a id="StatusConnection" class="navbar-brand" href="index.html">SmartHome II</a>
+                <a class="navbar-brand" href="index.html"><span id="StatusConnection">SmartHome II</span></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -349,7 +349,83 @@
                 </div>
             </div>
         </div>
+        <!--Query User-->
+        <div id="divQueryUser" class="modal fade" style="padding: 0px;" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                CONSULTA
+                            </h4>
+                        </div>
+                        <div class="modal-body" style="padding: 0px;">
+                            <div class="row clearfix">
+                                <form id="form-cadastro" class="form-horizontal">
+                                    <div class="row clearfix" id="formName">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                            <label for="queryName">Nome</label>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input id="queryName" type="text" class="form-control" placeholder="Digite seu nome">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix" id="">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                            <label id="labelEmail" for="queryEmail">E-mail</label>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input id="queryEmail" type="email" class="form-control" placeholder="Digite um endereço de Email Válido">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix" id="">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                            <label for="queryTel">Telefone</label>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input id="queryTel" type="text" class="form-control" placeholder="Digite seu telefone para contato">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix" id="">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                            <label for="queryNasc">Nascimento</label>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input id="queryNasc" type="date" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </form>
+                                <br />
+                                <button id="btConsultar" class="btn btn-primary btn-lg m-l-15 waves-effect">Consultar</button>
+                            </div>
+                            <div id="outputQueryUser"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <!-- #Top Bar -->
     <section>
         <!-- Left Sidebar -->
@@ -369,10 +445,10 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">NAVEGAÇÃO</li>
-                    <li class="active">
-                        <a href="index.html">
-                            <i class="material-icons">dashboard</i>
-                            <span>Início</span>
+                    <li>
+                        <a id="openTheDoor" href="javascript:void(0);">
+                            <i class="material-icons">vpn_key</i>
+                            <span>Abrir porta</span>
                         </a>
                     </li>
                     <li>
@@ -386,6 +462,13 @@
                                     <span>Cadastro</span>
                                 </a>
                             </li>
+
+                            <li>
+                                <a data-toggle="modal" data-target="#divQueryUser">
+                                    <span>Consulta</span>
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
                     <li>
@@ -492,22 +575,36 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="body" id="monitoring">
-                            <!--<div id="real_time_chart" class="dashboard-flot-chart"></div>-->
-                            <canvas id="myCanvas" align="center"></canvas>
-                            <video id="my-video" autoplay align="center"></video>
-                            <video id="remote-video" autoplay align="center"></video>
-                            <audio id="soundAlert">
-                                <source src="SH2/sounds/alert.mp3" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
-
+                        <div class="body">
+                            <div id="monitoring">
+                                <!--<div id="real_time_chart" class="dashboard-flot-chart"></div>-->
+                                <canvas id="myCanvas" align="center"></canvas>
+                                <video id="my-video" autoplay align="center"></video>
+                                <video id="remote-video" autoplay align="center"></video>
+                                <audio id="soundAlert">
+                                    <source src="SH2/sounds/alert.mp3" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                                <div id="userInfo"></div>
+                            </div>
                             <!--FORM CADASTRO-->
                             <div id="divRegister" class="row clearfix">
                                 <div class="header">
-                                    <h2>CADASTRO</h2>
+                                    <h2 id="lbCadastro">CADASTRO</h2>
                                 </div>
                                 <form id="form-cadastro" class="form-horizontal">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                            <a id="takePicture" class="glyphicon glyphicon-camera" href="javascript:void(0);"></a>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <label id="labPicture" for="takePicture">Capturar Foto</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row clearfix" id="formName">
                                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                             <label for="name">Nome</label>
@@ -610,7 +707,7 @@
                                                 <div class="form-group">
                                                     <div class="form-line">
                                                         <div class="switch">
-                                                            <label>OFF<input type="checkbox" checked id="lightBathroom" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                            <label>OFF<input type="checkbox" id="lightBathroom" class=""><span class="lever switch-col-cyan"></span>ON</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -626,7 +723,7 @@
                                                 <div class="form-group">
                                                     <div class="form-line">
                                                         <div class="switch">
-                                                            <label>OFF<input type="checkbox" checked id="lightKitchen" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                            <label>OFF<input type="checkbox" id="lightKitchen" class=""><span class="lever switch-col-cyan"></span>ON</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -642,7 +739,7 @@
                                                 <div class="form-group">
                                                     <div class="form-line">
                                                         <div class="switch">
-                                                            <label>OFF<input type="checkbox" checked id="lightBedroom" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                            <label>OFF<input type="checkbox" id="lightBedroom" class=""><span class="lever switch-col-cyan"></span>ON</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -652,13 +749,13 @@
                                         <!--Room1-->
                                         <div class="row clearfix panel-switch-btn" id="">
                                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                                <label for="lightRoom1">Sala Princial</label>
+                                                <label for="lightRoom1">Sala Principal</label>
                                             </div>
                                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                                 <div class="form-group">
                                                     <div class="form-line">
                                                         <div class="switch">
-                                                            <label>OFF<input type="checkbox" checked id="lightRoom1" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                            <label>OFF<input type="checkbox" id="lightRoom1" class=""><span class="lever switch-col-cyan"></span>ON</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -674,7 +771,7 @@
                                                 <div class="form-group">
                                                     <div class="form-line">
                                                         <div class="switch">
-                                                            <label>OFF<input type="checkbox" checked id="lightRoom2" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                            <label>OFF<input type="checkbox" id="lightRoom2" class=""><span class="lever switch-col-cyan"></span>ON</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -690,7 +787,7 @@
                                                 <div class="form-group">
                                                     <div class="form-line">
                                                         <div class="switch">
-                                                            <label>OFF<input type="checkbox" checked id="TV" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                            <label>OFF<input type="checkbox" id="TV" class=""><span class="lever switch-col-cyan"></span>ON</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -706,7 +803,7 @@
                                                 <div class="form-group">
                                                     <div class="form-line">
                                                         <div class="switch">
-                                                            <label>OFF<input type="checkbox" checked id="curtain" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                            <label>OFF<input type="checkbox" id="curtain" class=""><span class="lever switch-col-cyan"></span>ON</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -722,7 +819,7 @@
                                                 <div class="form-group">
                                                     <div class="form-line">
                                                         <div class="switch">
-                                                            <label>OFF<input type="checkbox" checked id="air_conditioning" class=""><span class="lever switch-col-cyan"></span>ON</label>
+                                                            <label>OFF<input type="checkbox" id="air_conditioning" class=""><span class="lever switch-col-cyan"></span>ON</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -733,11 +830,9 @@
                                 </form>
                                 <br />
                                 <button class="btn btn-primary btn-lg m-l-15 waves-effect" id="btCadastro">Cadastrar</button>
-                                <button class="btn btn-primary btn-lg m-l-15 waves-effect" id="btConsultar">Consultar</button>
-                                <div id="tableUser"></div>
                             </div>
                             <!--/FORM CADASTRO-->
-                            <div id="userInfo"></div>
+
                         </div>
                     </div>
                     <!-- #END# CPU Usage -->

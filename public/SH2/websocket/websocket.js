@@ -13,7 +13,7 @@
     window.eventsWS = function () {
         socket.onopen = function () {
             console.log('CONNECTION ESTABLISHED!');
-            $('#StatusConnection').css("background", "#8BC34A");
+            $('#StatusConnection').css("color", "white");
                         
             //Get Imagem login and Set In view
             getImgLogin();
@@ -27,13 +27,11 @@
 
         socket.onclose = function () {
             console.log('CLOSED CONNECTION!');
-            $('#StatusConnection').css("background", "#E91E63");
+            $('#StatusConnection').css("color", "black");
         };
 
         socket.onerror = function (errorEvent) {
-            console.log(errorEvent);
-            $('#StatusConnection').css("background", "red");
-            $('#lbStatus').text("NOT CONNECTED");
+            console.log(errorEvent);                        
         };
 
         socket.onmessage = function (messageEvent) {            
@@ -51,11 +49,11 @@
                         break;
                     case "userData":                        
                         userData = JSON.parse(receivedAPI.msg);                                                
-                        setUserView(userData);
+                        setUserView(userData, 'outputQueryUser');
                         break;
                     case "userinview":
                         userInView = JSON.parse(receivedAPI.msg);
-                        setUserView(userInView);
+                        setUserView(userInView, 'userInfo'); 
                         break;
                     case "getalertemail":
                         setEmailInView(receivedAPI.msg);
@@ -125,10 +123,11 @@
     /***************************************************************
      *                       GENERATE ID USER                      *  
      ***************************************************************/
-    $('#name').click(function () {
+    $('#takePicture').click(function () {
         document.sendCodAPI('geniduser', '0', false);
-        console.log('enviou');
+        $('#labPicture').text('Foto capturada');
     });
+    
 
     /***************************************************************
      *                       GET USER IN VIEW                      *  
@@ -233,7 +232,7 @@
             html += 'ID: ' + user.userID;
             html += '        <button onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-trash" ></button>';
             html += '    </div>';
-            html += '    <div class="panel-body">';
+            html += '    <div class="panel-body" style="margin-left:10px; font-size:12px">';
             
             //NOME   
             html += '           <div class="row clearfix" id="divUserNome">';
@@ -329,15 +328,15 @@
             html += '     </div>';
           
             //Custom House';
-            html += '                       <div id="customHouse">';
+            html += '                       <div id="customHouse" style="margin-left:13px; font-size:12px">';
             html += '                           <hr/>';
-            html += '                           <h4 style="margin-left: 40px">Lânpadas:</h4><br/>';
+            html += '                           <h4 style="margin-left: 40px">Lâmpadas:</h4><br/>';
             //                           <!--Bathroom-->
-            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                           <div class="row clearfix " id="">';
             html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
             html += '                                   <label for="updateLightBathroom">Banheiro</label>';
             html += '                               </div>';
-            html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
+            html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7" >';
             html += '                                   <div class="form-group">';
             html += '                                       <div class="form-line">';
             html += '                                           <div class="switch">';
@@ -348,7 +347,7 @@
             html += '                               </div>';
             html += '                           </div>';          
             //                           <!--Kitchen-->
-            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                           <div class="row clearfix " id="">';
             html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
             html += '                                   <label for="updateLightKitchen">Cozinha</label>';
             html += '                               </div>';
@@ -363,7 +362,7 @@
             html += '                               </div>';
             html += '                           </div>';        
             //                           <!--Bedroom-->';
-            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                           <div class="row clearfix  " id="">';
             html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
             html += '                                   <label for="updateLightBedroom">Quarto</label>';
             html += '                               </div>';
@@ -378,9 +377,9 @@
             html += '                               </div>';
             html += '                           </div>';         
             //                           <!--Room1-->
-            html += '                           <div class="row clearfix panel-switch-btn" id="">';
-            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
-            html += '                                   <label for="updateLightRoom1">Sala Princilal</label>';
+            html += '                           <div class="row clearfix  " id="">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label" style="padding: 0 1px 0 0">';
+            html += '                                   <label for="updateLightRoom1">Sala Principal</label>';
             html += '                               </div>';
             html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
             html += '                                   <div class="form-group">';
@@ -393,8 +392,8 @@
             html += '                               </div>';
             html += '                           </div>';        
             //                           <!--Room2-->
-            html += '                           <div class="row clearfix panel-switch-btn" style="margin: 0 0 0 0;">';
-            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                           <div class="row clearfix">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label" style="padding: 0 1px 0 0">';
             html += '                                   <label for="updateLightRoom2">Sala de Jantar</label>';
             html += '                               </div>';
             html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
@@ -410,7 +409,7 @@
 
             html += '                           <hr/>';
             //                           <!--TV-->';
-            html += '                           <div class="row clearfix panel-switch-btn" id="">';
+            html += '                           <div class="row clearfix  " id="">';
             html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
             html += '                                   <label for="updateTV">Televisão</label>';
             html += '                               </div>';
@@ -426,8 +425,8 @@
             html += '                           </div>';
         
             //                           <!--Curtain-->';
-            html += '                           <div class="row clearfix panel-switch-btn" id="">';
-            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">';
+            html += '                           <div class="row clearfix  " id="">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label" style="padding: 0 6px 0 0;">';
             html += '                                   <label for="updateCurtain">Cortina</label>';
             html += '                               </div>';
             html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
@@ -441,8 +440,8 @@
             html += '                               </div>';
             html += '                           </div>';
             //                           <!--air_conditioning-->';
-            html += '                           <div class="row clearfix panel-switch-btn" id="">';
-            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label" style="padding: 0 0 0 0;">';
+            html += '                           <div class="row clearfix  " id="">';
+            html += '                               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label" style="padding: 0 1px 0 0; font-size:12px">';
             html += '                                   <label for="updateAir_conditioning">Ar-condicionado</label>';
             html += '                               </div>';
             html += '                               <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">';
@@ -463,7 +462,7 @@
             html += ' <br/> </div>';
         }
 
-        $('#userInfo').html(html);
+        $('#outputQueryUser').html(html);
         
         $("#updateLightBathroom").prop("checked", $.parseJSON(user.lightBathroom.toLowerCase()));
         $("#updateLightKitchen").prop("checked", $.parseJSON(user.lightKitchen.toLowerCase()));
@@ -532,7 +531,7 @@
         document.sendCodAPI('getuser', '0', false);
     });
 
-    function setUserView(userData) {
+    function setUserView(userData, mode) {
         //alert(userData.isArray());
         console.log(userData);
         window.userData = userData;
@@ -562,8 +561,10 @@
                     html += '<br/><div class="panel panel-default">';
                     html += '    <div class="panel-heading">';
                     html += 'ID: ' + user.userID;
-                    html += '        <button onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-trash" ></button>';
-                    html += '        <button onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</button>';
+                    if (mode == 'outputQueryUser') {
+                        html += '        <button onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-trash" ></button>';
+                        html += '        <button onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</button>';
+                    }
                     html += '    </div>';
                     html += '    <div class="panel-body">';
                     html += '<p> Nome: ' + user.nome + '</p>';
@@ -580,15 +581,16 @@
                     var lightRoom1 = user.lightRoom1 == "True" ? "Ligar" : "Desligar";
                     var lightRoom2 = user.lightRoom2 == "True" ? "Ligar" : "Desligar";
                     var TV = user.TV == "True" ? "Ligar" : "Desligar";
-                    var curtain = user.curtain == "True" ? "Ligar" : "Desligar";
-                    var air_conditioning = user.air_conditioning == "True" ? "Ligar" : "Desligar";
-                    
+                    var cortain = user.curtain == "True" ? "Abrir" : "Fechar";
+                    var air_conditioning = user.air_conditioning == "True" ? "Ligar" : "Desligar";                    
 
                     html += '<br/><div class="panel panel-default">';
                     html += '    <div class="panel-heading">';
                     html += 'ID: ' + user.userID;
-                    html += '        <button onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-trash" ></button>';
-                    html += '        <button onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</button>';
+                    if (mode == 'outputQueryUser') {
+                        html += '        <button onclick="window.alterUser(\'' + 'unregisterUser' + '\'     ,     \'' + user.userID + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-trash" ></button>';
+                        html += '        <button onclick="window.updateUser(\'' + 'updateuser' + '\'     ,     \'' + i + '\'     ,   \'' + user.nome + '\');" class="btnExcluir glyphicon glyphicon-edit" >Editar</button>';
+                    }
                     html += '    </div>';
                     html += '    <div class="panel-body">';
                     html += '<p> Nome: ' + user.nome + '</p>';
@@ -600,7 +602,7 @@
                     html += '<p>Lista Negra: ' + blacklist + '</p>';
 
                     html += '<hr/>';
-                    html += '<h4>Lânpadas:</h4>';                   
+                    html += '<h4>Lâmpadas:</h4>';                   
 
                     html += '<p>Banheiro: ' + lightBathroom + '</p>';
                     html += '<p>Cozinha: ' + lightKitchen + '</p>';
@@ -609,7 +611,7 @@
                     html += '<p>Sala de Jantar: ' + lightRoom2 + '</p>';
                     html += '<hr/>';
                     html += '<p>Televisão: ' + TV + '</p>';
-                    html += '<p>Cortina: ' + curtain + '</p>';
+                    html += '<p>Cortina: ' + cortain + '</p>';
                     html += '<p>Ar-Condicionado: ' + air_conditioning + '</p>';
                  
 
@@ -622,8 +624,13 @@
         } else {
             html = '';
         }
-
-        $('#userInfo').html(html);
+        //$('#userInfo').html(html);
+        if (mode == 'userInfo') {
+            $('#userInfo').html(html);
+        }
+        if (mode == 'outputQueryUser') {
+            $('#outputQueryUser').html(html);
+        }
     }
 
     /***************************************************************
@@ -682,7 +689,7 @@
                 var crypPassword = CryptoJS.SHA1($('#password').val());
                 crypPassword = crypPassword.toString(CryptoJS.enc.Base64);
                 var cod = {
-                    userID: 110,//receivedAPI.userId,
+                    userID: receivedAPI.userId,
                     level: level,
                     registerLevel: $('#registerLevel').val(),
                     cod: cod,
@@ -726,10 +733,10 @@
                     userID: userID,
                     level: level,
                     cod: cod,
-                    nome: $('#name').val(),
-                    tel: $('#tel').val(),
-                    nasc: $('#nasc').val(),
-                    email: $('#email').val()
+                    nome: $('#queryName').val(),
+                    tel: $('#queryTel').val(),
+                    nasc: $('#queryNasc').val(),
+                    email: $('#queryEmail').val()
                 };
                 break;
             case "updatealertemail":
@@ -758,7 +765,7 @@
                 var crypUserPassword = CryptoJS.SHA1($('#userPassword').val());
                 crypUserPassword = crypUserPassword.toString(CryptoJS.enc.Base64);
                 var cod = {
-                    userID: 110,//userID,
+                    userID: userID,
                     level: level,
                     registerLevel: registerLevel = $('#userRegisterLevel').val() != undefined ? $('#userRegisterLevel').val() : 0,
                     cod: cod,

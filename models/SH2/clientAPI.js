@@ -102,6 +102,14 @@ global.connect = function () {
     })
 }
 
+
+global.socket.on('connection', function (socket) {
+    socket.on('openTheDoor', function () {
+        //openTheDoor();                
+    });
+});
+
+
 client.on('data', function (data) {
     //console.log('Received: ' + data);
     dataReiceived = JSON.parse(data);
@@ -119,6 +127,7 @@ client.on('data', function (data) {
             socket.emit("TV-Increase", userCustom.TV_Increase);
             socket.emit("curtain", userCustom.curtain);
             socket.emit("air-conditioning", userCustom.air_conditioning);
+
 
 
             /*if (userCustom.lightBathroom == "True") {
