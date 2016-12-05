@@ -105,7 +105,7 @@ global.connect = function () {
 
 global.socket.on('connection', function (socket) {
     socket.on('openTheDoor', function () {
-        //openTheDoor();                
+        openTheDoor();
     });
 });
 

@@ -29,7 +29,7 @@ require('./config/configIP.js');
 require('./models/SH2/clientAPI.js');
 
 
-/*
+
 Cylon.robot({
   connections: {
     galileo: {
@@ -80,7 +80,7 @@ Cylon.robot({
 
     });
   }
-}).start();*/
+}).start();
 
 app.tempBroadcast = function () {
     temper.temperature();
