@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js" ng-app="appSmart">
 <head>
     <meta charset="UTF-8">
@@ -517,7 +517,7 @@
             <!-- Widgets -->
             <div class="row clearfix">
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-pink hover-expand-effect" data-toggle="modal" data-target="#modal_luz">
+                    <div class="info-box bg-orange hover-expand-effect" data-toggle="modal" data-target="#modal_luz">
                         <div class="icon">
                             <img src="SH2/css/svg/light-bulb-on.svg">
                         </div>
@@ -551,7 +551,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-orange hover-expand-effect" onclick="activeTvCia(); sendTvHome();">
+                    <div class="info-box bg-pink hover-expand-effect" onclick="activeTvCia(); sendTvHome();">
                         <div class="icon">
                             <img src="SH2/css/svg/television-screen.svg" />
                         </div>
@@ -589,9 +589,11 @@
                             </div>
                             <!--FORM CADASTRO-->
                             <div id="divRegister" class="row clearfix">
+                                
                                 <div class="header">
                                     <h2 id="lbCadastro">CADASTRO</h2>
                                 </div>
+                                <div id="mainRegister">
                                 <form id="form-cadastro" class="form-horizontal">
                                     <div class="row clearfix">
                                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
@@ -675,8 +677,8 @@
                                                     <select id="registerLevel" class="form-control">
                                                         <option value="selecion" selected="selected">Selecione</option>
                                                         <option value="1">Proprietário</option>
-                                                        <option value="2">representante </option>
-                                                        <option value="3">residentes</option>
+                                                        <option value="2">Representante </option>
+                                                        <option value="3">Residente</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -688,7 +690,7 @@
                                             <label for="blackList">Lista Negra</label>
                                         </div>
                                     </div>
-
+                                </div>
                                     <br />
                                     <br />
 
@@ -696,12 +698,12 @@
                                     <div id="customHouse">
 
                                         <!--Bathroom-->
-                                        <hr />
-                                        <h4>Lâmpadas</h4>
+                                        <h4 style="margin-left:3em;">Lâmpadas</h4>
                                         <br />
+                                        <br/>
                                         <div class="row clearfix panel-switch-btn" id="">
                                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                                <label for="lightBathroom">Banheiro</label>
+                                                <label for="lightBathroom" class="text-right">Banheiro</label>
                                             </div>
                                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                                 <div class="form-group">
@@ -777,7 +779,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <hr />
+                                        <br />
                                         <!--TV-->
                                         <div class="row clearfix panel-switch-btn" id="">
                                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
@@ -829,6 +833,8 @@
                                     </div>
                                 </form>
                                 <br />
+                                <button class="btn btn-primary btn-lg m-l-15 waves-effect pull-right" id="btCustom" onclick="stepnext(2);">Customizar</button>
+                                <button class="btn btn-primary btn-lg m-l-15 waves-effect pull-right" id="btBack" onclick="stepnext(1);">Voltar</button>
                                 <button class="btn btn-primary btn-lg m-l-15 waves-effect" id="btCadastro">Cadastrar</button>
                             </div>
                             <!--/FORM CADASTRO-->
@@ -840,7 +846,7 @@
                         <!-- Visitors -->
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="card">
-                                <div class="body bg-pink">
+                                <div class="body bg-orange">
                                     <div class="m-b--35 font-bold">Lâmpadas</div>
                                     <ul class="dashboard-stat-list">
                                         <li>
@@ -923,7 +929,7 @@
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="card">
-                                <div class="body bg-orange">
+                                <div class="body bg-pink">
                                     <div class="font-bold m-b--35">Televisão</div>
                                     <ul class="dashboard-stat-list">
                                         <li>
@@ -968,7 +974,27 @@
             </div>
         </div>
     </section>
+<script>
 
+$("#customHouse").hide();
+$("#btBack").hide();
+
+function stepnext(pStep){
+
+    if (pStep != 2) {
+        $("#customHouse").hide();
+        $("#mainRegister").show();
+        $("#btCustom").show();
+        $("#btBack").hide();
+    } else {      
+        $("#customHouse").show();
+        $("#mainRegister").hide();
+        $("#btCustom").hide();
+        $("#btBack").show();
+    }
+}
+
+</script>
 </body>
 
-</html>   
+</html>
