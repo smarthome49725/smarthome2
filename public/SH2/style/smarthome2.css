@@ -176,9 +176,9 @@ float: right;*/
     margin-right: 35px;
 }
 
-.modal-content, .info-box, .card, .body, #myCanvas, #my-video, #remote-video{
+/*.modal-content, .info-box, .card, .body, #myCanvas, #my-video, #remote-video{
     border-radius: 5px !important;
-}
+}*/
 
 #lbCaadastro{
     margin-left: 15px;
